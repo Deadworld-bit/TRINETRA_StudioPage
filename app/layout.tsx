@@ -7,6 +7,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} font-sans antialiased bg-neutral-950 text-white`}>{children}</body>
+            <body className={`${geistSans.variable} font-sans antialiased bg-amber-50 text-black`}>{children}</body>
         </html>
     );
 }
