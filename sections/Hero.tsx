@@ -1,47 +1,109 @@
-import React from "react";
-import backgroundImage from "@/public/wallpaper_bg1.jpg";
+"use client";
 
-const Hero = () => {
+import React from "react";
+import { Orbitron, Montserrat } from "next/font/google";
+import { motion, useScroll, useTransform } from "framer-motion";
+import backgroundImage from "@/public/wallpaper_bg2.jpg";
+
+const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["400"] });
+
+// Grayscale palette
+const COLORS = {
+  pureWhite: '#FFFFFF',
+  snow: '#F8F9FA',
+  lightGray: '#D1D5DB',
+  midGray: '#6B7280',
+  darkGray: '#374151',
+  charcoal: '#1F2937',
+  pureBlack: '#000000',
+};
+
+const Hero: React.FC = () => {
+  const { scrollY } = useScroll();
+
+  const bgY = useTransform(scrollY, [0, 600], [0, 300]);
+  const headingY = useTransform(scrollY, [0, 400], [0, -150]);
+  const headingOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const subOpacity = useTransform(scrollY, [100, 500], [1, 0]);
+
   return (
-    <section
-      className="relative w-full flex items-center justify-center min-h-screen overflow-hidden"
+    <motion.section
+      className="relative w-full pt-20 flex flex-col items-center justify-center min-h-screen overflow-hidden text-center"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundPositionY: bgY,
       }}
     >
-      {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
+      {/* Overlay layers using grayscale palette */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to bottom, ${COLORS.charcoal}CC, transparent, ${COLORS.charcoal}CC)`,
+        }}
+      />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${COLORS.snow}20, transparent)` }} />
 
-      {/* Particle “sparkle” overlay */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="w-full h-full bg-[url('/particles.svg')] animate-fade-in opacity-20"></div>
-      </div>
-
-      <div className="relative text-center px-4">
-        <h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight
-                     bg-clip-text text-transparent
-                     bg-gradient-to-r from-purple-300 via-pink-300 to-yellow-200
-                     drop-shadow-lg"
-          style={{ fontFamily: "Orbitron, sans-serif" }}
+      <div className="relative px-4 lg:px-8 max-w-3xl">
+        <motion.h1
+          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl`}
+          style={{
+            fontSize: 'clamp(3rem, 6vw, 5rem)',
+            y: headingY,
+            opacity: headingOpacity,
+            background: `linear-gradient(90deg, ${COLORS.darkGray}, ${COLORS.midGray}, ${COLORS.lightGray})`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
         >
           Welcome to TRINETRA
-        </h1>
+        </motion.h1>
 
-        {/* Sub-heading with a light drop shadow */}
-        <p className="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl text-white drop-shadow-md max-w-2xl mx-auto">
+        <motion.p
+          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl`}
+          style={{
+            opacity: subOpacity,
+            color: COLORS.pureWhite,
+          }}
+        >
           Indie Games. Bold Ideas. Made by Passion.
-        </p>
+        </motion.p>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 flex flex-col items-center animate-bounce">
-        <span className="block w-1.5 h-1.5 bg-white rounded-full mb-2"></span>
-        <span className="text-sm text-white">Scroll</span>
-      </div>
-    </section>
+      {/* Scroll arrow using midGray */}
+      <motion.div
+        className="absolute bottom-8 flex flex-col items-center"
+        animate={{ y: [0, 12, 0], opacity: [1, 0.7, 1] }}
+        transition={{ repeat: Infinity, duration: 1.8 }}
+      >
+        <svg
+          className="w-6 h-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke={COLORS.pureWhite}
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+        <span className={`${montserrat.className} mt-2`} style={{ color: COLORS.pureWhite, fontSize: '0.875rem' }}>
+          Scroll
+        </span>
+      </motion.div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .animate-fade-in {
+          animation: fade-in 2s ease-in-out forwards;
+        }
+      `}</style>
+    </motion.section>
   );
 };
 
