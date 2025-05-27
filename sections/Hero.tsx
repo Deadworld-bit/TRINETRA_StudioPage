@@ -19,9 +19,7 @@ const Hero = () => {
         <div className="w-full h-full bg-[url('/particles.svg')] animate-fade-in opacity-20"></div>
       </div>
 
-      {/* Content */}
       <div className="relative text-center px-4">
-        {/* Headline with gradient text */}
         <h1
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight
                      bg-clip-text text-transparent
