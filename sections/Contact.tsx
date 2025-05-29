@@ -25,7 +25,7 @@ export default function Contact() {
     <section
       className="
         relative w-full min-h-screen
-        bg-charcoal bg-[url('/wallpaper_bg8.jpg')] bg-cover bg-center
+        bg-charcoal bg-[url('/wallpaper_bg7.jpg')] bg-cover bg-center
         flex flex-col lg:flex-row items-stretch
       "
     >
