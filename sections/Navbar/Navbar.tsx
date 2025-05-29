@@ -28,7 +28,7 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
+  return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -36,7 +36,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 ${
-        isScrolled ? "bg-[#1a1a1a] shadow-md" : "bg-transparent"
+        isScrolled ? "bg-charcoal shadow-md" : "bg-transparent"
       }`}
     >
       {/* Desktop Navbar */}
@@ -52,7 +52,7 @@ export default function Navbar() {
             }`}
           />
           <span
-            className={`${orbitron.className} text-3xl font-bold text-white ml-4 studio-name`}
+            className={`${orbitron.className} text-3xl font-bold text-pure-white ml-4 studio-name`}
           >
             TRINETRA
           </span>
@@ -62,7 +62,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className={`${montserrat.className} text-lg text-white nav-link`}
+              className={`${montserrat.className} text-lg text-pure-white nav-link`}
             >
               {link.label}
             </Link>
@@ -74,7 +74,7 @@ export default function Navbar() {
       <div className="md:hidden fixed top-0 left-0 w-full h-16 flex justify-between items-center px-4 z-50">
         <button
           onClick={() => setExpanded(!expanded)}
-          className={`menu-button text-3xl text-white ${
+          className={`menu-button text-3xl text-pure-white ${
             expanded ? "active" : ""
           }`}
           aria-label="Toggle navigation"
@@ -96,7 +96,7 @@ export default function Navbar() {
 
       {/* Mobile Nav Drawer */}
       <nav
-        className={`md:hidden fixed top-16 left-0 w-full h-[calc(100%-4rem)] bg-[#1a1a1a] flex flex-col items-center justify-center z-40 nav-drawer ${
+        className={`md:hidden fixed top-16 left-0 w-full h-[calc(100%-4rem)] bg-charcoal flex flex-col items-center justify-center z-40 nav-drawer ${
           expanded ? "nav-drawer-active" : "nav-drawer-inactive"
         }`}
       >
@@ -105,7 +105,7 @@ export default function Navbar() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className={`${montserrat.className} text-2xl font-semibold text-white nav-link`}
+                className={`${montserrat.className} text-2xl font-semibold text-pure-white nav-link`}
                 onClick={() => setExpanded(false)}
               >
                 {link.label}

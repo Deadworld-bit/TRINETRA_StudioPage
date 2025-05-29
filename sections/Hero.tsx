@@ -8,17 +8,6 @@ import backgroundImage from "@/public/wallpaper_bg2.jpg";
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
-// Grayscale palette
-const COLORS = {
-  pureWhite: '#FFFFFF',
-  snow: '#F8F9FA',
-  lightGray: '#D1D5DB',
-  midGray: '#6B7280',
-  darkGray: '#374151',
-  charcoal: '#1F2937',
-  pureBlack: '#000000',
-};
-
 const Hero: React.FC = () => {
   const { scrollY } = useScroll();
 
@@ -26,6 +15,12 @@ const Hero: React.FC = () => {
   const headingY = useTransform(scrollY, [0, 400], [0, -150]);
   const headingOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const subOpacity = useTransform(scrollY, [100, 500], [1, 0]);
+
+  const triFill = useTransform(
+    scrollY,
+    [0, 150],
+    ["rgba(255,255,255,0)", "rgba(255,255,255,1)"]
+  );
 
   return (
     <motion.section
@@ -37,14 +32,18 @@ const Hero: React.FC = () => {
         backgroundPositionY: bgY,
       }}
     >
-      {/* Overlay layers using grayscale palette */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to bottom, ${COLORS.charcoal}CC, transparent, ${COLORS.charcoal}CC)`,
+          background: `linear-gradient(to bottom, var(--charcoal)/CB, transparent, var(--charcoal)/CB)`,
         }}
       />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${COLORS.snow}20, transparent)` }} />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at center, var(--snow)/20, transparent)`,
+        }}
+      />
 
       <div className="relative px-4 lg:px-8 max-w-3xl">
         <motion.h1
@@ -53,7 +52,7 @@ const Hero: React.FC = () => {
             fontSize: 'clamp(3rem, 6vw, 5rem)',
             y: headingY,
             opacity: headingOpacity,
-            background: `linear-gradient(90deg, ${COLORS.darkGray}, ${COLORS.midGray}, ${COLORS.lightGray})`,
+            background: `var(--pure-black)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}
@@ -62,37 +61,44 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl`}
-          style={{
-            opacity: subOpacity,
-            color: COLORS.pureWhite,
-          }}
+          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl text-dark-gray`}
+          style={{ opacity: subOpacity }}
         >
           Indie Games. Bold Ideas. Made by Passion.
         </motion.p>
       </div>
 
-      {/* Scroll arrow using midGray */}
       <motion.div
         className="absolute bottom-8 flex flex-col items-center"
         animate={{ y: [0, 12, 0], opacity: [1, 0.7, 1] }}
         transition={{ repeat: Infinity, duration: 1.8 }}
       >
         <svg
-          className="w-6 h-6"
+          className="w-6 h-6 stroke-dark-gray"
           viewBox="0 0 24 24"
           fill="none"
-          stroke={COLORS.pureWhite}
           strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
-        <span className={`${montserrat.className} mt-2`} style={{ color: COLORS.pureWhite, fontSize: '0.875rem' }}>
+        <span className={`${montserrat.className} mt-2 text-dark-gray`} style={{ fontSize: '0.875rem' }}>
           Scroll
         </span>
       </motion.div>
+
+      {/* Bottom triangles */}
+      <div className="absolute left-0 right-0 bottom-0 h-20 pointer-events-none z-10">
+        <motion.div
+          className="absolute left-0 bottom-0 w-1/2 h-full"
+          style={{ backgroundColor: triFill, clipPath: "polygon(0 0, 100% 100%, 0 100%)" }}
+        />
+        <motion.div
+          className="absolute right-0 bottom-0 w-1/2 h-full"
+          style={{ backgroundColor: triFill, clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
+        />
+      </div>
 
       <style jsx>{`
         @keyframes fade-in {

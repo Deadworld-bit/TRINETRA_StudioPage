@@ -1,12 +1,50 @@
 @import "tailwindcss";
 
-input:-webkit-autofill {
-    background-color: #1f2937 !important; 
-    color: white !important; 
-    -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset !important; 
-    transition: background-color 5000s ease-in-out 0s; 
+:root {
+  --pure-white: #FFFFFF;
+  --snow:       #F8F9FA;
+  --light-gray: #D1D5DB;
+  --mid-gray:   #6B7280;
+  --dark-gray:  #374151;
+  --charcoal:   #1F2937;
+  --pure-black: #000000;
+}
+
+@layer base {
+  input:-webkit-autofill {
+    background-color: var(--charcoal) !important;
+    color:              var(--pure-white) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--charcoal) inset !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
-  
+
   input:-webkit-autofill::first-line {
-    color: white !important; 
+    color: var(--pure-white) !important;
   }
+}
+
+@layer utilities {
+  .text-pure-white { color: var(--pure-white) !important; }
+  .text-snow       { color: var(--snow)       !important; }
+  .text-light-gray { color: var(--light-gray) !important; }
+  .text-mid-gray   { color: var(--mid-gray)   !important; }
+  .text-dark-gray  { color: var(--dark-gray)  !important; }
+  .text-charcoal   { color: var(--charcoal)   !important; }
+  .text-pure-black { color: var(--pure-black) !important; }
+
+  .bg-pure-white { background-color: var(--pure-white) !important; }
+  .bg-snow       { background-color: var(--snow)       !important; }
+  .bg-light-gray { background-color: var(--light-gray) !important; }
+  .bg-mid-gray   { background-color: var(--mid-gray)   !important; }
+  .bg-dark-gray  { background-color: var(--dark-gray)  !important; }
+  .bg-charcoal   { background-color: var(--charcoal)   !important; }
+  .bg-pure-black { background-color: var(--pure-black) !important; }
+
+  .stroke-pure-white { stroke: var(--pure-white) !important; }
+  .stroke-snow       { stroke: var(--snow)       !important; }
+  .stroke-light-gray { stroke: var(--light-gray) !important; }
+  .stroke-mid-gray   { stroke: var(--mid-gray)   !important; }
+  .stroke-dark-gray  { stroke: var(--dark-gray)  !important; }
+  .stroke-charcoal   { stroke: var(--charcoal)   !important; }
+  .stroke-pure-black { stroke: var(--pure-black) !important; }
+}
