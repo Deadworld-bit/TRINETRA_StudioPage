@@ -1,3 +1,7 @@
+import profile from "@/public/Profile.jpg";
+import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+
+// Sections data
 export const sections = [
   {
     title: "Studio Mission & Philosophy",
@@ -19,5 +23,30 @@ export const sections = [
       "What sets Trinetra apart is our focus on emergent storytelling, where no two journeys are ever the same. Every visual is carefully crafted, and every decision you make has a lasting impact, allowing you to shape a universe uniquely your own.",
     ],
     image: "/wallpaper_bg1.jpg",
+  },
+];
+
+// Team Members data
+export const teamMembers = [
+  {
+    name: "Alakh Pandey",
+    title: "Creative Director",
+    photo: profile,
+    social: [
+      { icon: FaTwitter, url: "https://twitter.com/alakh" },
+      { icon: FaLinkedin, url: "https://linkedin.com/in/alakh" },
+    ],
+  },
+  {
+    name: "Pushpa Raj",
+    title: "Lead Developer",
+    photo: profile,
+    social: [{ icon: FaTwitter, url: "https://twitter.com/pushpa" }],
+  },
+  {
+    name: "Sanni Dancer",
+    title: "Art & Design",
+    photo: profile,
+    social: [{ icon: FaInstagram, url: "https://instagram.com/sanni" }],
   },
 ];

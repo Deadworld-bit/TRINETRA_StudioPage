@@ -18,7 +18,7 @@ type SectionDividerProps = {
 };
 
 const SectionDivider = ({ color, type, className }: SectionDividerProps) => {
-  const points = type === "A" ? "0,10 100,0 100,10" : "0,10 100,0 100,10";
+  const points = type === "A" ? "0,10 100,0 100,10" : "100,10 0,0 0,10";
   return (
     <div className={`relative ${className || ""}`} style={{ lineHeight: 0 }}>
       <svg
@@ -179,7 +179,7 @@ export default function IntroductionSection() {
       {/* Divider 2*/}
       <SectionDivider
         color="var(--dark-gray)"
-        type="B"
+        type="A"
         className="transform rotate-180 bg-snow"
       />
 

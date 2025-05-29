@@ -3,7 +3,7 @@
 import React from "react";
 import { Orbitron, Montserrat } from "next/font/google";
 import { motion, useScroll, useTransform } from "framer-motion";
-import backgroundImage from "@/public/wallpaper_bg2.jpg";
+import backgroundImage from "@/public/wallpaper_bg5.jpg";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400"] });
@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at center, var(--snow)/20, transparent)`,
+          background: `radial-gradient(circle at center, var(--light-gray)/30, transparent)`,
         }}
       />
 
@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl text-dark-gray`}
+          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl text-pure-black`}
           style={{ opacity: subOpacity }}
         >
           Indie Games. Bold Ideas. Made by Passion.

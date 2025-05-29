@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Orbitron, Montserrat } from "next/font/google";
-import logoImage from "@/public/StudioLogo_4_white.png";
+import logoDark from "@/public/StudioLogo_3.png";   
+import logoLight from "@/public/StudioLogo_4_white.png"; 
 import { HiX, HiMenu } from "react-icons/hi";
 import "./navbar-effects.css";
 
@@ -26,33 +27,38 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
-  return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // common transition classes
+  const transitionColor = "transition-colors duration-300";
+  const transitionOpacity = "transition-opacity duration-300";
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 ${
-        isScrolled ? "bg-charcoal shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 bg-transparent ${isScrolled ? "bg-charcoal shadow-md" : ""}`}
     >
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-between items-center px-8 h-20">
         <div className="flex items-center">
-          <Image
-            src={logoImage}
-            alt="Trinetra Logo"
-            width={70}
-            height={70}
-            className={`transition-all duration-300 ${
-              isScrolled ? "logo-desktop-scrolled" : "logo-desktop"
-            }`}
-          />
+          {/* Logo container with crossfade */}
+          <div className="relative w-[60px] h-[60px]">
+            <Image
+              src={logoDark}
+              alt="Trinetra Logo Dark"
+              fill
+              className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-0" : "opacity-100"}`}
+            />
+            <Image
+              src={logoLight}
+              alt="Trinetra Logo Light"
+              fill
+              className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-100" : "opacity-0"}`}
+            />
+          </div>
           <span
-            className={`${orbitron.className} text-3xl font-bold text-pure-white ml-4 studio-name`}
+            className={`${orbitron.className} text-3xl font-bold ml-4 studio-name ${transitionColor} ${isScrolled ? "text-pure-white" : "text-pure-black"}`}
           >
             TRINETRA
           </span>
@@ -62,7 +68,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className={`${montserrat.className} text-lg text-pure-white nav-link`}
+              className={`${montserrat.className} text-lg nav-link ${transitionColor} ${isScrolled ? "text-pure-white" : "text-pure-black"}`}
             >
               {link.label}
             </Link>
@@ -74,22 +80,23 @@ export default function Navbar() {
       <div className="md:hidden fixed top-0 left-0 w-full h-16 flex justify-between items-center px-4 z-50">
         <button
           onClick={() => setExpanded(!expanded)}
-          className={`menu-button text-3xl text-pure-white ${
-            expanded ? "active" : ""
-          }`}
+          className={`menu-button ${transitionColor} ${isScrolled ? "text-pure-white" : "text-pure-black"}`}
           aria-label="Toggle navigation"
         >
-          {expanded ? <HiX /> : <HiMenu />}
+          {expanded ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
         </button>
-        <div className="flex items-center">
+        <div className="relative w-[40px] h-[40px]">
           <Image
-            src={logoImage}
-            alt="Trinetra Logo"
-            width={50}
-            height={50}
-            className={`transition-all duration-300 ${
-              isScrolled ? "logo-mobile-scrolled" : "logo-mobile"
-            }`}
+            src={logoDark}
+            alt="Trinetra Logo Dark Mobile"
+            fill
+            className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-0" : "opacity-100"}`}
+          />
+          <Image
+            src={logoLight}
+            alt="Trinetra Logo Light Mobile"
+            fill
+            className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-100" : "opacity-0"}`}
           />
         </div>
       </div>
@@ -105,7 +112,7 @@ export default function Navbar() {
             <li key={link.label}>
               <Link
                 href={link.href}
-                className={`${montserrat.className} text-2xl font-semibold text-pure-white nav-link`}
+                className={`${montserrat.className} text-2xl font-semibold nav-link ${transitionColor} text-pure-white`}
                 onClick={() => setExpanded(false)}
               >
                 {link.label}
