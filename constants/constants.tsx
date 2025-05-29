@@ -50,3 +50,46 @@ export const teamMembers = [
     social: [{ icon: FaInstagram, url: "https://instagram.com/sanni" }],
   },
 ];
+
+export const Games = [
+  {
+    title: "Echoes of the Void",
+    genre: "Sci-Fi RPG",
+    shortDescription: "A sci-fi adventure where every choice alters space-time.",
+    fullDescription:
+      "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
+    platforms: ["PC", "Xbox", "PlayStation"],
+    image: "/wallpaper_bg1.jpg",
+    link: "/games/echoes-of-the-void",
+  },
+  {
+    title: "Pixel Quest: Chronicles",
+    genre: "Retro RPG",
+    shortDescription: "Retro-inspired RPG with modern twists.",
+    fullDescription:
+      "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
+    platforms: ["Switch", "PC"],
+    image: "/wallpaper_bg2.jpg",
+    link: "/games/pixel-quest-chronicles",
+  },
+  {
+    title: "Echoes of the Void",
+    genre: "Sci-Fi RPG",
+    shortDescription: "A sci-fi adventure where every choice alters space-time.",
+    fullDescription:
+      "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
+    platforms: ["PC", "Xbox", "PlayStation"],
+    image: "/wallpaper_bg1.jpg",
+    link: "/games/echoes-of-the-void",
+  },
+  {
+    title: "Pixel Quest: Chronicles",
+    genre: "Retro RPG",
+    shortDescription: "Retro-inspired RPG with modern twists.",
+    fullDescription:
+      "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
+    platforms: ["Switch", "PC"],
+    image: "/wallpaper_bg2.jpg",
+    link: "/games/pixel-quest-chronicles",
+  },
+];

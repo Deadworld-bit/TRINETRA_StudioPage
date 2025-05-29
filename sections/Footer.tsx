@@ -31,11 +31,6 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2">
             <li>
-              <a href="/contact" className="text-snow hover:text-[#60a5fa] transition">
-                Contact
-              </a>
-            </li>
-            <li>
               <a href="/legal-note" className="text-snow hover:text-[#60a5fa] transition">
                 Legal Note
               </a>

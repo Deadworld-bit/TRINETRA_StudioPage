@@ -5,6 +5,7 @@ import Hero from "@/sections/Hero";
 import Introduction from "@/sections/Introduction";
 import Game from "@/sections/Game";
 import TeamMembers from "@/sections/TeamMember/TeamMember";
+import Contact from "@/sections/Contact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Introduction />
         <TeamMembers />
         <Game />
+        <Contact />
         <Footer />
     </>
   );
