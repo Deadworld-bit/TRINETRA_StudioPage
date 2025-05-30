@@ -1,174 +1,153 @@
-"use client";
-
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Games } from "@/constants/constants";
+import { motion } from "framer-motion";
+import { Games } from "@/constants/constants"; 
+import { Game } from "@/constants/constants"; 
+import GameModal from "@/components/gamemodal"; 
 
+const ITEM_WIDTH_PERCENT = 50;
+const MARGIN_RIGHT_PERCENT = 4;
+const AUTOSCROLL_INTERVAL = 5000;
 
-const loopedGames = [...Games, ...Games, ...Games];
+const GameCarousel: React.FC = () => {
+  const [current, setCurrent] = useState<number>(0);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
-export default function GameCarousel() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [scrollPos, setScrollPos] = useState(0);
-
-  useEffect(() => {
-    const el = containerRef.current!;
-    // Start in the middle copy for infinite looping
-    el.scrollLeft = el.scrollWidth / 3;
-
-    const onScroll = () => {
-      const maxScroll = el.scrollWidth;
-      // Infinite loop reset
-      if (el.scrollLeft <= 0) {
-        el.scrollLeft = maxScroll / 3;
-      } else if (el.scrollLeft + el.clientWidth >= maxScroll) {
-        el.scrollLeft = maxScroll / 3;
-      }
-
-      setScrollPos(el.scrollLeft);
-
-      // Update active index based on the card at the center
-      const cards = Array.from(el.children) as HTMLElement[];
-      const center = el.scrollLeft + el.clientWidth / 2;
-      const idx = cards.findIndex((card) => {
-        const left = card.offsetLeft;
-        return left <= center && left + card.clientWidth > center;
-      });
-      if (idx !== -1) setActiveIndex(idx % Games.length);
-    };
-
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+  const clamp = useCallback((index: number): number => {
+    const len = Games.length;
+    if (len === 0) return 0;
+    return ((index % len) + len) % len;
   }, []);
 
-  const scrollTo = (idx: number) => {
-    const el = containerRef.current!;
-    const target = el.children[idx + Games.length] as HTMLElement;
-    target.scrollIntoView({ behavior: "smooth", inline: "center" });
+  const prev = useCallback((): void => {
+    setCurrent((c) => clamp(c - 1));
+  }, [clamp]);
+
+  const next = useCallback((): void => {
+    setCurrent((c) => clamp(c + 1));
+  }, [clamp]);
+
+  const xOffset = useMemo<string>(() => {
+    const initialCenteringOffset = (100 - ITEM_WIDTH_PERCENT) / 2;
+    const stepPerItem = ITEM_WIDTH_PERCENT + MARGIN_RIGHT_PERCENT;
+    return `calc(${initialCenteringOffset}% - ${current * stepPerItem}%)`;
+  }, [current]);
+
+  useEffect(() => {
+    if (isHovering || Games.length <= 1 || isModalOpen) {
+      return;
+    }
+    const timerId = setInterval(next, AUTOSCROLL_INTERVAL);
+    return () => clearInterval(timerId);
+  }, [current, isHovering, next, isModalOpen]);
+
+  const handleGameCardClick = (game: Game): void => {
+    setSelectedGame(game);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+    setSelectedGame(null); 
+    document.body.style.overflow = 'unset';
   };
 
   return (
-    <section className="py-20 bg-[#111214] text-white">
-      <div className="w-[90vw] mx-auto px-4">
-        <h2 className="text-5xl font-extrabold text-center mb-10">
-          Our Games
-        </h2>
+    <>
+      <section className="relative py-16 bg-dark-gray text-white overflow-hidden" id ="games">
+        <h2 className="text-6xl font-extrabold text-center mb-12">Our Games</h2>
 
-        <div className="relative overflow-hidden">
-          <div
-            ref={containerRef}
-            className="flex space-x-4 overflow-x-auto whitespace-nowrap px-2 scrollbar-hide snap-x snap-mandatory"
-            style={{ perspective: 1000 }}
+        <div
+          className="relative overflow-hidden w-full max-w-7xl mx-auto"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <motion.div
+            className="flex"
+            animate={{ x: xOffset }}
+            transition={{ type: "tween", duration: 0.5 }}
           >
-            {loopedGames.map((game, idx) => {
-              const realIdx = idx % Games.length;
-              const isExpanded = realIdx === expandedIndex;
-              const cardEl = containerRef.current?.children[idx] as HTMLElement | undefined;
-              const cardCenter = cardEl
-                ? cardEl.offsetLeft + cardEl.clientWidth / 2
-                : 0;
-              const center = scrollPos + (containerRef.current?.clientWidth || 0) / 2;
-              const diff = center - cardCenter;
-              const containerWidth = containerRef.current?.clientWidth || 1;
-              const maxDiff = containerWidth / 2;
-              // Scale from 1.1 (center) to 0.9 (edges)
-              const scale = isExpanded
-                ? 1.2
-                : Math.max(0.9, 1.1 - (Math.abs(diff) / maxDiff) * 0.2);
-              // Rotate from -30 to 30 degrees based on position
-              const rotateY = isExpanded ? 0 : (diff / maxDiff) * 30;
-              // Parallax effect for background
-              const bgOffset = diff * 0.2;
-
-              return (
-                <motion.div
-                  key={idx}
-                  className="snap-center flex-shrink-0 w-[95vw] sm:w-[85vw] md:w-[75vw] lg:w-[65vw] h-[600px] bg-gray-800 rounded-3xl shadow-2xl relative cursor-pointer"
-                  layout
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
-                  viewport={{ once: true }}
-                  onClick={() => setExpandedIndex(isExpanded ? null : realIdx)}
-                  whileHover={{ scale: isExpanded ? 1.2 : 1.1, zIndex: 30 }}
-                  animate={{
-                    scale,
-                    rotateY,
-                    zIndex: isExpanded ? 40 : 0,
-                    transition: { type: "spring", stiffness: 150, damping: 20 },
-                  }}
-                  style={{ transformStyle: "preserve-3d" }}
+            {Games.map((game, idx) => (
+              <div
+                key={`${game.title}-${idx}`} 
+                className={`flex-shrink-0 p-2`}
+                style={{
+                  width: `${ITEM_WIDTH_PERCENT}%`,
+                  marginRight:
+                    idx === Games.length - 1
+                      ? "0%"
+                      : `${MARGIN_RIGHT_PERCENT}%`,
+                }}
+              >
+                <div
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-2xl h-full flex flex-col"
+                  onClick={() => handleGameCardClick(game)}
                 >
-                  <div
-                    className="absolute inset-0 overflow-hidden rounded-3xl"
-                    style={{ transform: `translateX(${bgOffset}px)` }}
-                  >
+                  <div className="relative h-96 w-full">
                     <Image
                       src={game.image}
                       alt={game.title}
-                      fill
-                      className="object-cover"
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-t-2xl"
                     />
-                    <div className="absolute inset-0 bg-black/60" />
                   </div>
-
-                  <div className="relative p-8 flex flex-col h-full">
-                    <h3 className="text-3xl font-bold mb-2">{game.title}</h3>
-                    <span className="text-sm mb-4 inline-block bg-purple-600 px-3 py-1 rounded-full">
-                      {game.genre}
-                    </span>
-                    <p className="flex-grow text-gray-200 mb-4">
-                      {isExpanded ? game.fullDescription : game.shortDescription}
-                    </p>
-
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1, transition: { duration: 0.3 } }}
-                          exit={{ opacity: 0 }}
-                          className="mt-auto space-y-4"
-                        >
-                          <div className="flex flex-wrap gap-2">
-                            {game.platforms.map((plat) => (
-                              <span
-                                key={plat}
-                                className="text-xs bg-indigo-500 px-2 py-1 rounded"
-                              >
-                                {plat}
-                              </span>
-                            ))}
-                          </div>
-                          <a
-                            href={game.link}
-                            className="inline-block px-6 py-3 bg-indigo-600 rounded-full font-medium"
-                          >
-                            Play Now
-                          </a>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 className="text-3xl md:text-4xl font-semibold text-white px-4 text-center">
+                      {game.title}
+                    </h3>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {Games.length > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-3 rounded-full text-white z-10"
+                aria-label="Previous game"
+              >
+                &#8249;
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-3 rounded-full text-white z-10"
+                aria-label="Next game"
+              >
+                &#8250;
+              </button>
+            </>
+          )}
+        </div>
+
+        {Games.length > 1 && (
+          <div className="flex justify-center mt-8 space-x-2">
+            {Games.map((_, idx) => (
+              <button
+                key={`dot-${idx}`}
+                onClick={() => setCurrent(idx)}
+                className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                  idx === current
+                    ? "bg-white scale-125"
+                    : "bg-gray-500 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to game ${idx + 1}`}
+              />
+            ))}
           </div>
-        </div>
+        )}
+      </section>
 
-        <div className="flex justify-center mt-8 space-x-3">
-          {Games.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollTo(idx)}
-              className={`w-4 h-4 rounded-full transition-transform ${
-                idx === activeIndex ? "bg-white scale-125" : "bg-gray-600"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+      {isModalOpen && selectedGame && (
+        <GameModal game={selectedGame} onClose={closeModal} />
+      )}
+    </>
   );
-}
+};
+
+export default GameCarousel;

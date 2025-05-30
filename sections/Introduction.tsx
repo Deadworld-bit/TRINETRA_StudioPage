@@ -34,7 +34,7 @@ const SectionDivider = ({ color, type, className }: SectionDividerProps) => {
 
 export default function IntroductionSection() {
   return (
-    <section className="overflow-hidden">
+    <section className="overflow-hidden" id ="aboutus">
       {/* First Section */}
       <motion.div
         className="bg-pure-white py-16 md:py-24 px-6 md:px-10 lg:px-20"

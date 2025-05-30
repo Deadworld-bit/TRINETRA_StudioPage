@@ -14,9 +14,9 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "#features" },
-  { label: "Our Games", href: "#reviews" },
-  { label: "Contact", href: "#membership" },
+  { label: "About Us", href: "#aboutus" },
+  { label: "Our Games", href: "#games" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {

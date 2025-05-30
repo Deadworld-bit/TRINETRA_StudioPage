@@ -27,7 +27,7 @@ export default function Contact() {
         relative w-full min-h-screen
         bg-charcoal bg-[url('/wallpaper_bg7.jpg')] bg-cover bg-center
         flex flex-col lg:flex-row items-stretch
-      "
+      " id = "contact"
     >
       {/* dark overlay */}
       <div className="absolute inset-0 bg-black/50" />

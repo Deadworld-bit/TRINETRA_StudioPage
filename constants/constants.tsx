@@ -1,8 +1,37 @@
-import profile from "@/public/Profile.jpg";
+import profile from "@/public/Profile.jpg"; 
 import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { StaticImageData } from "next/image";
+import { IconType } from "react-icons";
 
-// Sections data
-export const sections = [
+export interface SocialLink {
+  icon: IconType;
+  url: string;
+}
+
+export interface TeamMember {
+  name: string;
+  title: string;
+  photo: StaticImageData | string;
+  social: SocialLink[];
+}
+
+export interface SectionContent {
+  title: string;
+  text: string[];
+  image: string; 
+}
+
+export interface Game {
+  title: string;
+  genre: string;
+  shortDescription: string;
+  fullDescription: string;
+  platforms: string[];
+  image: string; 
+  link?: string; 
+}
+
+export const sections: SectionContent[] = [
   {
     title: "Studio Mission & Philosophy",
     text: [
@@ -26,12 +55,11 @@ export const sections = [
   },
 ];
 
-// Team Members data
-export const teamMembers = [
+export const teamMembers: TeamMember[] = [
   {
     name: "Alakh Pandey",
     title: "Creative Director",
-    photo: profile,
+    photo: profile, 
     social: [
       { icon: FaTwitter, url: "https://twitter.com/alakh" },
       { icon: FaLinkedin, url: "https://linkedin.com/in/alakh" },
@@ -51,7 +79,7 @@ export const teamMembers = [
   },
 ];
 
-export const Games = [
+export const Games: Game[] = [
   {
     title: "Echoes of the Void",
     genre: "Sci-Fi RPG",
@@ -73,7 +101,7 @@ export const Games = [
     link: "/games/pixel-quest-chronicles",
   },
   {
-    title: "Echoes of the Void",
+    title: "Echoes of the Void", // Note: Duplicate title. Ensure map keys handle this.
     genre: "Sci-Fi RPG",
     shortDescription: "A sci-fi adventure where every choice alters space-time.",
     fullDescription:
@@ -83,7 +111,7 @@ export const Games = [
     link: "/games/echoes-of-the-void",
   },
   {
-    title: "Pixel Quest: Chronicles",
+    title: "Pixel Quest: Chronicles", // Note: Duplicate title.
     genre: "Retro RPG",
     shortDescription: "Retro-inspired RPG with modern twists.",
     fullDescription:
