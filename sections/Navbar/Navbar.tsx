@@ -80,7 +80,7 @@ export default function Navbar() {
       <div className="md:hidden fixed top-0 left-0 w-full h-16 flex justify-between items-center px-4 z-50">
         <button
           onClick={() => setExpanded(!expanded)}
-          className={`menu-button ${transitionColor} ${isScrolled ? "text-pure-white" : "text-pure-black"}`}
+          className={`menu-button ${transitionColor} ${isScrolled ? "text-pure-black" : "text-pure-black"}`}
           aria-label="Toggle navigation"
         >
           {expanded ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
@@ -93,7 +93,7 @@ export default function Navbar() {
             className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-0" : "opacity-100"}`}
           />
           <Image
-            src={logoLight}
+            src={logoDark}
             alt="Trinetra Logo Light Mobile"
             fill
             className={`${transitionOpacity} absolute inset-0 object-contain ${isScrolled ? "opacity-100" : "opacity-0"}`}
