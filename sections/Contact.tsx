@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -8,6 +9,8 @@ export default function Contact() {
     email: "",
     content: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -17,8 +20,32 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Sending message:", form);
-    // submit logic…
+    setIsSubmitting(true);
+    setMessage("");
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          fullName: form.fullName,
+          email: form.email,
+          content: form.content,
+        },
+        { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! }
+      )
+      .then(
+        () => {
+          setMessage("Message sent successfully");
+          setForm({ fullName: "", email: "", content: "" });
+        },
+        (error) => {
+          setMessage("Failed to send message: " + error.text);
+        }
+      )
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -27,7 +54,8 @@ export default function Contact() {
         relative w-full min-h-screen
         bg-charcoal bg-[url('/wallpaper_bg7.jpg')] bg-cover bg-center
         flex flex-col lg:flex-row items-stretch
-      " id = "contact"
+      "
+      id="contact"
     >
       {/* dark overlay */}
       <div className="absolute inset-0 bg-black/50" />
@@ -59,7 +87,7 @@ export default function Contact() {
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path d="M2 4.5A2.5 2.5 0 014.5 2h15A2.5 2.5 0 0122 4.5v15a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 19.5v-15zM4.5 4a.5.5 0 00-.5.5V7l8 5 8-5V4.5a.5.5 0 00-.5-.5h-15zM20 9.07l-7.555 4.722a.5.5 0 01-.444 0L4 9.07V19.5a.5.5 0 00.5.5h15a.5.5 0 00.5-.5V9.07z"/>
+                <path d="M2 4.5A2.5 2.5 0 014.5 2h15A2.5 2.5 0 0122 4.5v15a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 19.5v-15zM4.5 4a.5.5 0 00-.5.5V7l8 5 8-5V4.5a.5.5 0 00-.5-.5h-15zM20 9.07l-7.555 4.722a.5.5 0 01-.444 0L4 9.07V19.5a.5.5 0 00.5.5h15a.5.5 0 00.5-.5V9.07z" />
               </svg>
               <span>trinetra.info@trinetragames.com</span>
             </div>
@@ -69,7 +97,7 @@ export default function Contact() {
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path d="M3 5.25A2.25 2.25 0 015.25 3h1.5A2.25 2.25 0 019 5.25v1.5A2.25 2.25 0 016.75 9H6a.75.75 0 00-.75.75 8.25 8.25 0 008.25 8.25.75.75 0 00.75-.75v-.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0119 13.75v1.5A2.25 2.25 0 0116.75 17h-1.5a12.75 12.75 0 01-12.75-12.75V5.25z"/>
+                <path d="M3 5.25A2.25 2.25 0 015.25 3h1.5A2.25 2.25 0 019 5.25v1.5A2.25 2.25 0 016.75 9H6a.75.75 0 00-.75.75 8.25 8.25 0 008.25 8.25.75.75 0 00.75-.75v-.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0119 13.75v1.5A2.25 2.25 0 0116.75 17h-1.5a12.75 12.75 0 01-12.75-12.75V5.25z" />
               </svg>
               <span>024 6293 5559</span>
             </div>
@@ -165,14 +193,26 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="
+            disabled={isSubmitting}
+            className={`
               mt-4 w-full py-4 lg:py-5
               bg-orange-500 hover:bg-orange-600
               rounded-lg text-pure-white font-semibold text-lg lg:text-xl
-            "
+              ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}
+            `}
           >
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </button>
+
+          {message && (
+            <p
+              className={`mt-4 text-lg ${
+                message.includes("successfully") ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {message}
+            </p>
+          )}
         </form>
       </div>
     </section>
