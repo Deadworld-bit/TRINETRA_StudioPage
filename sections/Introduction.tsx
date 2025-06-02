@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { sections } from "@/constants/constants";
 import backgroundImage from "@/public/wallpaper_bg3.jpg";
 
@@ -34,7 +34,7 @@ const SectionDivider = ({ color, type, className }: SectionDividerProps) => {
 
 export default function IntroductionSection() {
   return (
-    <section className="overflow-hidden" id ="aboutus">
+    <section className="overflow-hidden" id="aboutus">
       {/* First Section */}
       <motion.div
         className="bg-pure-white py-16 md:py-24 px-6 md:px-10 lg:px-20"
@@ -68,10 +68,10 @@ export default function IntroductionSection() {
             ))}
           </motion.div>
           <motion.div
-            className="flex-1 w-full max-w-md lg:max-w-xl h-[20rem] md:h-[28rem] lg:h-[32rem] relative overflow-hidden rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl"
+            className="flex-1 w-full max-w-md lg:max-w-xl h-[20rem] md:h-[28rem] lg:h-[32rem] relative overflow-hidden rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl ring-2 md:ring-4 ring-light-gray/20"
             whileHover={{
               scale: 1.03,
-              boxShadow: "0px 20px 30px -10px rgba(0,0,0,0.2)",
+              boxShadow: "0px 15px 25px -8px rgba(200,200,200,0.15)",
             }}
             transition={{
               type: "spring",
@@ -95,7 +95,7 @@ export default function IntroductionSection() {
         </div>
       </motion.div>
 
-      {/* Divider 1*/}
+      {/* Divider 1 */}
       <SectionDivider
         color="var(--dark-gray)"
         type="A"
@@ -125,10 +125,10 @@ export default function IntroductionSection() {
         {/* Content */}
         <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16 z-30 py-16">
           <motion.div
-            className="flex-1 w-full order-last lg:order-first max-w-md lg:max-w-xl h-[20rem] md:h-[28rem] lg:h-[32rem] relative overflow-hidden rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl"
+            className="flex-1 w-full order-last lg:order-first max-w-md lg:max-w-xl h-[20rem] md:h-[28rem] lg:h-[32rem] relative overflow-hidden rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl ring-2 md:ring-4 ring-light-gray/20"
             whileHover={{
               scale: 1.03,
-              boxShadow: "0px 15px 25px -8px rgba(255,255,255,0.1)",
+              boxShadow: "0px 15px 25px -8px rgba(200,200,200,0.15)",
             }}
             transition={{
               duration: 0.6,
@@ -176,7 +176,7 @@ export default function IntroductionSection() {
         </div>
       </motion.div>
 
-      {/* Divider 2*/}
+      {/* Divider 2 */}
       <SectionDivider
         color="var(--dark-gray)"
         type="A"
