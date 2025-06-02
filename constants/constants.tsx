@@ -35,23 +35,23 @@ export const sections: SectionContent[] = [
   {
     title: "Studio Mission & Philosophy",
     text: [
-      "At Trinetra, our mission is to build immersive worlds that engage every sense. We believe in blending dynamic gameplay with rich storytelling, empowering players to shape their own unforgettable adventures.",
+      "At TRINETRA, our mission is to revive and reshape the Indian gaming industry by championing original, meaningful game development. The studio aims to support and produce games that are built from unique concepts, avoiding reliance on derivative or cloned content. Through a focus on long-term growth, structured learning, and collaborative experimentation, TRINETRA intends to develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
     ],
     image: "/wallpaper_bg1.jpg",
   },
   {
     title: "Studio Culture & Values",
     text: [
-      "Our studio thrives on collaboration and community, creating experiences alongside the very players who enjoy them. We champion inclusivity by embracing diverse perspectives, and we hold ourselves to the highest standards of craft—where visual artistry and innovative mechanics meet.",
+      "TRINETRA operates on principles of continuous learning, open collaboration, and shared growth. The studio encourages participation from individuals at all skill levels, with a focus on fostering team cohesion through Game Jams and small-scale development projects. Diversity of thought, transparent communication, and mutual respect are foundational. The studio remains adaptable in structure, welcoming creative contributors regardless of geographic origin or professional background.",
     ],
-    image: "/wallpaper_bg1.jpg",
+    image: "/ConceptPic_2.jpg",
   },
   {
     title: "What Makes Us Different",
     text: [
-      "What sets Trinetra apart is our focus on emergent storytelling, where no two journeys are ever the same. Every visual is carefully crafted, and every decision you make has a lasting impact, allowing you to shape a universe uniquely your own.",
+      "TRINETRA stands out by prioritizing original content in a market dominated by copycat titles. We foster new-concept development and early-stage experimentation, giving emerging developers room to innovate free from commercial constraints. Supported by strategic partnerships and prospective investors—contingent on delivering playable prototypes. We also welcome international collaboration to share knowledge and align with global industry standards.",
     ],
-    image: "/wallpaper_bg1.jpg",
+    image: "/ConceptPic_3.jpg",
   },
 ];
 
