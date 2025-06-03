@@ -18,10 +18,10 @@ export default function GameCarousel() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
-  // Determine how many cards to show at once based on window.innerWidth
+  // Utility to decide how many cards to show at once
   const getVisibleCount = () => {
     if (typeof window === "undefined") {
-      // During SSR, assume 1
+      // During SSR/hydration: assume 1
       return 1;
     }
     const w = window.innerWidth;
@@ -30,16 +30,23 @@ export default function GameCarousel() {
     return 1;                // mobile
   };
 
-  const [visibleCount, setVisibleCount] = useState<number>(() => getVisibleCount());
+  // Start with a default of 1, but we'll immediately re‐compute on mount
+  const [visibleCount, setVisibleCount] = useState<number>(1);
 
-  // Update visibleCount on window resize
+  // Run once on mount to set visibleCount correctly, and also re‐compute on resize
   useEffect(() => {
     const updateCount = () => {
-      const newCount = getVisibleCount();
-      setVisibleCount(newCount);
+      setVisibleCount(getVisibleCount());
     };
+
+    // Immediately run on mount:
+    updateCount();
+
+    // Then listen for resizes:
     window.addEventListener("resize", updateCount);
-    return () => window.removeEventListener("resize", updateCount);
+    return () => {
+      window.removeEventListener("resize", updateCount);
+    };
   }, []);
 
   // Wrap index around [0 .. Games.length−1]
@@ -57,7 +64,8 @@ export default function GameCarousel() {
     setCurrent((c) => clamp(c + 1));
   }, [clamp]);
 
-  // Compute each card’s width so that (visibleCount × cardWidth) + ((visibleCount−1) × margin) = 100%
+  // Compute each card’s width so that:
+  // (visibleCount × cardWidth) + ((visibleCount−1) × margin) = 100%
   const itemWidthPercent = useMemo(() => {
     if (visibleCount <= 1) {
       return 100;
@@ -67,9 +75,10 @@ export default function GameCarousel() {
 
   // Compute how far to shift the flex container so that the "current" card is centered
   const xOffset = useMemo(() => {
-    // e.g. if itemWidthPercent = 30.666... then initialCenterOffset = (100 - 30.666..) / 2
+    // e.g. if itemWidthPercent = 30.666..., then
+    // initialCenteringOffset = (100 - 30.666...) / 2
     const initialCenteringOffset = (100 - itemWidthPercent) / 2;
-    const stepPerItem = itemWidthPercent + MARGIN_RIGHT_PERCENT; 
+    const stepPerItem = itemWidthPercent + MARGIN_RIGHT_PERCENT;
     // Move left by (current × stepPerItem)% from the centering offset
     return `calc(${initialCenteringOffset}% - ${current * stepPerItem}%)`;
   }, [current, itemWidthPercent]);
@@ -135,8 +144,8 @@ export default function GameCarousel() {
                       <Image
                         src={game.image}
                         alt={game.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: "cover" }}
                         className="rounded-t-2xl"
                       />
                     </div>
