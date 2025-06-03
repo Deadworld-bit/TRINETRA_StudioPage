@@ -50,9 +50,7 @@ Open http://localhost:3000 in your browser.
 
 ## Screenshots:
 
-![Project First ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_01.png)<br><br>
-![Project Second ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_02.png)<br><br>  
-![Project Third ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_03.png)<br><br>  
+![Project First ScreenShot](https://github.com/Deadworld-bit/TRINETRA_StudioPage/blob/main/public/Screenshot%202025-06-03%20161817.png)<br><br>
 
 ##### © Deadworld 2025
 
