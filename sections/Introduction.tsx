@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { sections } from "@/constants/constants";
-import backgroundImage from "@/public/wallpaper_bg3.jpg";
+import backgroundImage from "@/public/wallpaper_bg9.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
