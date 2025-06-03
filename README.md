@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+[![TRINETRA_StudioPage | © 2025 by Deadworld ]](https://github.com/Deadworld-bit/TRINETRA_StudioPage.git)
+# Welcome to TRINETRA_StudioPage repository
+## Overview
+This repository contains the Trinetra Studio landing page, built with Next.js and styled using Tailwind CSS to deliver a fast, responsive, and modern user experience.
 
-## Getting Started
+## Key Features
+### Responsive Design
+* Fully mobile-first, using Tailwind’s utility classes for fluid layouts.
+* Landscape and portrait support out of the box.
 
-First, run the development server:
+### Next.js Static Generation & Routing
+* Pre-renders pages at build time for optimal performance.
+* File-based routing with clean URLs
 
+### Reusable Components
+* Modular React components.
+* Easy to extend or customize via props and Tailwind classes.
+
+### Optimized Asset Loading
+* Automatic image optimization using Next.js <Image> component.
+* Fonts and icons loaded via CDN to reduce bundle size.
+
+## Tech Stack
+* Framework: Next.js (v13+)
+* Styling: Tailwind CSS (v3+)
+* Language: TypeScript 
+* Bundler: Vercel’s optimized build pipeline (Webpack + SWC)
+* Assets:
+  - SVG icons from Heroicons
+  - Custom illustrations (stored in public)
+* Hosting: Deployed on Vercel for zero-config continuous deployment.
+
+## Installation & Usage
+### Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   git clone https://github.com/Deadworld-bit/TRINETRA_StudioPage.git
+   cd TRINETRA_StudioPage
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install dependencies
+```bash
+   npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run the development server
+```bash
+   npm run dev
+```
+Open http://localhost:3000 in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Screenshots:
 
-## Learn More
+![Project First ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_01.png)<br><br>
+![Project Second ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_02.png)<br><br>  
+![Project Third ScreenShot](https://github.com/Deadworld-bit/TurnBasedStrategy_Testing/blob/main/Pictures/Pic_03.png)<br><br>  
 
-To learn more about Next.js, take a look at the following resources:
+##### © Deadworld 2025
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
