@@ -48,6 +48,8 @@ This repository contains the Trinetra Studio landing page, built with Next.js an
 ```
 Open http://localhost:3000 in your browser.
 
+## Demo Link: https://trinetra-studio-page.vercel.app/
+
 ## Screenshots:
 
 ![Project First ScreenShot](https://github.com/Deadworld-bit/TRINETRA_StudioPage/blob/main/public/Screenshot%202025-06-03%20161817.png)<br><br>
