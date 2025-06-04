@@ -14,8 +14,25 @@ import logoImage from "@/public/StudioLogo_4_white.png";
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "600"] });
 
+const infoLinks = [
+  { href: "/legal-note", label: "Legal Note" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+];
+
+const socialLinks = [
+  { href: "https://discord.com", Icon: FaDiscord, label: "Discord" },
+  { href: "https://instagram.com", Icon: FaInstagram, label: "Instagram" },
+  { href: "https://facebook.com", Icon: FaFacebook, label: "Facebook" },
+  { href: "https://twitter.com", Icon: FaTwitter, label: "Twitter" },
+  { href: "https://linkedin.com", Icon: FaLinkedin, label: "LinkedIn" },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
+
+  const sectionHeadingClasses = `uppercase text-lg mb-4 font-bold text-pure-white ${orbitron.className}`;
+  const linkClasses = "text-snow hover:text-[#60a5fa] transition";
+  const iconBaseClasses = "text-snow hover:text-[#60a5fa] transition transform hover:scale-105";
 
   return (
     <footer
@@ -23,23 +40,16 @@ export default function Footer() {
     >
       <div className="container mx-auto px-4 flex flex-col md:grid md:grid-cols-3 gap-8">
         {/* Left: Info & Policies */}
-        <div className="text-center md:text-left order-1 md:order-1">
-          <h3
-            className={`uppercase text-lg mb-4 font-bold text-pure-white ${orbitron.className}`}
-          >
-            Info & Policies
-          </h3>
+        <div className="text-center md:text-left order-1">
+          <h3 className={sectionHeadingClasses}>Info & Policies</h3>
           <ul className="space-y-2">
-            <li>
-              <a href="/legal-note" className="text-snow hover:text-[#60a5fa] transition">
-                Legal Note
-              </a>
-            </li>
-            <li>
-              <a href="/privacy-policy" className="text-snow hover:text-[#60a5fa] transition">
-                Privacy Policy
-              </a>
-            </li>
+            {infoLinks.map(({ href, label }) => (
+              <li key={href}>
+                <a href={href} className={linkClasses}>
+                  {label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -64,58 +74,21 @@ export default function Footer() {
 
         {/* Right: Join & Social */}
         <div className="text-center md:text-right order-2 md:order-3">
-          <h3
-            className={`uppercase text-lg mb-2 font-bold text-pure-white ${orbitron.className}`}
-          >
-            Join our community
-          </h3>
-          <p className="text-sm mb-4 text-snow">Follow us & stay updated</p>
+          <h3 className={sectionHeadingClasses}>Join our community</h3>
+          <p className="text-sm mb-4 text-snow">Follow us &amp; stay updated</p>
           <div className="flex justify-center md:justify-end space-x-4">
-            <a
-              href="https://discord.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Discord"
-              className="text-snow hover:text-[#60a5fa] transition transform hover:scale-105"
-            >
-              <FaDiscord size={24} />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-snow hover:text-[#60a5fa] transition transform hover:scale-105"
-            >
-              <FaInstagram size={24} />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="text-snow hover:text-[#60a5fa] transition transform hover:scale-105"
-            >
-              <FaFacebook size={24} />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-              className="text-snow hover:text-[#60a5fa] transition transform hover:scale-105"
-            >
-              <FaTwitter size={24} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-snow hover:text-[#60a5fa] transition transform hover:scale-105"
-            >
-              <FaLinkedin size={24} />
-            </a>
+            {socialLinks.map(({ href, Icon, label }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={iconBaseClasses}
+              >
+                <Icon size={24} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
