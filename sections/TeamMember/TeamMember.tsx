@@ -117,6 +117,7 @@ export default function TeamMembers() {
         bg-center 
         bg-scroll
       "
+      id="pioneers"
       style={{ backgroundImage: "url('/wallpaper_bg6.jpg')" }}
     >
       <div className="absolute top-0 left-0 w-full h-1 bg-charcoal" />

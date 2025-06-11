@@ -25,6 +25,7 @@ const Hero: React.FC = () => {
   return (
     <motion.section
       className="relative w-full pt-20 flex flex-col items-center justify-center min-h-screen overflow-hidden text-center"
+      id="aboutus"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
         backgroundSize: "cover",

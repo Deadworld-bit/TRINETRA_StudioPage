@@ -194,6 +194,8 @@ export default function Contact() {
             className="hidden"
             autoComplete="off"
             tabIndex={-1}
+            placeholder="Leave this field empty"
+            title="If you are a human, leave this field empty"
           />
           <div className="space-y-6">
             {/* Full Name */}

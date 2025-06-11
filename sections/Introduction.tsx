@@ -159,7 +159,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({
 
 export default function IntroductionSection() {
   return (
-    <section className="overflow-hidden" id="aboutus">
+    <section className="overflow-hidden" id="ourmission">
       <ContentSection
         title={sections[0].title}
         text={sections[0].text}
