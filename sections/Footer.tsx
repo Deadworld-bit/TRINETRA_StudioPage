@@ -30,13 +30,15 @@ const socialLinks = [
 export default function Footer() {
   const year = new Date().getFullYear();
 
-  const sectionHeadingClasses = `uppercase text-lg mb-4 font-bold text-pure-white ${orbitron.className}`;
-  const linkClasses = "text-snow hover:text-[#60a5fa] transition";
-  const iconBaseClasses = "text-snow hover:text-[#60a5fa] transition transform hover:scale-105";
+  const sectionHeadingClasses = `uppercase text-lg mb-4 font-bold text-p2-soft-white ${orbitron.className}`;
+  const linkClasses =
+    "text-p2-gray-whisper hover:text-p2-electric-indigo transition";
+  const iconBaseClasses =
+    "text-p2-gray-whisper hover:text-p2-coral-burst transition transform hover:scale-110";
 
   return (
     <footer
-      className={`bg-charcoal text-pure-white py-8 mt-auto ${montserrat.className}`}
+      className={`bg-p2-charcoal text-p2-soft-white py-8 mt-auto ${montserrat.className}`}
     >
       <div className="container mx-auto px-4 flex flex-col md:grid md:grid-cols-3 gap-8">
         {/* Left: Info & Policies */}
@@ -63,19 +65,18 @@ export default function Footer() {
             className="mb-4"
           />
           <h2
-            className={`text-2xl font-bold text-pure-white ${orbitron.className}`}
+            className={`text-2xl font-bold text-p2-soft-white ${orbitron.className}`}
           >
             TRINETRA
           </h2>
-          <p className="text-sm mt-2 text-snow">
-            © {year} TRINETRA Game Studio. All rights reserved.
-          </p>
         </div>
 
         {/* Right: Join & Social */}
         <div className="text-center md:text-right order-2 md:order-3">
           <h3 className={sectionHeadingClasses}>Join our community</h3>
-          <p className="text-sm mb-4 text-snow">Follow us &amp; stay updated</p>
+          <p className="text-sm mb-4 text-p2-gray-whisper">
+            Follow us &amp; stay updated
+          </p>
           <div className="flex justify-center md:justify-end space-x-4">
             {socialLinks.map(({ href, Icon, label }) => (
               <a
@@ -91,6 +92,18 @@ export default function Footer() {
             ))}
           </div>
         </div>
+      </div>
+      <div className="mt-8 pt-4 text-center relative">
+        <div
+          className="absolute left-1/2 -translate-x-1/2 top-0 w-3/4 h-[3px] rounded-full"
+          style={{
+            background: "var(--p2-gray-whisper)",
+            opacity: 0.85,
+          }}
+        />
+        <p className="text-sm text-p2-gray-whisper relative z-10">
+          © {year} TRINETRA Game Studio. All rights reserved.
+        </p>
       </div>
     </footer>
   );

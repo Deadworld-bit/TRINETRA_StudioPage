@@ -6,6 +6,7 @@ import Introduction from "@/sections/Introduction";
 import Game from "@/sections/Game";
 import TeamMembers from "@/sections/TeamMember/TeamMember";
 import Contact from "@/sections/Contact";
+import OurMission from "@/sections/OurMission";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Navbar />
         <Hero />
         <Introduction />
+        <OurMission />
         <TeamMembers />
         <Game />
         <Contact />

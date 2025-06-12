@@ -28,7 +28,7 @@ export default function Navbar() {
   const [expanded, setExpanded] = useState(false);
 
   const headerClasses = `
-    fixed top-0 left-0 w-full z-50 bg-pure-black shadow-md
+  fixed top-0 left-0 w-full z-50 bg-p2-charcoal shadow-md
   `;
 
   const Logo = ({ size }: { size: "desktop" | "mobile" }) => {
@@ -53,9 +53,9 @@ export default function Navbar() {
         <Logo size="desktop" />
         <span
           className={`
-            ${orbitron.className} text-3xl font-bold ml-4 studio-name
-            ${orbitron.className} text-pure-white
-          `}
+          ${orbitron.className} text-3xl font-bold ml-4 studio-name
+          text-p2-soft-white
+        `}
         >
           TRINETRA
         </span>
@@ -63,30 +63,30 @@ export default function Navbar() {
       <GooeyNav
         items={navLinks}
         textClass={`
-    ${orbitron.className}
-    text-base
-    font-bold
-    tracking-widest
-    uppercase
-    text-pure-white
-    transition-colors duration-300
-  `}
+        ${orbitron.className}
+        text-base
+        font-bold
+        tracking-widest
+        uppercase
+        text-p2-soft-white
+        transition-colors duration-300
+      `}
       />
     </div>
   );
 
   const MobileHeader = () => (
-    <div className="md:hidden fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 z-50 bg-pure-black shadow-md">
+    <div className="md:hidden fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 z-50 bg-p2-charcoal shadow-md">
       <span
         className={`
-        ${orbitron.className} text-xl font-bold studio-name text-pure-white
+        ${orbitron.className} text-xl font-bold studio-name text-p2-soft-white
       `}
       >
         TRINETRA
       </span>
       <button
         onClick={() => setExpanded((prev) => !prev)}
-        className={`${TRANSITION_COLOR} text-pure-white menu-button`}
+        className={`${TRANSITION_COLOR} text-p2-soft-white menu-button`}
         aria-label="Toggle navigation"
       >
         {expanded ? (
@@ -101,8 +101,8 @@ export default function Navbar() {
   const MobileDrawer = () => (
     <nav
       className={`
-      md:hidden fixed top-16 right-0 h-[calc(100%-4rem)] w-3/4 max-w-xs
-      bg-pure-black flex flex-col items-center justify-center z-40 nav-drawer
+      md:hidden fixed top-16 left-0 h-[calc(100%-4rem)] w-full
+      bg-p2-charcoal flex flex-col items-center justify-center z-40 nav-drawer
       transition-transform duration-300
       ${expanded ? "translate-x-0" : "translate-x-full"}
     `}
@@ -115,7 +115,7 @@ export default function Navbar() {
               href={href}
               className={`
               ${orbitron.className} text-base font-bold tracking-widest uppercase nav-link
-              ${TRANSITION_COLOR} text-pure-white
+              ${TRANSITION_COLOR} text-p2-soft-white
             `}
               onClick={() => setExpanded(false)}
             >

@@ -15,6 +15,12 @@ export interface TeamMember {
   social: SocialLink[];
 }
 
+export interface AboutUs {
+  title: string;
+  text_1: string[];
+  text_2: string[];
+}
+
 export interface SectionContent {
   title: string;
   text: string[];
@@ -30,6 +36,18 @@ export interface Game {
   image: string; 
   link?: string; 
 }
+
+export const aboutus: AboutUs[] = [
+  {
+    title: "About Us",
+    text_1: [
+    "At TRINETRA, our mission is to revive and reshape the Indian gaming industry by championing original, meaningful game development. We avoid reliance on derivative or cloned content, focusing instead on unique concepts that push creative boundaries.",
+    ],
+    text_2: [
+    "Through structured learning and collaborative experimentation, we develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
+    ],
+  },
+]
 
 export const sections: SectionContent[] = [
   {

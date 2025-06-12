@@ -12,13 +12,23 @@ html {
 }
 
 :root {
+  /* Color Palette 1 */
   --pure-white: #FFFFFF;
   --snow:       #F8F9FA;
   --light-gray: #D1D5DB;
   --mid-gray:   #6B7280;
   --dark-gray:  #374151;
-  --charcoal:   #1F2937;
+  --charcoal:   #121212;
   --pure-black: #000000;
+
+  /* Color Palette 2 */
+  --p2-charcoal:       #1E1E1E;  /* Dark background base */
+  --p2-slate:          #2E2E3E;  /* Surface cards/panels */
+  --p2-coral-burst:    #FF6F61;  /* Primary CTAs */
+  --p2-electric-indigo:#5E60CE;  /* Secondary accents */
+  --p2-mint-flash:     #60D394;  /* Micro-interaction highlights */
+  --p2-soft-white:     #E0E0E0;  /* Primary text */
+  --p2-gray-whisper:   #A0A0A0;  /* Secondary text */
 }
 
 @layer base {
@@ -35,6 +45,7 @@ html {
 }
 
 @layer utilities {
+  /* Color Utilities 1*/
   .text-pure-white { color: var(--pure-white) !important; }
   .text-snow       { color: var(--snow)       !important; }
   .text-light-gray { color: var(--light-gray) !important; }
@@ -58,4 +69,31 @@ html {
   .stroke-dark-gray  { stroke: var(--dark-gray)  !important; }
   .stroke-charcoal   { stroke: var(--charcoal)   !important; }
   .stroke-pure-black { stroke: var(--pure-black) !important; }
+
+  /* Palette 2 Text */
+  .text-p2-charcoal        { color: var(--p2-charcoal)        !important; }
+  .text-p2-slate           { color: var(--p2-slate)           !important; }
+  .text-p2-coral-burst     { color: var(--p2-coral-burst)     !important; }
+  .text-p2-electric-indigo { color: var(--p2-electric-indigo) !important; }
+  .text-p2-mint-flash      { color: var(--p2-mint-flash)      !important; }
+  .text-p2-soft-white      { color: var(--p2-soft-white)      !important; }
+  .text-p2-gray-whisper    { color: var(--p2-gray-whisper)    !important; }
+
+  /* Palette 2 Background */
+  .bg-p2-charcoal        { background-color: var(--p2-charcoal)        !important; }
+  .bg-p2-slate           { background-color: var(--p2-slate)           !important; }
+  .bg-p2-coral-burst     { background-color: var(--p2-coral-burst)     !important; }
+  .bg-p2-electric-indigo { background-color: var(--p2-electric-indigo) !important; }
+  .bg-p2-mint-flash      { background-color: var(--p2-mint-flash)      !important; }
+  .bg-p2-soft-white      { background-color: var(--p2-soft-white)      !important; }
+  .bg-p2-gray-whisper    { background-color: var(--p2-gray-whisper)    !important; }
+
+  /* Palette 2 Stroke (SVG, outlines) */
+  .stroke-p2-charcoal        { stroke: var(--p2-charcoal)        !important; }
+  .stroke-p2-slate           { stroke: var(--p2-slate)           !important; }
+  .stroke-p2-coral-burst     { stroke: var(--p2-coral-burst)     !important; }
+  .stroke-p2-electric-indigo { stroke: var(--p2-electric-indigo) !important; }
+  .stroke-p2-mint-flash      { stroke: var(--p2-mint-flash)      !important; }
+  .stroke-p2-soft-white      { stroke: var(--p2-soft-white)      !important; }
+  .stroke-p2-gray-whisper    { stroke: var(--p2-gray-whisper)    !important; }
 }
