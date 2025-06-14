@@ -1,5 +1,5 @@
 import profile from "@/public/Profile.jpg"; 
-import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaInstagram, FaLightbulb, FaGraduationCap, FaGlobe } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { IconType } from "react-icons";
 
@@ -21,10 +21,10 @@ export interface AboutUs {
   text_2: string[];
 }
 
-export interface SectionContent {
+export interface MissionPillar {
+  icon: string;
   title: string;
-  text: string[];
-  image: string; 
+  desc: string;
 }
 
 export interface Game {
@@ -49,27 +49,21 @@ export const aboutus: AboutUs[] = [
   },
 ]
 
-export const sections: SectionContent[] = [
+export const missionPillars: MissionPillar[] = [
   {
-    title: "Studio Mission & Philosophy",
-    text: [
-      "At TRINETRA, our mission is to revive and reshape the Indian gaming industry by championing original, meaningful game development. The studio aims to support and produce games that are built from unique concepts, avoiding reliance on derivative or cloned content. Through a focus on long-term growth, structured learning, and collaborative experimentation, TRINETRA intends to develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
-    ],
-    image: "/wallpaper_bg1.jpg",
+    icon: "FaLightbulb", // Original Content
+    title: "Original Content",
+    desc: "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
   },
   {
-    title: "Studio Culture & Values",
-    text: [
-      "TRINETRA operates on principles of continuous learning, open collaboration, and shared growth. The studio encourages participation from individuals at all skill levels, with a focus on fostering team cohesion through Game Jams and small-scale development projects. Diversity of thought, transparent communication, and mutual respect are foundational. The studio remains adaptable in structure, welcoming creative contributors regardless of geographic origin or professional background.",
-    ],
-    image: "/ConceptPic_2.jpg",
+    icon: "FaGraduationCap", // Continuous Learning
+    title: "Continuous Learning",
+    desc: "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
   },
   {
-    title: "What Makes Us Different",
-    text: [
-      "TRINETRA stands out by prioritizing original content in a market dominated by copycat titles. We foster new-concept development and early-stage experimentation, giving emerging developers room to innovate free from commercial constraints. Supported by strategic partnerships and prospective investors—contingent on delivering playable prototypes. We also welcome international collaboration to share knowledge and align with global industry standards.",
-    ],
-    image: "/ConceptPic_3.jpg",
+    icon: "FaGlobe", // Global Collaboration
+    title: "Global Collaboration",
+    desc: "We welcome international collaboration to share knowledge and align with global industry standards.",
   },
 ];
 

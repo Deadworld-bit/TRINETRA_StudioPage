@@ -16,7 +16,6 @@ const navLinks = [
   { label: "About Us", href: "#aboutus" },
   { label: "Our Mission", href: "#ourmission" },
   { label: "Pioneers", href: "#pioneers" },
-  { label: "Values", href: "#values" },
   { label: "Our Games", href: "#games" },
   { label: "Contact", href: "#contact" },
 ];
@@ -28,7 +27,7 @@ export default function Navbar() {
   const [expanded, setExpanded] = useState(false);
 
   const headerClasses = `
-  fixed top-0 left-0 w-full z-50 bg-p2-charcoal shadow-md
+  fixed top-0 left-0 w-full z-50 bg-pure-black shadow-md
   `;
 
   const Logo = ({ size }: { size: "desktop" | "mobile" }) => {

@@ -97,3 +97,85 @@ html {
   .stroke-p2-soft-white      { stroke: var(--p2-soft-white)      !important; }
   .stroke-p2-gray-whisper    { stroke: var(--p2-gray-whisper)    !important; }
 }
+
+/* 1) Film‑grain noise overlay */
+@keyframes grain {
+  0%, 100% { background-position: 0 0; }
+  10% { background-position: -5% -5%; }
+  20% { background-position: -10% 10%; }
+  30% { background-position: 10% -10%; }
+  40% { background-position: -10% 5%; }
+  50% { background-position: 5% -10%; }
+  60% { background-position: -5% 10%; }
+  70% { background-position: 10% 5%; }
+  80% { background-position: -10% -5%; }
+  90% { background-position: 5% 10%; }
+}
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: url("/subtle-white-feathers.png") repeat;
+  opacity: 0.03;
+  animation: grain 8s steps(10) infinite;
+  z-index: -1;
+}
+
+/* 2) Animated dual‑layer grid */
+.animated-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: #09090A;
+  /* two grids: fast+coarse, slow+fine */
+  background-image:
+    /* slow, fine grid */
+    linear-gradient(rgba(58,138,255,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,138,255,0.15) 1px, transparent 1px),
+    /* fast, coarse grid */
+    linear-gradient(rgba(255,255,255,0.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 2px, transparent 2px);
+  background-size:
+    20px 20px, 20px 20px, 80px 80px, 80px 80px;
+  animation:
+    move-fine 30s linear infinite,
+    move-coarse 60s linear reverse infinite,
+    hue-shift 120s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+/* move each layer */
+@keyframes move-fine {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 20px 20px, 20px 20px, 0 0, 0 0; }
+}
+@keyframes move-coarse {
+  from { background-position: 0 0, 0 0, 80px 80px, 80px 80px; }
+  to   { background-position: 0 0, 0 0, 0 0, 0 0; }
+}
+/* slowly cycle the hue of the fine grid */
+@keyframes hue-shift {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(45deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+/* 3) Glowing nodes at every intersection */
+.animated-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 0 0, rgba(58,138,255,0.3) 2%, transparent 0) 0 0,
+    radial-gradient(circle at 0 100%, rgba(58,138,255,0.3) 2%, transparent 0) 0 100%,
+    radial-gradient(circle at 100% 0, rgba(58,138,255,0.3) 2%, transparent 0) 100% 0,
+    radial-gradient(circle at 100% 100%, rgba(58,138,255,0.3) 2%, transparent 0) 100% 100%;
+  background-size: 20px 20px; /* match fine grid */
+  pointer-events: none;
+  animation: pulse-nodes 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-nodes {
+  from { opacity: 0.2; }
+  to   { opacity: 0.6; }
+}

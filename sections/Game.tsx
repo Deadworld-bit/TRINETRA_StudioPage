@@ -1,23 +1,30 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Games, Game } from "@/constants/constants";
 import GameModal from "@/components/gamemodal";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-const MARGIN_RIGHT_PERCENT = 4;    
-const AUTOSCROLL_INTERVAL = 5000;  
+const MARGIN_RIGHT_PERCENT = 4;
+const AUTOSCROLL_INTERVAL = 5000;
 
 // Custom hook: returns how many cards should be visible based on window width
 function useVisibleCount(): number {
   const getCount = () => {
     if (typeof window === "undefined") return 1; // SSR guard
     const w = window.innerWidth;
-    if (w >= 1024) return 3; 
-    if (w >= 640) return 2;  
-    return 1;                
+    if (w >= 1024) return 3;
+    if (w >= 640) return 2;
+    return 1;
   };
 
   const [visibleCount, setVisibleCount] = useState<number>(1);
@@ -133,13 +140,21 @@ export default function GameCarousel() {
   const [isHovering, setIsHovering] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [titleFontSize, setTitleFontSize] = useState<number>(48);
 
   const visibleCount = useVisibleCount();
   const clampIndex = useClampIndex(Games.length);
 
   // Navigate to previous/next, wrapping around
-  const prev = useCallback(() => setCurrent((c) => clampIndex(c - 1)), [clampIndex]);
-  const next = useCallback(() => setCurrent((c) => clampIndex(c + 1)), [clampIndex]);
+  const prev = useCallback(
+    () => setCurrent((c) => clampIndex(c - 1)),
+    [clampIndex]
+  );
+  const next = useCallback(
+    () => setCurrent((c) => clampIndex(c + 1)),
+    [clampIndex]
+  );
 
   const itemWidthPercent = useMemo(() => {
     if (visibleCount <= 1) return 100;
@@ -147,7 +162,7 @@ export default function GameCarousel() {
   }, [visibleCount]);
 
   const xOffset = useMemo(() => {
-    const initialCenteringOffset = (100 - itemWidthPercent) / 2; 
+    const initialCenteringOffset = (100 - itemWidthPercent) / 2;
     const step = itemWidthPercent + MARGIN_RIGHT_PERCENT;
     return `calc(${initialCenteringOffset}% - ${current * step}%)`;
   }, [current, itemWidthPercent]);
@@ -162,7 +177,7 @@ export default function GameCarousel() {
   const handleCardClick = (game: Game) => {
     setSelectedGame(game);
     setIsModalOpen(true);
-    document.body.style.overflow = "hidden"; 
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
@@ -171,14 +186,65 @@ export default function GameCarousel() {
     document.body.style.overflow = "unset";
   };
 
+  useLayoutEffect(() => {
+    if (titleRef.current) {
+      const computed = window.getComputedStyle(titleRef.current);
+      const size = parseFloat(computed.fontSize);
+      setTitleFontSize(size);
+    }
+  }, []);
+
   // Render
   return (
     <>
       <section
         id="games"
-        className="relative py-16 bg-dark-gray text-white overflow-hidden"
+        className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       >
-        <h2 className="text-6xl font-extrabold text-center mb-12">Our Games</h2>
+        {/* Vertical Lines Background */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="absolute top-0 bottom-0 w-px"
+              style={{
+                left: `${(i * 100) / 6}%`,
+                background:
+                  "linear-gradient(180deg,rgba(96,211,148,0.13),rgba(96,211,148,0.06) 60%,rgba(96,211,148,0.13))", // p2-mint-flash
+                filter: "blur(0.5px)",
+                opacity: 0.7,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Watermark */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
+            <h1
+              className="font-extrabold uppercase leading-none text-white/5 tracking-tighter whitespace-nowrap"
+              style={{
+                WebkitTextStroke: "2px rgba(255,255,255,0.10)",
+                WebkitTextFillColor: "var(--charcoal)",
+                color: "var(--charcoal)",
+                fontSize: `${titleFontSize * 1.75}px`,
+                lineHeight: 1,
+                transition: "font-size 0.2s",
+              }}
+            >
+              Our Games
+            </h1>
+          </div>
+          <h2
+            ref={titleRef}
+            className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-pure-white drop-shadow-lg"
+            style={{
+              transition: "font-size 0.2s",
+            }}
+          >
+            Our Games
+          </h2>
+        </div>
         <div
           className="relative overflow-hidden w-full"
           onMouseEnter={() => setIsHovering(true)}

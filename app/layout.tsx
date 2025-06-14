@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist, Geist_Mono } from "next/font/google";
+import AnimatedGrid from "@/components/AnimatedGrid";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -9,7 +10,6 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -21,15 +21,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body className={`${geistSans.variable} font-sans antialiased bg-amber-50 text-black`}>{children}</body>
-            <Analytics />
-            <SpeedInsights />
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} font-sans antialiased text-black`}
+      >
+        {children}
+      </body>
+      <Analytics />
+      <SpeedInsights />
+    </html>
+  );
 }

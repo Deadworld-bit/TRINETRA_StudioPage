@@ -1,96 +1,71 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, {
+  useRef,
+  useLayoutEffect,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import emailjs from "@emailjs/browser";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import {
+  FaBuilding,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 const INPUT_CLASSES = `
-  w-full bg-charcoal bg-opacity-60
-  border-2 border-light-gray rounded-lg
-  px-6 py-4 text-lg lg:text-xl
-  focus:outline-none focus:ring-4 focus:ring-orange-500
+  w-full bg-p2-slate border border-p2-mint-flash/30 rounded-md
+  px-6 py-4 text-base md:text-lg text-pure-white
+  focus:outline-none focus:border-p2-mint-flash transition
 `;
 const TEXTAREA_CLASSES = `
   ${INPUT_CLASSES}
   resize-none
 `;
 const BUTTON_BASE_CLASSES = `
-  mt-4 w-full py-4 lg:py-5
-  bg-orange-500 hover:bg-orange-600
-  rounded-lg text-pure-white font-semibold
-  text-lg lg:text-xl
-  transition-colors duration-200
+  mt-4 w-full md:w-fit px-8 py-3
+  bg-p2-mint-flash hover:bg-p2-coral-burst hover:text-pure-white
+  rounded-md text-pure-black font-semibold
+  text-base md:text-lg
+  transition
 `;
 const COOLDOWN_SECONDS = 30;
-
-function ContactInfoCard() {
-  return (
-    <div
-      className="
-        bg-dark-gray
-        border-2 border-orange-500
-        p-12 lg:p-16
-        w-full max-w-lg
-        text-pure-white
-      "
-      style={{
-        clipPath:
-          "polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 1.5rem 100%, 0 calc(100% - 1.5rem))",
-      }}
-    >
-      <h3 className="text-4xl lg:text-5xl font-bold mb-4">
-        TRINETRA GAME STUDIO
-      </h3>
-      <p className="mb-8 text-lg lg:text-xl">
-        We are the best partner to take your game global
-      </p>
-
-      <div className="space-y-6 mb-10">
-        {/* Email row */}
-        <div className="flex items-center text-lg lg:text-xl">
-          <svg
-            className="w-6 h-6 mr-3 text-orange-500"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M2 4.5A2.5 2.5 0 014.5 2h15A2.5 2.5 0 0122 4.5v15a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 19.5v-15zM4.5 4a.5.5 0 00-.5.5V7l8 5 8-5V4.5a.5.5 0 00-.5-.5h-15zM20 9.07l-7.555 4.722a.5.5 0 01-.444 0L4 9.07V19.5a.5.5 0 00.5.5h15a.5.5 0 00.5-.5V9.07z" />
-          </svg>
-          <span>trinetra.info@trinetragames.com</span>
-        </div>
-
-        {/* Phone row */}
-        <div className="flex items-center text-lg lg:text-xl">
-          <svg
-            className="w-6 h-6 mr-3 text-orange-500"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path d="M3 5.25A2.25 2.25 0 015.25 3h1.5A2.25 2.25 0 019 5.25v1.5A2.25 2.25 0 016.75 9H6a.75.75 0 00-.75.75C5.25 17.25 12 21 12 21a.75.75 0 00.75-.75v-.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0119 16.75v1.5A2.25 2.25 0 0116.75 20h-1.5a12.75 12.75 0 01-12.75-12.75V5.25z" />
-          </svg>
-          <span>024 6293 5559</span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 type FormState = {
   fullName: string;
   email: string;
+  subject: string;
   content: string;
-  honeypot: string; 
+  honeypot: string;
 };
 
 export default function Contact() {
+  // Watermark logic
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [titleFontSize, setTitleFontSize] = useState<number>(48);
+
+  useLayoutEffect(() => {
+    if (titleRef.current) {
+      const computed = window.getComputedStyle(titleRef.current);
+      const size = parseFloat(computed.fontSize);
+      setTitleFontSize(size);
+    }
+  }, []);
+
+  // Form logic
   const [form, setForm] = useState<FormState>({
     fullName: "",
     email: "",
+    subject: "",
     content: "",
     honeypot: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState(""); 
-  const [cooldown, setCooldown] = useState<number>(0); 
+  const [message, setMessage] = useState("");
+  const [cooldown, setCooldown] = useState<number>(0);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -99,6 +74,12 @@ export default function Contact() {
     }, 1000);
     return () => clearInterval(timer);
   }, [cooldown]);
+
+  useEffect(() => {
+    if (!message) return;
+    const timer = setTimeout(() => setMessage(""), 5000);
+    return () => clearTimeout(timer);
+  }, [message]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -128,17 +109,26 @@ export default function Contact() {
         {
           fullName: form.fullName,
           email: form.email,
+          subject: form.subject,
           content: form.content,
         },
         { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! }
       );
 
       setMessage(" Message sent successfully");
-      setForm({ fullName: "", email: "", content: "", honeypot: "" });
+      setForm({
+        fullName: "",
+        email: "",
+        subject: "",
+        content: "",
+        honeypot: "",
+      });
       setCooldown(COOLDOWN_SECONDS);
     } catch (error: unknown) {
       if (typeof error === "object" && error !== null && "text" in error) {
-        setMessage("❌ Failed to send message: " + (error as { text?: string }).text);
+        setMessage(
+          "❌ Failed to send message: " + (error as { text?: string }).text
+        );
       } else if (error instanceof Error) {
         setMessage("❌ Failed to send message: " + error.message);
       } else {
@@ -152,140 +142,197 @@ export default function Contact() {
   const isFormValid =
     form.fullName.trim() !== "" &&
     form.email.trim() !== "" &&
+    form.subject.trim() !== "" &&
     form.content.trim() !== "" &&
     form.honeypot === "";
   const isSuccess = message.includes("successfully");
 
   return (
     <section
-      className="
-        relative w-full min-h-screen
-        bg-charcoal bg-[url('/wallpaper_bg7.jpg')] bg-cover bg-center
-        flex flex-col lg:flex-row items-stretch
-      "
+      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       id="contact"
     >
-      <div className="absolute inset-0 bg-black/50" />
-      <div className="relative z-10 flex-1 flex items-center justify-center p-8 lg:p-16">
-        <ContactInfoCard />
+      {/* Vertical Lines Background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        {[1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px"
+            style={{
+              left: `${(i * 100) / 6}%`,
+              background:
+                "linear-gradient(180deg,rgba(94,96,206,0.13),rgba(94,96,206,0.06) 60%,rgba(94,96,206,0.13))", // p2-electric-indigo accent
+              filter: "blur(0.5px)",
+              opacity: 0.7,
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Watermark */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
+          <h1
+            className="font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap"
+            style={{
+              WebkitTextStroke: "2px rgba(255,255,255,0.10)",
+              WebkitTextFillColor: "var(--charcoal)",
+              color: "var(--charcoal)",
+              fontSize: `${titleFontSize * 1.75}px`,
+              lineHeight: 1,
+              transition: "font-size 0.2s",
+            }}
+          >
+            Our Contacts
+          </h1>
+        </div>
+        <h2
+          ref={titleRef}
+          className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-pure-white drop-shadow-lg"
+          style={{
+            transition: "font-size 0.2s",
+          }}
+        >
+          Get in Touch
+        </h2>
       </div>
 
-      {/* Right form */}
-      <div className="relative z-10 flex-1 flex items-center justify-center p-8 lg:p-16">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-xl space-y-8"
-        >
-          {/* Section title */}
-          <div className="flex items-center mb-2">
-            <span className="text-orange-500 uppercase tracking-wide text-base lg:text-lg">
-              Send us your message
-            </span>
-            <div className="flex-1 h-px bg-light-gray ml-4" />
-          </div>
-          <h3 className="text-4xl lg:text-5xl font-bold mb-6 text-pure-white">
-            We are here because of you!
-          </h3>
-          <input
-            type="text"
-            name="honeypot"
-            value={form.honeypot}
-            onChange={handleChange}
-            className="hidden"
-            autoComplete="off"
-            tabIndex={-1}
-            placeholder="Leave this field empty"
-            title="If you are a human, leave this field empty"
-          />
-          <div className="space-y-6">
-            {/* Full Name */}
-            <div>
-              <label htmlFor="fullName" className="block mb-2 text-lg lg:text-xl text-pure-white">
-                Full name
-              </label>
+      <div className="relative z-10 w-full max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 sm:px-8 mt-20">
+        {/* Left: Form */}
+        <div className="flex flex-col w-full bg-p2-charcoal border border-p2-electric-indigo rounded-2xl shadow-lg p-8 md:p-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-pure-white text-left">
+            Contact Us
+          </h2>
+          <form onSubmit={handleSubmit} className="w-full" autoComplete="off">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <input
-                id="fullName"
+                type="text"
                 name="fullName"
+                placeholder="Name"
                 value={form.fullName}
                 onChange={handleChange}
-                required
                 className={INPUT_CLASSES}
+                required
               />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block mb-2 text-lg lg:text-xl text-pure-white">
-                Email
-              </label>
               <input
-                id="email"
-                name="email"
                 type="email"
+                name="email"
+                placeholder="Email"
                 value={form.email}
                 onChange={handleChange}
-                required
                 className={INPUT_CLASSES}
+                required
               />
             </div>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              value={form.subject}
+              onChange={handleChange}
+              className={`${INPUT_CLASSES} mb-6`}
+              required
+            />
+            <textarea
+              name="content"
+              placeholder="Message"
+              rows={6}
+              value={form.content}
+              onChange={handleChange}
+              className={TEXTAREA_CLASSES}
+              required
+            />
+            <input
+              type="text"
+              name="honeypot"
+              value={form.honeypot}
+              onChange={handleChange}
+              className="hidden"
+              autoComplete="off"
+              tabIndex={-1}
+              placeholder="Leave this field empty"
+              title="If you are a human, leave this field empty"
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting || !isFormValid}
+              className={
+                BUTTON_BASE_CLASSES +
+                (isSubmitting || !isFormValid
+                  ? " opacity-50 cursor-not-allowed"
+                  : "")
+              }
+            >
+              {isSubmitting
+                ? "Sending..."
+                : cooldown > 0
+                ? `Wait ${cooldown}s`
+                : "Send Message"}
+            </button>
+            {message && (
+              <div
+                className={`mt-4 flex items-center space-x-2 rounded-lg px-4 py-3 transition-opacity duration-300
+                  ${
+                    isSuccess
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }
+                `}
+                role="alert"
+              >
+                {isSuccess ? (
+                  <CheckCircleIcon className="w-6 h-6 text-green-600" />
+                ) : (
+                  <XCircleIcon className="w-6 h-6 text-red-600" />
+                )}
+                <span className="text-lg">{message}</span>
+              </div>
+            )}
+          </form>
+        </div>
 
-            {/* Content */}
-            <div>
-              <label htmlFor="content" className="block mb-2 text-lg lg:text-xl text-pure-white">
-                Content
-              </label>
-              <textarea
-                id="content"
-                name="content"
-                rows={6}
-                value={form.content}
-                onChange={handleChange}
-                required
-                className={TEXTAREA_CLASSES}
-              />
+        {/* Right: Contact Info */}
+        <div className="flex flex-col w-full bg-p2-charcoal border border-p2-electric-indigo rounded-2xl shadow-lg p-8 md:p-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-pure-white text-left">
+            Alternative
+          </h2>
+          <p className="text-p2-gray-whisper text-base md:text-lg mb-10 max-w-md text-left">
+            Always available for freelance work if the right project comes
+            along, Feel free to contact us!
+          </p>
+          <div className="flex flex-col gap-8">
+            <div className="flex items-start gap-4">
+              <FaBuilding className="text-p2-mint-flash text-2xl mt-1" />
+              <div>
+                <span className="font-semibold text-pure-white">Company</span>
+                <div className="text-p2-gray-whisper">ThemeREC</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <FaMapMarkerAlt className="text-p2-mint-flash text-2xl mt-1" />
+              <div>
+                <span className="font-semibold text-pure-white">Location</span>
+                <div className="text-p2-gray-whisper">
+                  Time Square, Manhattan, NYC, USA
+                </div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <FaPhoneAlt className="text-p2-mint-flash text-2xl mt-1" />
+              <div>
+                <span className="font-semibold text-pure-white">Call Us</span>
+                <div className="text-p2-gray-whisper">+1-200-300-4000</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <FaPaperPlane className="text-p2-mint-flash text-2xl mt-1" />
+              <div>
+                <span className="font-semibold text-pure-white">Email Us</span>
+                <div className="text-p2-gray-whisper">contact@example.com</div>
+              </div>
             </div>
           </div>
-
-          {/* Submit button */}
-          <button
-            type="submit"
-            disabled={isSubmitting || !isFormValid}
-            className={`
-              ${BUTTON_BASE_CLASSES}
-              ${isSubmitting || !isFormValid
-                ? "opacity-50 cursor-not-allowed"
-                : ""
-              }
-            `}
-          >
-            {isSubmitting
-              ? "Sending..."
-              : cooldown > 0
-              ? `Wait ${cooldown}s`
-              : "Send Message"}
-          </button>
-          
-          {message && (
-            <div
-              className={`
-                mt-4 flex items-center space-x-2 rounded-lg px-4 py-3
-                transition-opacity duration-300
-                ${isSuccess
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-                }
-              `}
-              role="alert"
-            >
-              {isSuccess ? (
-                <CheckCircleIcon className="w-6 h-6 text-green-600" />
-              ) : (
-                <XCircleIcon className="w-6 h-6 text-red-600" />
-              )}
-              <span className="text-lg">{message}</span>
-            </div>
-          )}
-        </form>
+        </div>
       </div>
     </section>
   );

@@ -1,254 +1,125 @@
 "use client";
 
-import React from "react";
-import Image, { StaticImageData } from "next/image";
-import { motion, Variants } from "framer-motion";
-import { sections } from "@/constants/constants";
-import backgroundImage2 from "@/public/wallpaper_bg9.jpg";
+import React, { useRef, useLayoutEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FaGamepad, FaPaintBrush, FaUsers } from "react-icons/fa";
 
-// Fade-in-up variant 
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-const fadeInUpTransition = { duration: 0.7, ease: "easeOut" };
+export default function OurMission() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [titleFontSize, setTitleFontSize] = useState<number>(48);
 
-// Slide-in from left 
-const slideInLeft: Variants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0 },
-};
-const slideInLeftTransition = { delay: 0.2, duration: 0.6, ease: "easeOut" };
-
-// Slide-in from right 
-const slideInRight: Variants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: { opacity: 1, x: 0 },
-};
-const slideInRightTransition = { delay: 0.5, duration: 0.6, ease: "easeOut" };
-
-// Fade-in for paragraphs with incremental delay
-const paragraphFadeIn = (): Variants => ({
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-});
-const paragraphTransition = (index: number) => ({
-  delay: 0.4 + index * 0.1,
-  duration: 0.5,
-});
-
-// Hover scale effect on images
-const imageHoverProps = {
-  whileHover: {
-    scale: 1.03,
-    boxShadow: "0px 15px 25px -8px rgba(200,200,200,0.15)",
-  },
-  transition: { type: "spring", stiffness: 260, damping: 20 },
-  initial: { opacity: 0, scale: 0.9 },
-  whileInView: { opacity: 1, scale: 1 },
-};
-
-type SectionDividerProps = {
-  color: string;
-  type: "A" | "B";
-  className?: string;
-};
-
-const SectionDivider = ({ color, type, className }: SectionDividerProps) => {
-  const points = type === "A" ? "0,10 100,0 100,10" : "100,10 0,0 0,10";
-  return (
-    <div className={`relative ${className || ""}`} style={{ lineHeight: 0 }}>
-      <svg
-        viewBox="0 0 100 10"
-        preserveAspectRatio="none"
-        className="block w-full h-[40px] md:h-[60px] lg:h-[80px]"
-      >
-        <polygon points={points} fill={color} />
-      </svg>
-    </div>
-  );
-};
-
-type ContentSectionProps = {
-  title: string;
-  text: string[];
-  image: StaticImageData | string;
-  bgColor?: string;          
-  textColor?: string;        
-  titleColor?: string;       
-  reverseOnDesktop?: boolean; 
-};
-
-const ContentSection: React.FC<ContentSectionProps> = ({
-  title,
-  text,
-  image,
-  bgColor = "bg-snow",
-  textColor = "text-dark-gray",
-  titleColor = "text-pure-black",
-  reverseOnDesktop = false,
-}) => {
-  // Determine flex ordering based on reverseOnDesktop
-  // On mobile, text always appears above image (so order-last on image only for mobile).
-  const textOrderClass = reverseOnDesktop ? "order-last lg:order-first" : "";
-  const imageOrderClass = reverseOnDesktop ? "order-first lg:order-last" : "";
+  useLayoutEffect(() => {
+    if (titleRef.current) {
+      const computed = window.getComputedStyle(titleRef.current);
+      const size = parseFloat(computed.fontSize);
+      setTitleFontSize(size);
+    }
+  }, []);
 
   return (
-    <motion.div
-      className={`${bgColor} py-16 md:py-24 px-6 md:px-10 lg:px-20`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={fadeInUp}
-      transition={fadeInUpTransition}
+    <section
+      className="relative bg-charcoal text-p2-soft-white py-16 sm:py-20 md:py-24 overflow-hidden w-full"
+      id="ourmission"
     >
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-        <motion.div
-          className={`flex-1 text-left ${textOrderClass}`}
-          variants={slideInLeft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          transition={slideInLeftTransition}
-        >
-          <h2
-            className={`text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 md:mb-10 leading-tight ${titleColor}`}
-          >
-            {title}
-          </h2>
-          {text.map((paragraph, idx) => (
-            <motion.p
-              key={idx}
-              className={`text-lg md:text-xl lg:text-2xl mb-4 md:mb-6 ${textColor} leading-relaxed`}
-              variants={paragraphFadeIn()}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              transition={paragraphTransition(idx)}
-            >
-              {paragraph}
-            </motion.p>
-          ))}
-        </motion.div>
-
-        <motion.div
-          className={`
-            flex-1 
-            w-full max-w-md lg:max-w-xl 
-            h-[20rem] md:h-[28rem] lg:h-[32rem] 
-            relative overflow-hidden rounded-xl md:rounded-2xl 
-            shadow-xl md:shadow-2xl ring-2 md:ring-4 ring-light-gray/20
-            ${imageOrderClass}
-          `}
-          {...imageHoverProps}
-          transition={{ ...imageHoverProps.transition, delay: 0.3 }}
-        >
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            priority
+      {/* Vertical Lines Background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        {[1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px"
+            style={{
+              left: `${(i * 100) / 6}%`,
+              background:
+                "linear-gradient(180deg,rgba(96,211,148,0.13),rgba(96,211,148,0.06) 60%,rgba(96,211,148,0.13))", // p2-mint-flash
+              filter: "blur(0.5px)",
+              opacity: 0.7,
+            }}
           />
-        </motion.div>
+        ))}
       </div>
-    </motion.div>
-  );
-};
 
-export default function OurMissionSection() {
-  return (
-    <section className="overflow-hidden" id="ourmission">
-      <ContentSection
-        title={sections[0].title}
-        text={sections[0].text}
-        image={sections[0].image}
-        bgColor="bg-pure-white"
-        textColor="text-dark-gray"
-        titleColor="text-pure-black"
-        reverseOnDesktop={false}
-      />
-
-      <SectionDivider color="var(--dark-gray)" type="A" className="bg-pure-white" />
-
-      <motion.div className="relative px-6 md:px-10 lg:px-20 overflow-hidden pt-0 pb-16">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={backgroundImage2}
-            alt="Abstract background"
-            fill
-            className="object-cover"
-            quality={90}
-          />
-        </div>
-        <motion.div
-          className="absolute inset-0 bg-charcoal/70 z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, ease: "easeInOut" }}
-        />
-        <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16 z-30 py-16">
-          <motion.div
-            className="
-              flex-1 w-full max-w-md lg:max-w-xl
-              h-[20rem] md:h-[28rem] lg:h-[32rem]
-              relative overflow-hidden rounded-xl md:rounded-2xl
-              shadow-xl md:shadow-2xl ring-2 md:ring-4 ring-light-gray/20
-              order-last lg:order-first
-            "
-            {...imageHoverProps}
-            transition={{ ...imageHoverProps.transition, delay: 0.4 }}
-            viewport={{ once: true, amount: 0.3 }}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
+        {/* Watermark */}
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
+          <h1
+            className="font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap"
+            style={{
+              WebkitTextStroke: "2px rgba(255,255,255,0.10)",
+              WebkitTextFillColor: "var(--charcoal)",
+              color: "var(--charcoal)",
+              fontSize: `${titleFontSize * 1.75}px`,
+              lineHeight: 1,
+              transition: "font-size 0.2s",
+              opacity: 1,
+            }}
           >
-            <Image
-              src={sections[1].image}
-              alt={sections[1].title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              priority
-            />
-          </motion.div>
-          <motion.div
-            className="flex-1 text-left lg:text-right"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={slideInRight}
-            transition={slideInRightTransition}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-pure-white mb-6 md:mb-10 leading-tight">
-              {sections[1].title}
-            </h2>
-            {sections[1].text.map((paragraph, idx) => (
-              <motion.p
-                key={idx}
-                className="text-lg md:text-xl lg:text-2xl text-snow mb-4 md:mb-6 leading-relaxed"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={slideInRight}
-                transition={{ duration: 0.5, delay: 0.6 + idx * 0.15 }}
-              >
-                {paragraph}
-              </motion.p>
-            ))}
-          </motion.div>
+            OUR MISSION
+          </h1>
         </div>
-      </motion.div>
+        {/* Title */}
+        <h2
+          ref={titleRef}
+          className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-pure-white drop-shadow-lg"
+          style={{
+            transition: "font-size 0.2s",
+          }}
+        >
+          Our Mission
+        </h2>
+      </div>
 
-      <SectionDivider color="var(--dark-gray)" type="A" className="transform rotate-180 bg-snow"/>
-
-      <ContentSection
-        title={sections[2].title}
-        text={sections[2].text}
-        image={sections[2].image}
-        bgColor="bg-snow"
-        textColor="text-dark-gray"
-        titleColor="text-pure-black"
-        reverseOnDesktop={false}
-      />
+      {/* Mission Pillars */}
+      <div className="relative z-10 mt-12 sm:mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
+        {[
+          {
+            icon: FaGamepad,
+            title: "Original Content",
+            desc: "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
+            iconColor: "text-p2-coral-burst",
+            borderColor: "border-p2-coral-burst",
+          },
+          {
+            icon: FaPaintBrush,
+            title: "Continuous Learning",
+            desc: "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
+            iconColor: "text-p2-electric-indigo",
+            borderColor: "border-p2-electric-indigo",
+          },
+          {
+            icon: FaUsers,
+            title: "Global Collaboration",
+            desc: "We welcome international collaboration to share knowledge and align with global industry standards.",
+            iconColor: "text-p2-mint-flash",
+            borderColor: "border-p2-mint-flash",
+          },
+        ].map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                delay: 0.2 + i * 0.2,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              className={`bg-p2-slate/80 border bg-p2-charcoal ${item.borderColor} rounded-xl p-6 sm:p-8 md:p-10 space-y-6 hover:bg-p2-slate transition flex flex-col items-start min-h-[300px]`}
+            >
+              <div className={`${item.iconColor} text-4xl sm:text-5xl mb-4`}>
+                <Icon />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-p2-soft-white">
+                {item.title}
+              </h3>
+              <p className="text-base sm:text-lg leading-relaxed text-p2-gray-whisper">
+                {item.desc}
+              </p>
+            </motion.div>
+          );
+        })}
+      </div>
     </section>
   );
 }

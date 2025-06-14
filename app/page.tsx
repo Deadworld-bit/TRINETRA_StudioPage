@@ -4,7 +4,7 @@ import Footer from "@/sections/Footer";
 import Hero from "@/sections/Hero";
 import Introduction from "@/sections/Introduction";
 import Game from "@/sections/Game";
-import TeamMembers from "@/sections/TeamMember/TeamMember";
+import TeamMembers from "@/sections/TeamMember";
 import Contact from "@/sections/Contact";
 import OurMission from "@/sections/OurMission";
 
