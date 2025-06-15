@@ -149,7 +149,7 @@ export default function GameShowcase() {
                 viewport={{ once: true, amount: 0.2 }}
                 variants={fadeInUp}
                 className="
-                  group bg-p2-slate border border-p2-mint-flash/30 rounded-2xl shadow-lg 
+                  group bg-p2-charcoal border border-p2-mint-flash/30 rounded-2xl shadow-lg 
                   flex flex-col overflow-hidden transition hover:shadow-2xl hover:border-p2-mint-flash
                   cursor-pointer relative
                   min-h-[420px] md:min-h-[480px] lg:min-h-[520px]
