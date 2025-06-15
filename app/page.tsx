@@ -7,6 +7,7 @@ import Game from "@/sections/Game";
 import TeamMembers from "@/sections/TeamMember";
 import Contact from "@/sections/Contact";
 import OurMission from "@/sections/OurMission";
+import OurValue from "@/sections/OurValue";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <OurMission />
         <TeamMembers />
         <Game />
+        <OurValue />
         <Contact />
         <Footer />
     </>

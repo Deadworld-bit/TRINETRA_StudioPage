@@ -37,34 +37,33 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.nav-glass {
+  background: pure-black; 
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s, border 0.3s;
+}
+
 .nav-link {
   position: relative;
-  transition: color 0.3s ease;
+  overflow: hidden;
 }
-
-.nav-link:hover {
-  color: #2563eb;
-}
-
 .nav-link::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -4px;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6); /* Blue to violet */
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--p2-electric-indigo);
+  transition: width 0.3s cubic-bezier(.4,0,.2,1), left 0.3s cubic-bezier(.4,0,.2,1);
   border-radius: 2px;
-  box-shadow: 0 0 6px rgba(139, 92, 246, 0.6); /* Soft glow */
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0;
 }
-
-.nav-link:hover::after {
-  transform: translateX(-50%) scaleX(1);
-  opacity: 1;
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%;
+  left: 0;
 }
 
 .menu-button {

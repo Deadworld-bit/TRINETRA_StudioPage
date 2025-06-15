@@ -69,7 +69,7 @@ export default function TeamMember() {
             className="absolute top-0 bottom-0 w-0.75"
             style={{
               left: `${(i * 100) / 6}%`,
-              background: "rgba(96,211,148,0.13)",
+              background: "rgba(20, 106, 163, 0.13)",
               opacity: 0.7,
               filter: "blur(0.5px)",
             }}
