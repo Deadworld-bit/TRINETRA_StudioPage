@@ -3,34 +3,67 @@
 import React from "react";
 import Image from "next/image";
 import { Montserrat } from "next/font/google";
+import { motion, Variants } from "framer-motion";
 import { aboutus } from "@/constants/constants";
 
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "700"] });
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const linePulse: Variants = {
+  animate: {
+    opacity: [0.5, 0.8, 0.5],
+    transition: { duration: 2, repeat: Infinity },
+  },
+};
 
 const Introduction: React.FC = () => {
   const about = aboutus[0];
 
   return (
-    <section className="relative w-full bg-charcoal text-p2-soft-white py-20 px-4 md:px-12 lg:px-24 overflow-hidden">
-      {/* Vertical Lines Background */}
+    <motion.section
+      className="relative w-full bg-charcoal text-p2-soft-white py-20 px-4 md:px-12 lg:px-24 overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={containerVariants}
+    >
+      {/* Vertical Lines Background with subtle pulsing */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         {[1, 2, 3, 4].map((i) => (
-          <div
+          <motion.div
             key={i}
-            className="absolute top-0 bottom-0 w-px"
-            style={{
-              left: `${(i * 100) / 6}%`,
-              background:
-                "linear-gradient(180deg,rgba(94,96,206,0.13),rgba(94,96,206,0.06) 60%,rgba(94,96,206,0.13))", // p2-electric-indigo for a subtle accent
-              filter: "blur(0.5px)",
-              opacity: 0.7,
+            className="absolute top-0 bottom-0 w-0.75"
+            style={{ left: `${(i * 100) / 6}%`, 
+            background: "rgba(96,211,148,0.13)",
+            opacity: 0.7,
+            filter: "blur(0.5px)",
             }}
+            variants={linePulse}
+            animate="animate"
           />
         ))}
       </div>
+
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
-        {/* Left: Image */}
-        <div className="relative w-full h-[350px] md:h-auto rounded-xl overflow-hidden shadow-2xl flex-1 bg-p2-slate">
+        {/* Left: Image with fade-in */}
+        <motion.div
+          className="relative w-full h-[350px] md:h-auto rounded-xl overflow-hidden shadow-2xl flex-1 bg-p2-slate"
+          variants={fadeInUp}
+        >
           <Image
             src="/ConceptPic_2.jpg"
             alt="Studio Building"
@@ -40,17 +73,17 @@ const Introduction: React.FC = () => {
             sizes="(min-width: 768px) 50vw, 100vw"
             style={{ objectFit: "cover" }}
           />
-        </div>
+        </motion.div>
 
-        {/* Right: Content */}
-        <div className="w-full flex flex-col justify-center flex-1">
-          <span className="text-p2-coral-burst text-xl font-bold mb-2 tracking-wide">
+        {/* Right: Content with staggered text animations */}
+        <motion.div className="flex flex-col justify-center flex-1" variants={fadeInUp}>
+          <motion.span className="text-p2-coral-burst text-xl font-bold mb-2 tracking-wide" variants={fadeInUp}>
             Who are we?
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]">
+          </motion.span>
+          <motion.h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]" variants={fadeInUp}>
             We are TRINETRA, a creative and dedicated group of individuals
-          </h2>
-          <div className="text-lg md:text-xl text-p2-gray-whisper mb-8">
+          </motion.h2>
+          <motion.div className="text-lg md:text-xl text-p2-gray-whisper mb-8" variants={fadeInUp}>
             {about.text_1.map((paragraph, idx) => (
               <p key={idx} className="mb-3 last:mb-0">
                 {paragraph}
@@ -61,9 +94,10 @@ const Introduction: React.FC = () => {
                 {paragraph}
               </p>
             ))}
-          </div>
+          </motion.div>
+
           {/* Contact row */}
-          <div className="flex flex-col sm:flex-row gap-6 border-t border-p2-slate/60 pt-6">
+          <motion.div className="flex flex-col sm:flex-row gap-6 border-t border-p2-slate/60 pt-6" variants={fadeInUp}>
             <div>
               <span className="font-semibold text-pure-white">CEO:</span>
               <span className="ml-2 text-p2-mint-flash">David Smith</span>
@@ -74,19 +108,22 @@ const Introduction: React.FC = () => {
                 contact@example.com
               </span>
             </div>
-          </div>
-          {/* Contact Us Button */}
-          <div className="mt-8">
-            <a
+          </motion.div>
+
+          {/* Contact Us Button with hover scale effect */}
+          <motion.div className="mt-8" variants={fadeInUp}>
+            <motion.a
               href="#contact"
               className="inline-block bg-p2-mint-flash text-p2-charcoal font-semibold px-8 py-3 rounded-md hover:bg-p2-coral-burst hover:text-pure-white transition text-lg shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Contact Us
-            </a>
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

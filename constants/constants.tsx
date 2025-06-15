@@ -33,8 +33,8 @@ export interface Game {
   shortDescription: string;
   fullDescription: string;
   platforms: string[];
-  image: string; 
-  link?: string; 
+  image: string;
+  downloadLinks: { [platform: string]: string }; 
 }
 
 export const aboutus: AboutUs[] = [
@@ -100,7 +100,11 @@ export const Games: Game[] = [
       "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
     platforms: ["PC", "Xbox", "PlayStation"],
     image: "/wallpaper_bg1.jpg",
-    link: "/games/echoes-of-the-void",
+    downloadLinks: {
+      PC: "https://example.com/echoes-pc",
+      Xbox: "https://example.com/echoes-xbox",
+      PlayStation: "https://example.com/echoes-ps",
+    },
   },
   {
     title: "Pixel Quest: Chronicles",
@@ -108,28 +112,44 @@ export const Games: Game[] = [
     shortDescription: "Retro-inspired RPG with modern twists.",
     fullDescription:
       "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
-    platforms: ["Switch", "PC"],
+    platforms: ["Switch", "PC", "iOS", "Android"],
     image: "/wallpaper_bg2.jpg",
-    link: "/games/pixel-quest-chronicles",
+    downloadLinks: {
+      Switch: "https://example.com/pixelquest-switch",
+      PC: "https://example.com/pixelquest-pc",
+      iOS: "https://example.com/pixelquest-ios",
+      Android: "https://example.com/pixelquest-android",
+    },
   },
   {
-    title: "Echoes of the Void", // Note: Duplicate title. Ensure map keys handle this.
-    genre: "Sci-Fi RPG",
-    shortDescription: "A sci-fi adventure where every choice alters space-time.",
+    title: "Mystic Arena",
+    genre: "MOBA",
+    shortDescription: "Fast-paced multiplayer battles in a mystical world.",
     fullDescription:
-      "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
-    platforms: ["PC", "Xbox", "PlayStation"],
-    image: "/wallpaper_bg1.jpg",
-    link: "/games/echoes-of-the-void",
+      "Mystic Arena is a competitive MOBA where players control unique heroes with magical abilities. Team up, strategize, and battle in vibrant arenas. Unlock skins, climb the leaderboards, and prove your skills in cross-platform play.",
+    platforms: ["PC", "iOS", "Android"],
+    image: "/wallpaper_bg3.jpg",
+    downloadLinks: {
+      PC: "https://example.com/mystic-pc",
+      iOS: "https://example.com/mystic-ios",
+      Android: "https://example.com/mystic-android",
+    },
   },
   {
-    title: "Pixel Quest: Chronicles", // Note: Duplicate title.
-    genre: "Retro RPG",
-    shortDescription: "Retro-inspired RPG with modern twists.",
+    title: "Skyline Racer",
+    genre: "Racing",
+    shortDescription: "High-speed racing above the clouds.",
     fullDescription:
-      "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
-    platforms: ["Switch", "PC"],
-    image: "/wallpaper_bg2.jpg",
-    link: "/games/pixel-quest-chronicles",
+      "Skyline Racer lets you race anti-gravity vehicles on tracks suspended in the sky. Customize your ride, master tricky courses, and challenge friends in online multiplayer. Available on console and mobile.",
+    platforms: ["PC", "Xbox", "PlayStation", "Switch", "iOS", "Android"],
+    image: "/wallpaper_bg4.jpg",
+    downloadLinks: {
+      PC: "https://example.com/skyline-pc",
+      Xbox: "https://example.com/skyline-xbox",
+      PlayStation: "https://example.com/skyline-ps",
+      Switch: "https://example.com/skyline-switch",
+      iOS: "https://example.com/skyline-ios",
+      Android: "https://example.com/skyline-android",
+    },
   },
 ];
