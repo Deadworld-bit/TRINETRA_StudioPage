@@ -355,13 +355,7 @@ export default function Contact() {
           </motion.p>
           <div className="flex flex-col gap-8">
             {[
-              { icon: FaBuilding, label: "Company", value: "ThemeREC" },
-              {
-                icon: FaMapMarkerAlt,
-                label: "Location",
-                value: "Times Square, NYC, USA",
-              },
-              { icon: FaPhoneAlt, label: "Call Us", value: "+1-200-300-4000" },
+              { icon: FaPhoneAlt, label: "Call Us", value: "024 6293 5559" },
               {
                 icon: FaPaperPlane,
                 label: "Email Us",

@@ -7,6 +7,7 @@ import logoLight from "@/public/StudioLogo_4_white.png";
 import "./navbar-effects.css";
 import { HiMenu, HiX } from "react-icons/hi";
 import Link from "next/link";
+import { FaTwitter, FaDiscord, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const orbitron = Orbitron({ subsets: ["latin"] });
 
@@ -17,6 +18,14 @@ const navLinks = [
   { label: "Our Games", href: "#games" },
   { label: "Our Value", href: "#ourvalue" },
   { label: "Contact", href: "#contact" },
+];
+
+const socialLinks = [
+  { icon: FaTwitter, href: "https://twitter.com/", label: "Twitter" },
+  { icon: FaDiscord, href: "https://discord.com/", label: "Discord" },
+  { icon: FaFacebook, href: "https://facebook.com/", label: "Facebook" },
+  { icon: FaInstagram, href: "https://instagram.com/", label: "Instagram" },
+  { icon: FaLinkedin, href: "https://linkedin.com/", label: "LinkedIn" },
 ];
 
 const TRANSITION_COLOR = "transition-colors duration-300";
@@ -138,11 +147,36 @@ export default function Navbar() {
     </nav>
   );
 
+  // --- Social Vertical Bar (Desktop Only) ---
+  const SocialBar = () => (
+    <div className="hidden md:flex flex-col items-center fixed left-6 top-1/2 -translate-y-1/2 z-40">
+      <div className="h-12" />
+      <div className="flex flex-col items-center gap-4 bg-p2-slate/70 rounded-2xl px-2 py-4 shadow-lg border border-p2-mint-flash/20">
+        {socialLinks.map(({ icon: Icon, href, label }) => (
+          <a
+            key={label}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className="group p-2 rounded-full hover:bg-p2-mint-flash/20 transition-colors"
+          >
+            <Icon className="text-2xl text-p2-mint-flash group-hover:text-p2-coral-burst transition-colors" />
+          </a>
+        ))}
+      </div>
+      <div className="w-1 h-24 bg-p2-mint-flash/30 mt-4 rounded-full" />
+    </div>
+  );
+
   return (
-    <header className={headerClasses}>
-      <DesktopNav />
-      <MobileHeader />
-      <MobileDrawer />
-    </header>
+    <>
+      <SocialBar />
+      <header className={headerClasses}>
+        <DesktopNav />
+        <MobileHeader />
+        <MobileDrawer />
+      </header>
+    </>
   );
 }

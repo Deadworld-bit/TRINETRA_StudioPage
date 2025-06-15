@@ -30,7 +30,7 @@ export default function Footer() {
         {/* Only Bottom Bar: Copyright & Socials */}
         <div className="border-t border-p2-slate/50 pt-8 flex flex-col sm:flex-row justify-between items-center gap-5">
           <p className="text-xs text-p2-gray-whisper">
-            &copy; {year} TRINETRA. All Rights Reserved.
+            &copy; {year} TRINETRA Game Studio. All Rights Reserved.
           </p>
           <div className="flex items-center gap-5">
             {socialLinks.map(({ href, icon: Icon, title }) => (

@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist} from "next/font/google";
 import "./globals.css";
+import CursorEffect from "@/components/CursorEffect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} font-sans antialiased text-black`}
       >
+        <CursorEffect />
         {children}
       </body>
       <Analytics />
