@@ -112,10 +112,9 @@ export const Games: Game[] = [
     shortDescription: "Retro-inspired RPG with modern twists.",
     fullDescription:
       "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
-    platforms: ["Switch", "PC", "iOS", "Android"],
+    platforms: ["PC", "iOS", "Android"],
     image: "/wallpaper_bg2.jpg",
     downloadLinks: {
-      Switch: "https://example.com/pixelquest-switch",
       PC: "https://example.com/pixelquest-pc",
       iOS: "https://example.com/pixelquest-ios",
       Android: "https://example.com/pixelquest-android",
@@ -141,13 +140,12 @@ export const Games: Game[] = [
     shortDescription: "High-speed racing above the clouds.",
     fullDescription:
       "Skyline Racer lets you race anti-gravity vehicles on tracks suspended in the sky. Customize your ride, master tricky courses, and challenge friends in online multiplayer. Available on console and mobile.",
-    platforms: ["PC", "Xbox", "PlayStation", "Switch", "iOS", "Android"],
+    platforms: ["PC", "Xbox", "PlayStation", "iOS", "Android"],
     image: "/wallpaper_bg4.jpg",
     downloadLinks: {
       PC: "https://example.com/skyline-pc",
       Xbox: "https://example.com/skyline-xbox",
       PlayStation: "https://example.com/skyline-ps",
-      Switch: "https://example.com/skyline-switch",
       iOS: "https://example.com/skyline-ios",
       Android: "https://example.com/skyline-android",
     },

@@ -2,11 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
+import { Orbitron } from "next/font/google";
 import { motion, Variants } from "framer-motion";
 import { aboutus } from "@/constants/constants";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "700"] });
+// Use Orbitron for consistency with Hero section
+const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 // Animation variants
 const containerVariants: Variants = {
@@ -30,6 +31,63 @@ const linePulse: Variants = {
   },
 };
 
+// Social/contact info row
+function ContactRow() {
+  return (
+    <motion.div
+      className="flex flex-col sm:flex-row gap-6 border-t border-p2-slate/60 pt-6"
+      variants={fadeInUp}
+    >
+      <div>
+        <span className="font-semibold text-pure-white">CEO:</span>
+        <span className="ml-2 text-p2-mint-flash">David Smith</span>
+      </div>
+      <div>
+        <span className="font-semibold text-pure-white">Email:</span>
+        <span className="ml-2 text-p2-electric-indigo">
+          contact@example.com
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+// Contact button
+function ContactButton() {
+  return (
+    <motion.div className="mt-8" variants={fadeInUp}>
+      <motion.a
+        href="#contact"
+        className="inline-block bg-p2-mint-flash text-p2-charcoal font-semibold px-8 py-3 rounded-md hover:bg-p2-coral-burst hover:text-pure-white transition text-lg shadow-lg"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Contact Us
+      </motion.a>
+    </motion.div>
+  );
+}
+
+// Vertical lines background
+function VerticalLines() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+      {[1, 2, 3, 4].map((i) => (
+        <div
+          key={i}
+          className="absolute top-0 bottom-0 w-0.75"
+          style={{
+            left: `${(i * 100) / 6}%`,
+            background: "rgba(20, 106, 163, 0.13)",
+            opacity: 1,
+            filter: "blur(0.5px)",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 const Introduction: React.FC = () => {
   const about = aboutus[0];
 
@@ -41,31 +99,16 @@ const Introduction: React.FC = () => {
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
     >
-      {/* Vertical Lines Background with subtle pulsing */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        {[1, 2, 3, 4].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute top-0 bottom-0 w-0.75"
-            style={{ left: `${(i * 100) / 6}%`, 
-            background: "rgba(20, 106, 163, 0.13)",
-            opacity: 0.7,
-            filter: "blur(0.5px)",
-            }}
-            variants={linePulse}
-            animate="animate"
-          />
-        ))}
-      </div>
+      <VerticalLines />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
-        {/* Left: Image with fade-in */}
+        {/* Left: Image */}
         <motion.div
           className="relative w-full h-[350px] md:h-auto rounded-xl overflow-hidden shadow-2xl flex-1 bg-p2-slate"
           variants={fadeInUp}
         >
           <Image
-            src="/ConceptPic_2.jpg"
+            src="/office_01.jpg"
             alt="Studio Building"
             fill
             className="object-cover"
@@ -75,15 +118,27 @@ const Introduction: React.FC = () => {
           />
         </motion.div>
 
-        {/* Right: Content with staggered text animations */}
-        <motion.div className="flex flex-col justify-center flex-1" variants={fadeInUp}>
-          <motion.span className="text-p2-coral-burst text-xl font-bold mb-2 tracking-wide" variants={fadeInUp}>
+        {/* Right: Content */}
+        <motion.div
+          className="flex flex-col justify-center flex-1"
+          variants={fadeInUp}
+        >
+          <motion.span
+            className={`${orbitron.className} text-p2-coral-burst text-xl font-bold mb-2 tracking-wide`}
+            variants={fadeInUp}
+          >
             Who are we?
           </motion.span>
-          <motion.h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]" variants={fadeInUp}>
+          <motion.h2
+            className={`${orbitron.className} text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+            variants={fadeInUp}
+          >
             We are TRINETRA, a creative and dedicated group of individuals
           </motion.h2>
-          <motion.div className="text-lg md:text-xl text-p2-gray-whisper mb-8" variants={fadeInUp}>
+          <motion.div
+            className="text-lg md:text-xl text-p2-gray-whisper mb-8"
+            variants={fadeInUp}
+          >
             {about.text_1.map((paragraph, idx) => (
               <p key={idx} className="mb-3 last:mb-0">
                 {paragraph}
@@ -95,32 +150,8 @@ const Introduction: React.FC = () => {
               </p>
             ))}
           </motion.div>
-
-          {/* Contact row */}
-          <motion.div className="flex flex-col sm:flex-row gap-6 border-t border-p2-slate/60 pt-6" variants={fadeInUp}>
-            <div>
-              <span className="font-semibold text-pure-white">CEO:</span>
-              <span className="ml-2 text-p2-mint-flash">David Smith</span>
-            </div>
-            <div>
-              <span className="font-semibold text-pure-white">Email:</span>
-              <span className="ml-2 text-p2-electric-indigo">
-                contact@example.com
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Contact Us Button with hover scale effect */}
-          <motion.div className="mt-8" variants={fadeInUp}>
-            <motion.a
-              href="#contact"
-              className="inline-block bg-p2-mint-flash text-p2-charcoal font-semibold px-8 py-3 rounded-md hover:bg-p2-coral-burst hover:text-pure-white transition text-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Us
-            </motion.a>
-          </motion.div>
+          <ContactRow />
+          <ContactButton />
         </motion.div>
       </div>
     </motion.section>

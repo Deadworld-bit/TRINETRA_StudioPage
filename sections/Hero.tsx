@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import { Orbitron, Montserrat } from "next/font/google";
+import { Orbitron } from "next/font/google"; // Only import Orbitron for consistency
 import { motion, useScroll, useTransform } from "framer-motion";
 import backgroundImage from "@/public/wallpaper_bg11.jpg";
 
-// Font configs
+// Font config (only Orbitron)
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["400"] });
 
 // Animation hooks
 function useHeroScrollTransforms() {
@@ -63,8 +62,8 @@ function ScrollIndicator() {
         <polyline points="6 9 12 15 18 9" />
       </svg>
       <span
-        className={`${montserrat.className} mt-2 text-pure-white`}
-        style={{ fontSize: "0.875rem" }}
+        className={`${orbitron.className} mt-2 text-pure-white tracking-widest font-semibold`}
+        style={{ fontSize: "0.95rem", letterSpacing: "0.08em" }}
       >
         Scroll
       </span>
@@ -107,10 +106,11 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${montserrat.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl`}
+          className={`${orbitron.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl tracking-wide`}
           style={{
             opacity: subOpacity,
             color: "var(--p2-soft-white)",
+            letterSpacing: "0.04em",
           }}
         >
           {HERO_SUBTITLE}
