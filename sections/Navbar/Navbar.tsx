@@ -47,9 +47,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const headerClasses = `s
+  const headerClasses = `
   fixed top-0 left-0 w-full z-50
-  ${scrolled ? "nav-glass" : "bg-p3-pure-black"}
+  ${scrolled ? "md:nav-glass" : "bg-p3-pure-black"}
   shadow-md
   transition-all`;
 
@@ -128,11 +128,11 @@ export default function Navbar() {
   const MobileDrawer = () => (
     <nav
       className={`
-      md:hidden fixed top-16 left-0 h-[calc(100%-4rem)] w-full
-      bg-p3-charcoal flex flex-col items-center justify-center z-40 nav-drawer
-      transition-transform duration-300
-      ${expanded ? "translate-x-0" : "translate-x-full"}
-    `}
+    md:hidden fixed top-16 left-0 h-[calc(100%-4rem)] w-full
+    bg-p3-charcoal flex flex-col items-center justify-center z-40 nav-drawer
+    transition-transform duration-300
+    ${expanded ? "translate-x-0" : "translate-x-full"}
+  `}
       style={{ boxShadow: expanded ? "-2px 0 16px rgba(0,0,0,0.2)" : "none" }}
     >
       <ul className="flex flex-col items-center space-y-8 mt-8">
