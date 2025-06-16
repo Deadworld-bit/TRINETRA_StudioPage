@@ -13,18 +13,18 @@ interface GameModalProps {
 }
 
 const platformColors: Record<string, string> = {
-  PC: "bg-p2-mint-flash text-p2-charcoal hover:bg-p2-coral-burst hover:text-pure-white",
-  Xbox: "bg-p2-coral-burst text-pure-white hover:bg-p2-mint-flash hover:text-p2-charcoal",
-  PlayStation: "bg-p2-electric-indigo text-pure-white hover:bg-p2-mint-flash hover:text-p2-charcoal",
-  iOS: "bg-p2-mint-flash text-p2-charcoal hover:bg-p2-coral-burst hover:text-pure-white",
-  Android: "bg-p2-coral-burst text-pure-white hover:bg-p2-mint-flash hover:text-p2-charcoal",
+  PC: "bg-p3-slate text-p3-snow hover:bg-p3-coral-burst hover:text-p3-snow",
+  Xbox: "bg-p3-slate text-p3-snow hover:bg-p3-mint-flash hover:text-p3-charcoal",
+  PlayStation: "bg-p3-slate text-p3-snow hover:bg-p3-mint-flash hover:text-p3-charcoal",
+  iOS: "bg-p3-slate text-p3-snow hover:bg-p3-coral-burst hover:text-p3-snow",
+  Android: "bg-p3-slate text-p3-snow hover:bg-p3-mint-flash hover:text-p3-charcoal",
 };
 
 function CloseButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="absolute top-4 left-4 text-p2-gray-whisper hover:text-p2-mint-flash transition-colors z-10 p-2 bg-p2-slate/80 hover:bg-p2-slate rounded-full"
+      className="absolute top-4 left-4 text-p3-slate hover:text-p3-mint-flash transition-colors z-10 p-2 bg-p3-slate/80 hover:bg-p3-slate rounded-full"
       aria-label="Close game details"
     >
       <svg
@@ -52,7 +52,7 @@ function GameImage({ src, alt }: { src: string; alt: string }) {
         sizes="(min-width: 768px) 600px, 100vw"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent opacity-80 rounded-t-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-p3-charcoal via-transparent to-transparent opacity-80 rounded-t-2xl"></div>
     </div>
   );
 }
@@ -60,7 +60,7 @@ function GameImage({ src, alt }: { src: string; alt: string }) {
 function DownloadLinks({ game }: { game: Game }) {
   return (
     <div>
-      <h4 className="text-lg font-semibold mb-2 text-p2-coral-burst">Download Links:</h4>
+      <h4 className="text-lg font-semibold mb-2 text-p3-coral-burst">Download Links:</h4>
       <div className="flex flex-wrap gap-3">
         {game.platforms.map((platform) =>
           game.downloadLinks && game.downloadLinks[platform] ? (
@@ -71,7 +71,7 @@ function DownloadLinks({ game }: { game: Game }) {
               rel="noopener noreferrer"
               className={`px-5 py-2 rounded-lg font-semibold text-sm transition shadow ${
                 platformColors[platform] ||
-                "bg-p2-mint-flash text-p2-charcoal hover:bg-p2-coral-burst hover:text-pure-white"
+                "bg-p3-mint-flash text-p3-charcoal hover:bg-p3-coral-burst hover:text-p3-snow"
               }`}
             >
               Download for {platform}
@@ -79,7 +79,7 @@ function DownloadLinks({ game }: { game: Game }) {
           ) : (
             <span
               key={platform}
-              className="px-5 py-2 rounded-lg font-semibold text-sm bg-p2-slate/60 text-p2-gray-whisper cursor-not-allowed"
+              className="px-5 py-2 rounded-lg font-semibold text-sm bg-p3-slate/60 text-p3-slate cursor-not-allowed"
             >
               {platform} Unavailable
             </span>
@@ -105,7 +105,7 @@ const GameModal: React.FC<GameModalProps> = ({ game, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-pure-black bg-opacity-80 flex items-center justify-center z-[999] p-4"
+        className="fixed inset-0 bg-p3-charcoal bg-opacity-90 flex items-center justify-center z-[999] p-4"
         onClick={onClose}
       >
         <motion.div
@@ -113,25 +113,25 @@ const GameModal: React.FC<GameModalProps> = ({ game, onClose }) => {
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 50, opacity: 0, scale: 0.96 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className={`${orbitron.className} bg-charcoal text-pure-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative flex flex-col border border-p2-mint-flash/30`}
+          className={`${orbitron.className} bg-p3-charcoal text-p3-snow rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative flex flex-col border border-p3-mint-flash/30`}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
         >
           <CloseButton onClick={onClose} />
           <GameImage src={game.image} alt={game.title} />
           <div className="p-6 sm:p-8 space-y-5 flex-grow flex flex-col">
-            <h2 className="text-3xl sm:text-4xl font-bold text-p2-mint-flash mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-p3-mint-flash mb-2">
               {game.title}
             </h2>
             <div className="flex flex-wrap gap-2 items-center mb-2">
-              <span className="text-xs bg-p2-mint-flash/20 text-p2-mint-flash px-3 py-1 rounded-full font-semibold uppercase tracking-widest">
+              <span className="text-xs bg-p3-mint-flash/20 text-p3-mint-flash px-3 py-1 rounded-full font-semibold uppercase tracking-widest">
                 {game.genre}
               </span>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-1 text-p2-coral-burst">
+              <h4 className="text-lg font-semibold mb-1 text-p3-coral-burst">
                 About the Game:
               </h4>
-              <p className="text-p2-gray-whisper leading-relaxed text-base">
+              <p className="text-p3-snow leading-relaxed text-base">
                 {game.fullDescription}
               </p>
             </div>
