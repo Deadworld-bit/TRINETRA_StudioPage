@@ -34,7 +34,7 @@ export default function CursorEffect() {
         width: clicked ? 20 : 32,
         height: clicked ? 20 : 32,
         borderRadius: "50%",
-        border: "2px solid var(--p2-mint-flash, #60d394)",
+        border: "2px solid var(--p3-snow, #60d394)",
         background: "transparent",
         pointerEvents: "none",
         zIndex: 9999,

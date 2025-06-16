@@ -59,7 +59,7 @@ function VerticalLines() {
           className="absolute top-0 bottom-0 w-0.75"
           style={{
             left: `${(i * 100) / 6}%`,
-            background: "rgba(20, 106, 163, 0.13)",
+            background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
           }}
@@ -95,7 +95,7 @@ function SectionTitle({
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
           style={{
             WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--charcoal)",
+            WebkitTextFillColor: "var(--p3-charcoal)",
             fontSize: `${titleFontSize * 1.75}px`,
             lineHeight: 1,
           }}
@@ -109,7 +109,7 @@ function SectionTitle({
         variants={titleVariants}
         initial="hidden"
         animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-pure-white drop-shadow-lg text-left`}
+        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-p3-snow drop-shadow-lg text-left`}
       >
         {title}
       </motion.h2>
@@ -133,16 +133,16 @@ function MissionCard({
   // Assign color based on icon for demo
   const iconColor =
     icon === "FaLightbulb"
-      ? "text-p2-coral-burst"
+      ? "text-p3-coral-burst"
       : icon === "FaGraduationCap"
-      ? "text-p2-electric-indigo"
-      : "text-p2-mint-flash";
+      ? "text-p3-electric-indigo"
+      : "text-p3-mint-flash";
   const borderColor =
     icon === "FaLightbulb"
-      ? "border-p2-coral-burst"
+      ? "border-p3-coral-burst"
       : icon === "FaGraduationCap"
-      ? "border-p2-electric-indigo"
-      : "border-p2-mint-flash";
+      ? "border-p3-electric-indigo"
+      : "border-p3-mint-flash";
 
   return (
     <motion.div
@@ -162,7 +162,7 @@ function MissionCard({
       }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
       className={`
-        bg-p2-charcoal border ${borderColor} rounded-xl p-6 sm:p-8 md:p-10 space-y-6
+        bg-p3-charcoal border ${borderColor} rounded-xl p-6 sm:p-8 md:p-10 space-y-6
         transition-all flex flex-col items-start min-h-[300px] glass-card
         `}
       style={{
@@ -175,11 +175,11 @@ function MissionCard({
         <Icon />
       </div>
       <h3
-        className={`${orbitron.className} text-xl sm:text-2xl font-bold text-p2-soft-white`}
+        className={`${orbitron.className} text-xl sm:text-2xl font-bold text-p3-white-smoke`}
       >
         {title}
       </h3>
-      <p className="text-base sm:text-lg leading-relaxed text-p2-gray-whisper">
+      <p className="text-base sm:text-lg leading-relaxed text-p3-snow">
         {desc}
       </p>
     </motion.div>
@@ -199,7 +199,7 @@ export default function OurMission() {
 
   return (
     <section
-      className="relative bg-charcoal text-p2-soft-white py-16 sm:py-20 md:py-24 overflow-hidden w-full"
+      className="relative bg-p3-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
       id="ourmission"
     >
       <VerticalLines />

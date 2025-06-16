@@ -52,7 +52,7 @@ function VerticalLines() {
           className="absolute top-0 bottom-0 w-0.75"
           style={{
             left: `${(i * 100) / 6}%`,
-            background: "rgba(20, 106, 163, 0.13)",
+            background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
           }}
@@ -88,7 +88,7 @@ function SectionTitle({
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
           style={{
             WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--charcoal)",
+            WebkitTextFillColor: "var(--p3-charcoal)",
             fontSize: `${titleFontSize * 1.75}px`,
             lineHeight: 1,
           }}
@@ -102,7 +102,7 @@ function SectionTitle({
         variants={titleVariants}
         initial="hidden"
         animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
       >
         {title}
       </motion.h2>
@@ -125,7 +125,7 @@ function MemberCard({ member, idx }: { member: any; idx: number }) {
         boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
       }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      className="bg-p2-slate/80 border border-p2-electric-indigo rounded-xl overflow-hidden shadow-xl flex flex-col relative"
+      className="bg-p3-slate/80 border border-p3-electric-indigo rounded-xl overflow-hidden shadow-xl flex flex-col relative"
     >
       {/* Image with subtle zoom on hover */}
       <div className="relative w-full aspect-square overflow-hidden">
@@ -147,13 +147,13 @@ function MemberCard({ member, idx }: { member: any; idx: number }) {
         </motion.div>
       </div>
       {/* Info */}
-      <div className="pl-8 sm:pl-10 pr-6 pb-6 pt-4 flex flex-col items-start bg-p2-charcoal rounded-b-xl">
+      <div className="pl-8 sm:pl-10 pr-6 pb-6 pt-4 flex flex-col items-start bg-p3-charcoal rounded-b-xl">
         <h3
-          className={`${orbitron.className} text-xl sm:text-2xl font-bold text-pure-white mb-1`}
+          className={`${orbitron.className} text-xl sm:text-2xl font-bold text-p3-snow mb-1`}
         >
           {member.name}
         </h3>
-        <p className="text-base sm:text-lg text-p2-gray-whisper mb-4">
+        <p className="text-base sm:text-lg text-p3-snow mb-4">
           {member.title}
         </p>
         <div className="flex gap-5 mt-2">
@@ -163,7 +163,7 @@ function MemberCard({ member, idx }: { member: any; idx: number }) {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-p2-electric-indigo hover:text-p2-mint-flash transition"
+              className="text-p2-electric-indigo hover:text-p3-ghost-white transition"
               aria-label={social.url}
             >
               <social.icon size={22} />
@@ -188,7 +188,7 @@ export default function TeamMember() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
+      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-p3-charcoal"
       id="pioneers"
     >
       <VerticalLines />

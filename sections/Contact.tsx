@@ -17,9 +17,9 @@ import { Orbitron } from "next/font/google";
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 const INPUT_CLASSES = `
-  w-full bg-p2-slate border border-p2-mint-flash/30 rounded-md
-  px-6 py-4 text-base md:text-lg text-pure-white
-  focus:outline-none focus:border-p2-mint-flash transition
+  w-full bg-p3-slate border border-p3-mint-flash/30 rounded-md
+  px-6 py-4 text-base md:text-lg text-p3-snow
+  focus:outline-none focus:border-p3-mint-flash transition
 `;
 const TEXTAREA_CLASSES = `
   ${INPUT_CLASSES}
@@ -27,8 +27,8 @@ const TEXTAREA_CLASSES = `
 `;
 const BUTTON_BASE_CLASSES = `
   mt-4 w-full md:w-fit px-8 py-3
-  bg-p2-mint-flash hover:bg-p2-coral-burst hover:text-pure-white
-  rounded-md text-pure-black font-semibold
+  bg-p3-snow hover:bg-p3-coral-burst hover:text-p3-snow
+  rounded-md text-p3-charcoal font-semibold
   text-base md:text-lg
   transition
 `;
@@ -81,7 +81,7 @@ function VerticalLines() {
           className="absolute top-0 bottom-0 w-0.75"
           style={{
             left: `${(i * 100) / 6}%`,
-            background: "rgba(20, 106, 163, 0.13)",
+            background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
           }}
@@ -106,34 +106,29 @@ function SectionTitle({
   return (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
       {/* Watermark */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full"
-        style={{ opacity: 0.1 }}
-      >
-        <motion.h1
-          variants={itemVariants}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
+        <h1
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
           style={{
             WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--charcoal)",
+            WebkitTextFillColor: "var(--p3-charcoal)",
             fontSize: `${titleFontSize * 1.75}px`,
             lineHeight: 1,
+            transition: "font-size 0.2s",
           }}
         >
           {watermark}
-        </motion.h1>
-      </motion.div>
-      {/* Title */}
-      <motion.h2
+        </h1>
+      </div>
+      <h2
         ref={titleRef}
-        variants={itemVariants}
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-pure-white drop-shadow-lg`}
+        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-lg`}
+        style={{
+          transition: "font-size 0.2s",
+        }}
       >
         {title}
-      </motion.h2>
+      </h2>
     </div>
   );
 }
@@ -163,11 +158,11 @@ function ContactForm({
   return (
     <motion.div
       variants={itemVariants}
-      className="flex flex-col w-full bg-p2-charcoal border border-p2-electric-indigo rounded-2xl shadow-lg p-8 md:p-12"
+      className="flex flex-col w-full bg-p3-charcoal border border-p3-slate rounded-2xl shadow-lg p-8 md:p-12"
     >
       <motion.h3
         variants={itemVariants}
-        className={`${orbitron.className} text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-pure-white text-left`}
+        className={`${orbitron.className} text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-p3-snow text-left`}
       >
         Contact Us
       </motion.h3>
@@ -231,10 +226,11 @@ function ContactForm({
         <motion.button
           variants={itemVariants}
           type="submit"
-          disabled={isSubmitting || !isFormValid}
+          // Only disable when submitting or cooldown, not when form is invalid
+          disabled={isSubmitting || cooldown > 0}
           className={
             BUTTON_BASE_CLASSES +
-            (isSubmitting || !isFormValid
+            (isSubmitting || cooldown > 0
               ? " opacity-50 cursor-not-allowed"
               : "")
           }
@@ -278,17 +274,17 @@ function ContactInfoPanel() {
   return (
     <motion.div
       variants={itemVariants}
-      className="flex flex-col w-full bg-p2-charcoal border border-p2-electric-indigo rounded-2xl shadow-lg p-8 md:p-12"
+      className="flex flex-col w-full bg-p3-charcoal border border-p3-slate rounded-2xl shadow-lg p-8 md:p-12"
     >
       <motion.h3
         variants={itemVariants}
-        className={`${orbitron.className} text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-pure-white text-left`}
+        className={`${orbitron.className} text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-p3-snow text-left`}
       >
         Alternative
       </motion.h3>
       <motion.p
         variants={itemVariants}
-        className="text-p2-gray-whisper text-base md:text-lg mb-10 max-w-md text-left"
+        className="text-p3-snow text-base md:text-lg mb-10 max-w-md text-left"
       >
         Always available for freelance opportunities—let’s make something great
         together!
@@ -300,12 +296,12 @@ function ContactInfoPanel() {
             key={idx}
             className="flex items-start gap-4"
           >
-            <info.icon className="text-p2-mint-flash text-2xl mt-1" />
+            <info.icon className="text-p3-ghost-white text-2xl mt-1" />
             <div>
-              <span className="font-semibold text-pure-white">
+              <span className="font-semibold text-p3-snow">
                 {info.label}
               </span>
-              <div className="text-p2-gray-whisper">{info.value}</div>
+              <div className="text-p3-snow">{info.value}</div>
             </div>
           </motion.div>
         ))}
@@ -414,7 +410,7 @@ export default function Contact() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
+      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-p3-charcoal"
       id="contact"
     >
       <VerticalLines />

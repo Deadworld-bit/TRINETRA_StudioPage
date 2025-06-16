@@ -49,7 +49,7 @@ function VerticalLines() {
           className="absolute top-0 bottom-0 w-0.75"
           style={{
             left: `${(i * 100) / 6}%`,
-            background: "rgba(20, 106, 163, 0.13)",
+            background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
           }}
@@ -85,7 +85,7 @@ function SectionTitle({
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
           style={{
             WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--charcoal)",
+            WebkitTextFillColor: "var(--p3-charcoal)",
             fontSize: `${titleFontSize * 1.75}px`,
             lineHeight: 1,
           }}
@@ -99,7 +99,7 @@ function SectionTitle({
         variants={titleVariants}
         initial="hidden"
         animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-pure-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
       >
         {title}
       </motion.h2>
@@ -111,16 +111,16 @@ function SectionTitle({
 function ValueContent() {
   return (
     <motion.div
-      className="flex flex-col justify-center text-left space-y-8 border-l-2 border-p2-mint-flash pl-5"
+      className="flex flex-col justify-center text-left space-y-8 border-l-2 border-p3-mint-flash pl-5"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
     >
       <motion.p className="text-lg md:text-xl" variants={fadeInUp}>
-        <span className="text-pure-white font-medium">TRINETRA</span> operates
+        <span className="text-p3-snow font-medium">TRINETRA</span> operates
         on principles of{" "}
-        <span className="text-p2-mint-flash font-semibold">
+        <span className="text-p3-mint-flash font-semibold">
           open collaboration
         </span>{" "}
         and shared growth. We encourage team cohesion through{" "}
@@ -146,7 +146,7 @@ function ValueImage() {
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeInUp}
     >
-      <div className="w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-p2-slate/80 transition-transform transform hover:scale-105">
+      <div className="w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-p3-slate/80 transition-transform transform hover:scale-105">
         <Image
           src="/collab_01.jpg"
           alt="Our Values"
@@ -174,7 +174,7 @@ export default function OurValue() {
 
   return (
     <section
-      className="relative bg-charcoal text-p2-soft-white py-16 sm:py-20 md:py-24 overflow-hidden w-full"
+      className="relative bg-p3-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
       id="ourvalue"
     >
       <VerticalLines />

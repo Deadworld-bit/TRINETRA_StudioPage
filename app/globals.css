@@ -22,13 +22,23 @@ html {
   --pure-black: #000000;
 
   /* Color Palette 2 */
-  --p2-charcoal:       #1E1E1E;  /* Dark background base */
-  --p2-slate:          #2E2E3E;  /* Surface cards/panels */
-  --p2-coral-burst:    #FF6F61;  /* Primary CTAs */
-  --p2-electric-indigo:#5E60CE;  /* Secondary accents */
-  --p2-mint-flash:     #60D394;  /* Micro-interaction highlights */
-  --p2-soft-white:     #E0E0E0;  /* Primary text */
-  --p2-gray-whisper:   #A0A0A0;  /* Secondary text */
+  --p2-charcoal:        #1E1E1E;  /* Dark background base */
+  --p2-slate:           #2E2E3E;  /* Surface cards/panels */
+  --p2-coral-burst:     #FF6F61;  /* Primary CTAs */
+  --p2-electric-indigo: #5E60CE;  /* Secondary accents */
+  --p2-mint-flash:      #60D394;  /* Micro-interaction highlights */
+  --p2-soft-white:      #E0E0E0;  /* Primary text */
+  --p2-gray-whisper:    #A0A0A0;  /* Secondary text */
+
+  /* Color Palette 3 (Grayscale Variant) */
+  --p3-pure-black:    #000000; /* Deepest black */
+  --p3-jet-black:     #0D0D0D; /* Almost pure black */
+  --p3-charcoal:      #262626; /* Dark gray */
+  --p3-slate:         #404040; /* Mid-dark gray */
+  --p3-white-smoke:   #F5F5F5; /* Very light gray */
+  --p3-ghost-white:   #F8F8FF; /* Slightly cool white */
+  --p3-snow:          #FFFBFD; /* Soft white */
+  --p3-pure-white:    #FFFFFF; /* Brightest white */
 }
 
 @layer base {
@@ -96,6 +106,36 @@ html {
   .stroke-p2-mint-flash      { stroke: var(--p2-mint-flash)      !important; }
   .stroke-p2-soft-white      { stroke: var(--p2-soft-white)      !important; }
   .stroke-p2-gray-whisper    { stroke: var(--p2-gray-whisper)    !important; }
+
+  /* Palette 3 Text */
+  .text-p3-pure-black  { color: var(--p3-pure-black)  !important; }
+  .text-p3-jet-black   { color: var(--p3-jet-black)   !important; }
+  .text-p3-charcoal    { color: var(--p3-charcoal)    !important; }
+  .text-p3-slate       { color: var(--p3-slate)       !important; }
+  .text-p3-white-smoke { color: var(--p3-white-smoke) !important; }
+  .text-p3-ghost-white { color: var(--p3-ghost-white) !important; }
+  .text-p3-snow        { color: var(--p3-snow)        !important; }
+  .text-p3-pure-white  { color: var(--p3-pure-white)  !important; }
+
+  /* Palette 3 Background */
+  .bg-p3-pure-black    { background-color: var(--p3-pure-black)    !important; }
+  .bg-p3-jet-black     { background-color: var(--p3-jet-black)     !important; }
+  .bg-p3-charcoal      { background-color: var(--p3-charcoal)      !important; }
+  .bg-p3-slate         { background-color: var(--p3-slate)         !important; }
+  .bg-p3-white-smoke   { background-color: var(--p3-white-smoke)   !important; }
+  .bg-p3-ghost-white   { background-color: var(--p3-ghost-white)   !important; }
+  .bg-p3-snow          { background-color: var(--p3-snow)          !important; }
+  .bg-p3-pure-white    { background-color: var(--p3-pure-white)    !important; }
+
+  /* Palette 3 Stroke (SVG, outlines) */
+  .stroke-p3-pure-black  { stroke: var(--p3-pure-black)  !important; }
+  .stroke-p3-jet-black   { stroke: var(--p3-jet-black)   !important; }
+  .stroke-p3-charcoal    { stroke: var(--p3-charcoal)    !important; }
+  .stroke-p3-slate       { stroke: var(--p3-slate)       !important; }
+  .stroke-p3-white-smoke { stroke: var(--p3-white-smoke) !important; }
+  .stroke-p3-ghost-white { stroke: var(--p3-ghost-white) !important; }
+  .stroke-p3-snow        { stroke: var(--p3-snow)        !important; }
+  .stroke-p3-pure-white  { stroke: var(--p3-pure-white)  !important; }
 }
 
 /* 1) Film‑grain noise overlay */

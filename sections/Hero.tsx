@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Orbitron } from "next/font/google"; // Only import Orbitron for consistency
+import { Orbitron } from "next/font/google";
 import { motion, useScroll, useTransform } from "framer-motion";
 import backgroundImage from "@/public/wallpaper_bg11.jpg";
 
@@ -27,7 +27,7 @@ function HeroOverlays() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, var(--p2-charcoal) 0%, transparent 60%, var(--p2-charcoal) 100%)",
+            "linear-gradient(to bottom, var(--p3-charcoal) 0%, transparent 60%, var(--p3-charcoal) 100%)",
           opacity: 0.85,
         }}
       />
@@ -35,7 +35,7 @@ function HeroOverlays() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at center, var(--p2-soft-white) 0%, transparent 80%)",
+            "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)",
           opacity: 0.08,
         }}
       />
@@ -52,7 +52,8 @@ function ScrollIndicator() {
       transition={{ repeat: Infinity, duration: 1.8 }}
     >
       <svg
-        className="w-6 h-6 stroke-pure-white"
+        className="w-6 h-6"
+        style={{ stroke: "var(--p3-snow)" }}
         viewBox="0 0 24 24"
         fill="none"
         strokeWidth={2}
@@ -62,8 +63,14 @@ function ScrollIndicator() {
         <polyline points="6 9 12 15 18 9" />
       </svg>
       <span
-        className={`${orbitron.className} mt-2 text-pure-white tracking-widest font-semibold`}
-        style={{ fontSize: "0.95rem", letterSpacing: "0.08em" }}
+        className={`${orbitron.className} mt-2`}
+        style={{
+          color: "var(--p3-snow)",
+          fontSize: "0.95rem",
+          letterSpacing: "0.08em",
+          fontWeight: 600,
+          textTransform: "uppercase",
+        }}
       >
         Scroll
       </span>
@@ -75,7 +82,8 @@ const HERO_TITLE = "Welcome to TRINETRA";
 const HERO_SUBTITLE = "Indie Games. Bold Ideas. Made by Passion.";
 
 const Hero: React.FC = () => {
-  const { bgY, headingY, headingOpacity, subOpacity } = useHeroScrollTransforms();
+  const { bgY, headingY, headingOpacity, subOpacity } =
+    useHeroScrollTransforms();
 
   return (
     <motion.section
@@ -97,7 +105,7 @@ const Hero: React.FC = () => {
             fontSize: "clamp(3rem, 6vw, 5rem)",
             y: headingY,
             opacity: headingOpacity,
-            background: "var(--pure-white)",
+            background: "var(--p3-snow)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -109,7 +117,7 @@ const Hero: React.FC = () => {
           className={`${orbitron.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl tracking-wide`}
           style={{
             opacity: subOpacity,
-            color: "var(--p2-soft-white)",
+            color: "var(--p3-white-smoke)",
             letterSpacing: "0.04em",
           }}
         >
