@@ -3,7 +3,7 @@
 import React from "react";
 import { Orbitron } from "next/font/google";
 import { motion, useScroll, useTransform } from "framer-motion";
-import backgroundImage from "@/public/wallpaper_bg11.jpg";
+import backgroundImage from "@/public/wallpaper_bg12.png";
 
 // Font config (only Orbitron)
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
