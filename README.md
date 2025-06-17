@@ -48,7 +48,7 @@ This repository contains the Trinetra Studio landing page, built with Next.js an
 ```
 Open http://localhost:3000 in your browser.
 
-## Demo Link: https://trinetra-studio-page.vercel.app/
+## Demo Link: [https://trinetra-studio-page.vercel.app/](https://www.trinetragames.in/)
 
 ## Screenshots:
 
