@@ -27,10 +27,10 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: FaTwitter, href: "https://twitter.com/", label: "Twitter" },
+  { icon: FaTwitter, href: "https://x.com/Trinetragames?t=S9L7I0buit9NbbYziZykqQ&s=09", label: "Twitter" },
   { icon: FaDiscord, href: "https://discord.com/", label: "Discord" },
   { icon: FaFacebook, href: "https://facebook.com/", label: "Facebook" },
-  { icon: FaInstagram, href: "https://instagram.com/", label: "Instagram" },
+  { icon: FaInstagram, href: "https://www.instagram.com/trinetragames/#", label: "Instagram" },
   { icon: FaLinkedin, href: "https://linkedin.com/", label: "LinkedIn" },
 ];
 

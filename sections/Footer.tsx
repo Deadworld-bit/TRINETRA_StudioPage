@@ -14,8 +14,8 @@ const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 const socialLinks: { href: string; icon: React.ElementType; title: string }[] =
   [
     { href: "#", icon: FaFacebook, title: "Facebook" },
-    { href: "#", icon: FaTwitter, title: "Twitter" },
-    { href: "#", icon: FaInstagram, title: "Instagram" },
+    { href: "https://x.com/Trinetragames?t=S9L7I0buit9NbbYziZykqQ&s=09", icon: FaTwitter, title: "Twitter" },
+    { href: "https://www.instagram.com/trinetragames/#", icon: FaInstagram, title: "Instagram" },
     { href: "#", icon: FaLinkedin, title: "LinkedIn" },
     { href: "#", icon: FaDiscord, title: "Discord" },
   ];

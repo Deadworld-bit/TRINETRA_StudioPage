@@ -118,8 +118,8 @@ function ValueContent() {
       variants={containerVariants}
     >
       <motion.p className="text-lg md:text-xl" variants={fadeInUp}>
-        <span className="text-p3-snow font-medium">TRINETRA</span> operates
-        on principles of{" "}
+        <span className="text-p3-snow font-medium">TRINETRA</span> operates on
+        principles of{" "}
         <span className="text-p3-mint-flash font-semibold">
           open collaboration
         </span>{" "}
@@ -146,7 +146,7 @@ function ValueImage() {
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeInUp}
     >
-      <div className="w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-p3-slate/80 transition-transform transform hover:scale-105">
+      <div className="w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-p3-slate/80">
         <Image
           src="/collab_01.jpg"
           alt="Our Values"
