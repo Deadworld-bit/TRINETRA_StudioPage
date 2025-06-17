@@ -27,10 +27,18 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: FaTwitter, href: "https://x.com/Trinetragames?t=S9L7I0buit9NbbYziZykqQ&s=09", label: "Twitter" },
+  {
+    icon: FaTwitter,
+    href: "https://x.com/Trinetragames?t=S9L7I0buit9NbbYziZykqQ&s=09",
+    label: "Twitter",
+  },
   { icon: FaDiscord, href: "https://discord.com/", label: "Discord" },
   { icon: FaFacebook, href: "https://facebook.com/", label: "Facebook" },
-  { icon: FaInstagram, href: "https://www.instagram.com/trinetragames/#", label: "Instagram" },
+  {
+    icon: FaInstagram,
+    href: "https://www.instagram.com/trinetragames/#",
+    label: "Instagram",
+  },
   { icon: FaLinkedin, href: "https://linkedin.com/", label: "LinkedIn" },
 ];
 
@@ -49,7 +57,7 @@ export default function Navbar() {
 
   const headerClasses = `
   fixed top-0 left-0 w-full z-50
-  ${scrolled ? "md:nav-glass" : "bg-p3-pure-black"}
+  ${scrolled ? "bg-p3-pure-black" : "bg-p3-pure-black"}
   shadow-md
   transition-all`;
 

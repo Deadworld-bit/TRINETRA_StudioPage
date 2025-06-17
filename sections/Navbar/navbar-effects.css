@@ -38,7 +38,7 @@
 }
 
 .nav-glass {
-  background: pure-black; 
+  background: var(--p3-pure-black); 
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   backdrop-filter: blur(16px) saturate(160%);
   border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -57,7 +57,8 @@
   width: 0;
   height: 2px;
   background: var(--p3-snow);
-  transition: width 0.3s cubic-bezier(.4,0,.2,1), left 0.3s cubic-bezier(.4,0,.2,1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
 }
 .nav-link:hover::after,
@@ -75,12 +76,13 @@
 }
 
 .nav-drawer {
-  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.45s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
-  background: rgba(30, 30, 40, 0.88); 
+  background: rgba(30, 30, 40, 0.88);
   -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);         
-  box-shadow: -2px 0 24px rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+  box-shadow: -2px 0 24px rgba(0, 0, 0, 0.35);
 }
 
 .nav-drawer-inactive {
