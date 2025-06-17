@@ -163,7 +163,7 @@ function MemberCard({ member, idx }: { member: any; idx: number }) {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-p2-electric-indigo hover:text-p3-ghost-white transition"
+              className="text-p3-snow hover:text-p3-ghost-white transition"
               aria-label={social.url}
             >
               <social.icon size={22} />
