@@ -51,29 +51,23 @@ function ScrollIndicator() {
       animate={{ y: [0, 12, 0], opacity: [1, 0.7, 1] }}
       transition={{ repeat: Infinity, duration: 1.8 }}
     >
-      <svg
-        className="w-6 h-6"
-        style={{ stroke: "var(--p3-snow)" }}
-        viewBox="0 0 24 24"
-        fill="none"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="6 9 12 15 18 9" />
-      </svg>
-      <span
-        className={`${orbitron.className} mt-2`}
+      <a
+        href="#whoarewe"
+        className={`
+          ${orbitron.className}
+          mt-2 px-7 py-3 rounded-full border-2 border-p3-snow
+          text-p3-snow font-bold uppercase tracking-wide
+          bg-transparent transition
+          hover:bg-p3-snow hover:text-p3-charcoal
+          focus:outline-none focus:ring-2 focus:ring-p3-snow
+        `}
         style={{
-          color: "var(--p3-snow)",
-          fontSize: "0.95rem",
+          fontSize: "1.05rem",
           letterSpacing: "0.08em",
-          fontWeight: 600,
-          textTransform: "uppercase",
         }}
       >
-        Scroll
-      </span>
+        More About Us
+      </a>
     </motion.div>
   );
 }

@@ -10,14 +10,7 @@ import { Orbitron } from "next/font/google";
 // Use Orbitron for consistency
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
-const platformOptions = [
-  "All",
-  "PC",
-  "Xbox",
-  "PlayStation",
-  "iOS",
-  "Android",
-];
+const platformOptions = ["All", "PC", "Xbox", "PlayStation", "iOS", "Android"];
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -149,13 +142,13 @@ function GameCard({
       role="button"
       aria-label={`View details for ${game.title}`}
     >
-      {/* Game Image */}
-      <div className="relative w-full aspect-[4/3] bg-p3-slate min-h-[220px] md:min-h-[260px] lg:min-h-[320px]">
+      {/* Game Image - fixed aspect ratio, center-cropped, fixed height */}
+      <div className="relative w-full h-[250px] bg-p3-slate flex items-center justify-center overflow-hidden">
         <Image
           src={game.image}
           alt={game.title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover object-center w-full h-full"
           sizes="(min-width: 1024px) 500px, 100vw"
           priority={i === 0}
         />
@@ -184,11 +177,33 @@ function GameCard({
           ))}
         </div>
       </div>
-      {/* Overlay on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-p3-charcoal/80 flex items-center justify-center transition-opacity duration-300 pointer-events-none">
-        <span className="text-lg font-semibold text-p3-snow">
-          Click to view details
-        </span>
+      {/* Overlay on hover: 90% black, title/genre in white, minimalist outline button */}
+      <div
+        className="
+        absolute inset-0 flex flex-col items-center justify-center
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300
+        bg-black/90 z-10
+      "
+      >
+        <div className="text-center space-y-3">
+          <h3 className={`${orbitron.className} text-2xl font-bold text-white`}>
+            {game.title}
+          </h3>
+          <span className="block text-xs font-semibold uppercase tracking-widest text-white">
+            {game.genre}
+          </span>
+          <button
+            tabIndex={-1}
+            className="
+              mt-4 px-5 py-2 border-2 border-white rounded-full
+              text-white font-semibold text-sm bg-transparent
+              hover:bg-white hover:text-p3-charcoal transition
+              shadow-none outline-none
+            "
+          >
+            View &rarr;
+          </button>
+        </div>
       </div>
     </motion.div>
   );
