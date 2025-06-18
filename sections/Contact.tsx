@@ -17,12 +17,16 @@ import { Orbitron } from "next/font/google";
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 const INPUT_CLASSES = `
-  w-full bg-p3-slate border border-p3-mint-flash/30 rounded-md
+  w-full bg-transparent border border-p3-snow rounded-md
   px-6 py-4 text-base md:text-lg text-p3-snow
-  focus:outline-none focus:border-p3-mint-flash transition
+  focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal
+  focus:border-p3-snow transition
 `;
 const TEXTAREA_CLASSES = `
-  ${INPUT_CLASSES}
+  w-full bg-transparent border border-p3-snow rounded-md
+  px-6 py-4 text-base md:text-lg text-p3-snow
+  focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal
+  focus:border-p3-snow transition
   resize-none
 `;
 const BUTTON_BASE_CLASSES = `
@@ -70,6 +74,8 @@ const itemVariants: Variants = {
     transition: { duration: 0.6, ease: "easeOut" },
   },
 };
+
+const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 // Vertical lines background
 function VerticalLines() {
@@ -155,6 +161,8 @@ function ContactForm({
   message: string;
   isSuccess: boolean;
 }) {
+  const isEmailValid = EMAIL_REGEX.test(form.email);
+
   return (
     <motion.div
       variants={itemVariants}
@@ -181,16 +189,24 @@ function ContactForm({
             className={INPUT_CLASSES}
             required
           />
-          <motion.input
-            variants={itemVariants}
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            className={INPUT_CLASSES}
-            required
-          />
+          <div className="relative">
+            <motion.input
+              variants={itemVariants}
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              className={`${INPUT_CLASSES} ${form.email && !isEmailValid ? 'border-red-500' : ''}`}
+              required
+            />
+            {/* Warning message: only show if user has typed something and it's invalid */}
+            {form.email && !isEmailValid && (
+              <p className="mt-2 text-sm text-red-500 absolute left-0">
+                Please enter a valid email.
+              </p>
+            )}
+          </div>
         </motion.div>
         <motion.input
           variants={itemVariants}
@@ -226,11 +242,10 @@ function ContactForm({
         <motion.button
           variants={itemVariants}
           type="submit"
-          // Only disable when submitting or cooldown, not when form is invalid
-          disabled={isSubmitting || cooldown > 0}
+          disabled={isSubmitting || cooldown > 0 || !isEmailValid}
           className={
             BUTTON_BASE_CLASSES +
-            (isSubmitting || cooldown > 0
+            (isSubmitting || cooldown > 0 || !isEmailValid
               ? " opacity-50 cursor-not-allowed"
               : "")
           }

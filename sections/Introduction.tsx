@@ -94,6 +94,7 @@ const Introduction: React.FC = () => {
   return (
     <motion.section
       className="relative w-full bg-charcoal text-p3-white-smoke py-20 px-4 md:px-12 lg:px-24 overflow-hidden"
+      id="whoarewe"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
@@ -137,6 +138,10 @@ const Introduction: React.FC = () => {
           </motion.h2>
           <motion.div
             className="text-lg md:text-xl text-p3-white-smoke mb-8"
+            style={{
+              lineHeight: 1.6,
+              maxWidth: "60ch",
+            }}
             variants={fadeInUp}
           >
             {about.text_1.map((paragraph, idx) => (

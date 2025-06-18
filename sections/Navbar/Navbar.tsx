@@ -18,7 +18,7 @@ import {
 const orbitron = Orbitron({ subsets: ["latin"] });
 
 const navLinks = [
-  { label: "About Us", href: "#aboutus" },
+  { label: "About Us", href: "#whoarewe" },
   { label: "Our Mission", href: "#ourmission" },
   { label: "Pioneers", href: "#pioneers" },
   { label: "Our Games", href: "#games" },
@@ -56,10 +56,14 @@ export default function Navbar() {
   }, []);
 
   const headerClasses = `
-  fixed top-0 left-0 w-full z-50
-  ${scrolled ? "bg-p3-pure-black" : "bg-p3-pure-black"}
-  shadow-md
-  transition-all`;
+   fixed top-0 left-0 w-full z-50
+   transition-colors duration-500 ease-in-out
+  ${
+    scrolled
+      ? "bg-p3-pure-black bg-opacity-80 shadow-md nav-glass"
+      : "bg-transparent"
+  }
+ `;
 
   const Logo = ({ size }: { size: "desktop" | "mobile" }) => {
     const dimension = size === "desktop" ? 60 : 40;
