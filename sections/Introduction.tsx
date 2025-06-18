@@ -93,7 +93,7 @@ const Introduction: React.FC = () => {
 
   return (
     <motion.section
-      className="relative w-full bg-p3-charcoal text-p3-white-smoke py-20 px-4 md:px-12 lg:px-24 overflow-hidden"
+      className="relative w-full bg-charcoal text-p3-white-smoke py-20 px-4 md:px-12 lg:px-24 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
