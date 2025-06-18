@@ -188,7 +188,7 @@ export default function TeamMember() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-p3-charcoal"
+      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       id="pioneers"
     >
       <VerticalLines />

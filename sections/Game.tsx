@@ -223,7 +223,7 @@ export default function GameShowcase() {
     <>
       <section
         id="games"
-        className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-p3-charcoal"
+        className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       >
         <VerticalLines />
         <SectionTitle

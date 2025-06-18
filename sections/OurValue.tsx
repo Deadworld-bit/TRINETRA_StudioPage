@@ -174,7 +174,7 @@ export default function OurValue() {
 
   return (
     <section
-      className="relative bg-p3-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
+      className="relative bg-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
       id="ourvalue"
     >
       <VerticalLines />
