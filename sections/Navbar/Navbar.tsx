@@ -18,11 +18,11 @@ import {
 const orbitron = Orbitron({ subsets: ["latin"] });
 
 const navLinks = [
-  { label: "About Us", href: "#whoarewe" },
-  { label: "Our Mission", href: "#ourmission" },
+  { label: "About", href: "#whoarewe" },
+  { label: "Missions", href: "#ourmission" },
   { label: "Pioneers", href: "#pioneers" },
-  { label: "Our Games", href: "#games" },
-  { label: "Our Value", href: "#ourvalue" },
+  { label: "Games", href: "#games" },
+  { label: "Values", href: "#ourvalue" },
   { label: "Contact", href: "#contact" },
 ];
 
