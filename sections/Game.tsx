@@ -42,6 +42,21 @@ function VerticalLines() {
   );
 }
 
+function GridBackground() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        opacity: 0.22,
+      }}
+    />
+  );
+}
+
 // Watermark and Title
 function SectionTitle({
   titleRef,
@@ -241,6 +256,9 @@ export default function GameShowcase() {
         className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       >
         <VerticalLines />
+        <GridBackground />
+
+        {/* Watermark and Title */}
         <SectionTitle
           titleRef={titleRef}
           titleFontSize={titleFontSize}

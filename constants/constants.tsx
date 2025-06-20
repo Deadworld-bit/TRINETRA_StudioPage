@@ -51,17 +51,17 @@ export const aboutus: AboutUs[] = [
 
 export const missionPillars: MissionPillar[] = [
   {
-    icon: "FaLightbulb", // Original Content
+    icon: "FaLightbulb", 
     title: "Original Content",
     desc: "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
   },
   {
-    icon: "FaGraduationCap", // Continuous Learning
+    icon: "FaGraduationCap", 
     title: "Continuous Learning",
     desc: "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
   },
   {
-    icon: "FaGlobe", // Global Collaboration
+    icon: "FaGlobe", 
     title: "Global Collaboration",
     desc: "We welcome international collaboration to share knowledge and align with global industry standards.",
   },
