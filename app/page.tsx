@@ -1,26 +1,22 @@
 "use client";
-import Navbar from "@/sections/Navbar/Navbar";
-import Footer from "@/sections/Footer";
-import Hero from "@/sections/Hero";
-import Introduction from "@/sections/Introduction";
-import Game from "@/sections/Game";
-import TeamMembers from "@/sections/TeamMember";
-import Contact from "@/sections/Contact";
-import OurMission from "@/sections/OurMission";
-import OurValue from "@/sections/OurValue";
+
+import Hero from "@/sections/HomePage/Hero";
+import Introduction from "@/sections/HomePage/Introduction";
+import Game from "@/sections/HomePage/Game";
+import TeamMembers from "@/sections/HomePage/TeamMember";
+import Contact from "@/sections/HomePage/Contact";
+import OurMission from "@/sections/HomePage/OurMission";
+import OurValue from "@/sections/HomePage/OurValue";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
       <Introduction />
-      <OurMission />
+      <OurValue />
       <Game />
       <TeamMembers />
-      <OurValue />
       <Contact />
-      <Footer />
     </>
   );
 }

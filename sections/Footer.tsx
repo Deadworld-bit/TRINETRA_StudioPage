@@ -25,10 +25,14 @@ export default function Footer() {
 
   return (
     <footer
-      className={`${orbitron.className} bg-pure-black text-p2-soft-white`}
+      className={`${orbitron.className} text-p2-soft-white`}
+      style={{
+        backgroundImage: 'url("/parttern_06.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       <div className="max-w-screen-xl mx-auto px-8 py-16">
-        {/* Only Bottom Bar: Copyright & Socials */}
         <div className="border-t border-p2-slate/50 pt-8 flex flex-col sm:flex-row justify-between items-center gap-5">
           <p className="text-xs text-p2-gray-whisper">
             &copy; {year} TRINETRA Game Studio. All Rights Reserved.
