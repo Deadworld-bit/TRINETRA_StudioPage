@@ -5,8 +5,6 @@ import Image from "next/image";
 import { Orbitron } from "next/font/google";
 import { motion, Variants } from "framer-motion";
 import { aboutus } from "@/constants/constants";
-import { FiArrowRight } from "react-icons/fi";
-import { FaUser, FaEnvelope } from "react-icons/fa";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
@@ -61,7 +59,7 @@ function GridBackground() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0"
       style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.22,
@@ -112,36 +110,6 @@ const Introduction: React.FC = () => {
       {/* Watermark and Title */}
 
       <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-        {/* Left: Content */}
-        <div className="lg:w-1/2 flex flex-col justify-center">
-          <motion.span
-            className={`${orbitron.className} text-p3-coral-burst text-lg font-bold mb-3 tracking-wider uppercase`}
-            variants={fadeInUp}
-          >
-            Who We Are
-          </motion.span>
-          <motion.h2
-            className={`${orbitron.className} text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
-            variants={fadeInUp}
-          >
-            TRINETRA: A Fusion of Creativity and Dedication.
-          </motion.h2>
-
-          <motion.div
-            className="text-lg md:text-xl text-p3-white-smoke/90 mb-8"
-            style={{ lineHeight: 1.7, maxWidth: "60ch" }}
-            variants={fadeInUp}
-          >
-            {about.text_2.map((paragraph, idx) => (
-              <p key={idx} className="mb-4 last:mb-0">
-                {paragraph}
-              </p>
-            ))}
-          </motion.div>
-
-          <HighlightBox>{highlight}</HighlightBox>
-        </div>
-
         {/* Right: Image & Pillars */}
         <div className="lg:w-1/2 w-full">
           <motion.div
@@ -179,9 +147,38 @@ const Introduction: React.FC = () => {
             ))}
           </motion.ul>
         </div>
+
+        {/* Left: Content */}
+        <div className="lg:w-1/2 flex flex-col justify-center">
+          <motion.span
+            className={`${orbitron.className} text-p3-coral-burst text-lg font-bold mb-3 tracking-wider uppercase`}
+            variants={fadeInUp}
+          >
+            Who We Are
+          </motion.span>
+          <motion.h2
+            className={`${orbitron.className} text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+            variants={fadeInUp}
+          >
+            TRINETRA: A Fusion of Creativity and Dedication.
+          </motion.h2>
+
+          <motion.div
+            className="text-lg md:text-xl text-p3-white-smoke/90 mb-8"
+            style={{ lineHeight: 1.7, maxWidth: "60ch" }}
+            variants={fadeInUp}
+          >
+            {about.text_2.map((paragraph, idx) => (
+              <p key={idx} className="mb-4 last:mb-0">
+                {paragraph}
+              </p>
+            ))}
+          </motion.div>
+
+          <HighlightBox>{highlight}</HighlightBox>
+        </div>
       </div>
-      <div className="max-w-7xl mx-auto">
-      </div>
+      <div className="max-w-7xl mx-auto"></div>
     </motion.section>
   );
 };

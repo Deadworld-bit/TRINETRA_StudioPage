@@ -68,7 +68,7 @@ function GridBackground() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0"
       style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.22,

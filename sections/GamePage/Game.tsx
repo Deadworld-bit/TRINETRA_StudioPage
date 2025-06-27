@@ -9,16 +9,21 @@ import {
   FaAppStore,
 } from "react-icons/fa";
 import Image from "next/image";
-import { Games as AllGames } from "@/constants/constants";
 import { motion, Variants } from "framer-motion";
-import GameModal from "@/components/gamemodal";
-import { FaTag } from "react-icons/fa";
 import { Orbitron } from "next/font/google";
+import { Games as AllGames } from "@/constants/constants";
+import GameModal from "@/components/gamemodal";
 
-// Use Orbitron for consistency
+// Font configuration
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
+// Constants
 const platformOptions = ["All", "PC", "Xbox", "PlayStation", "iOS", "Android"];
+const cardBaseStyles =
+  "bg-p3-charcoal border border-p3-mint-flash/30 rounded-2xl shadow-lg overflow-hidden transition hover:shadow-2xl hover:border-p3-mint-flash cursor-pointer relative";
+const overlayStyles =
+  "absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/90 z-10";
+const buttonStyles = "px-5 py-2 rounded-full font-semibold text-sm transition";
 
 // Animation variants
 const fadeInUp: Variants = {
@@ -30,16 +35,48 @@ const fadeInUp: Variants = {
   }),
 };
 
-// Vertical lines background
+// Interfaces
+interface Game {
+  title: string;
+  image: string;
+  genre: string;
+  shortDescription: string;
+  platforms: string[];
+  fullDescription: string;
+  downloadLinks: { [platform: string]: string };
+}
+
+interface TitleProps {
+  titleRef: React.RefObject<HTMLHeadingElement | null>;
+  titleFontSize: number;
+  watermark: string;
+  title: string;
+}
+
+interface CardProps {
+  game: Game;
+  onClick: () => void;
+}
+
+interface GameCardProps extends CardProps {
+  i: number;
+}
+
+interface FeaturedGameCardProps {
+  game: Game;
+  onClick: () => void;
+}
+
+// Vertical Lines Background
 function VerticalLines() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
+      {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
           className="absolute top-0 bottom-0 w-0.75"
           style={{
-            left: `${(i * 100) / 6}%`,
+            left: `${((i + 1) * 100) / 6}%`,
             background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
@@ -50,13 +87,14 @@ function VerticalLines() {
   );
 }
 
+// Grid Background
 function GridBackground() {
   return (
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0"
       style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundImage: 'url("/ConvertedPic/parttern_06.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.22,
@@ -65,21 +103,15 @@ function GridBackground() {
   );
 }
 
-// Watermark and Title
+// Section Title Component
 function SectionTitle({
   titleRef,
   titleFontSize,
   watermark,
   title,
-}: {
-  titleRef: React.RefObject<HTMLHeadingElement | null>;
-  titleFontSize: number;
-  watermark: string;
-  title: string;
-}) {
+}: TitleProps) {
   return (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
-      {/* Watermark */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
         <h1
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
@@ -97,9 +129,7 @@ function SectionTitle({
       <h2
         ref={titleRef}
         className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-lg`}
-        style={{
-          transition: "font-size 0.2s",
-        }}
+        style={{ transition: "font-size 0.2s" }}
       >
         {title}
       </h2>
@@ -107,37 +137,47 @@ function SectionTitle({
   );
 }
 
+// Platform Divider Component
 function PlatformDivider() {
   return (
-    <div
-      className="fixed left-0 w-screen z-20"
-      style={{
-        position: "relative",
-        background: "var(--charcoal)",
-      }}
-    >
-      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-5xl gap-6 px-6 py-10 mx-auto rounded-2xl">
-        <span
-          className="text-white text-2xl md:text-4xl font-semibold text-left leading-snug mb-4 md:mb-0"
-          style={{ fontFamily: "inherit" }}
-        >
-          Get ready to play your heart out!
-          <br className="hidden md:block" />
-          Download now and unlock a world of gaming wonders.
-        </span>
-        <div className="flex items-center gap-6 md:ml-8">
-          <FaSteam className="text-white" size={38} />
-          <FaGooglePlay className="text-white" size={38} />
-          <FaPlaystation className="text-white" size={38} />
-          <FaXbox className="text-white" size={38} />
-          <FaAppStore className="text-white" size={38} />
+    <div className="relative z-10 w-full bg-p3-pure-black py-8 px-6 sm:px-10 md:px-16">
+      <div
+        className="
+          max-w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 p-6 bg-p3-pure-black"
+      >
+        {/* Text */}
+        <div className="text-center md:text-left">
+          <h3
+            className={`
+              ${orbitron.className}
+              text-2xl sm:text-3xl md:text-4xl font-bold text-p3-pure-white mb-2
+            `}
+          >
+            Get ready to play your heart out!
+          </h3>
+          <p className="text-p3-ghost-white text-sm sm:text-base opacity-80">
+            Download now and unlock a world of gaming wonders.
+          </p>
+        </div>
+
+        {/* Platform Icons */}
+        <div className="flex items-center gap-5 md:gap-8 justify-center">
+          {[FaSteam, FaGooglePlay, FaPlaystation, FaXbox, FaAppStore].map(
+            (Icon, idx) => (
+              <Icon
+                key={idx}
+                size={34}
+                className="text-p3-pure-white opacity-80 hover:opacity-100 transition duration-200"
+              />
+            )
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-// Platform Filter Bar
+// Platform Filter Bar Component
 function PlatformFilterBar({
   selectedPlatform,
   setSelectedPlatform,
@@ -150,13 +190,11 @@ function PlatformFilterBar({
       {platformOptions.map((platform) => (
         <button
           key={platform}
-          className={`px-5 py-2 rounded-full font-semibold text-sm transition
-            ${
-              selectedPlatform === platform
-                ? "bg-p3-ghost-white text-p3-charcoal shadow"
-                : "bg-p3-slate text-p3-ghost-white hover:bg-p3-ghost-white/30"
-            }
-          `}
+          className={`${buttonStyles} ${
+            selectedPlatform === platform
+              ? "bg-p3-ghost-white text-p3-charcoal shadow"
+              : "bg-p3-slate text-p3-ghost-white hover:bg-p3-ghost-white/30"
+          }`}
           onClick={() => setSelectedPlatform(platform)}
         >
           {platform}
@@ -166,220 +204,170 @@ function PlatformFilterBar({
   );
 }
 
-// Game Card
-function GameCard({
-  game,
-  i,
-  onClick,
-}: {
-  game: (typeof AllGames)[0];
-  i: number;
-  onClick: () => void;
-}) {
+// Game Card Component
+export function GameCard({ game, i, onClick }: GameCardProps) {
   return (
     <motion.div
-      key={game.title + game.image + i}
       custom={i}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={fadeInUp}
-      className="
-        group bg-p3-charcoal border border-p3-mint-flash/30 rounded-2xl shadow-lg 
-        flex flex-col overflow-hidden transition hover:shadow-2xl hover:border-p3-mint-flash
-        cursor-pointer relative
-        min-h-[420px] md:min-h-[480px] lg:min-h-[520px]
-      "
       onClick={onClick}
-      tabIndex={0}
       role="button"
-      aria-label={`View details for ${game.title}`}
+      tabIndex={0}
+      className="
+        group relative cursor-pointer overflow-hidden rounded-2xl
+        shadow-xl transition-transform duration-300
+        hover:scale-[1.02] focus:scale-[1.02]
+      "
+      style={{ aspectRatio: "16 / 9" }}
     >
-      {/* Game Image - fixed aspect ratio, center-cropped, fixed height */}
-      <div className="relative w-full h-[250px] bg-p3-slate flex items-center justify-center overflow-hidden">
-        <Image
-          src={game.image}
-          alt={game.title}
-          fill
-          className="object-cover object-center w-full h-full"
-          sizes="(min-width: 1024px) 500px, 100vw"
-          priority={i === 0}
-        />
-      </div>
-      {/* Game Info */}
-      <div className="flex flex-col flex-1 p-8">
+      <Image
+        src={game.image}
+        alt={game.title}
+        fill
+        className="object-cover"
+        priority={i === 0}
+      />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+        <span
+          className={`${orbitron.className} uppercase text-xs text-p3-snow opacity-75`}
+        >
+          {game.genre}
+        </span>
         <h3
-          className={`${orbitron.className} text-2xl md:text-3xl font-bold text-p3-snow mb-2 group-hover:text-p3-mint-flash transition`}
+          className={`${orbitron.className} uppercase text-2xl sm:text-3xl text-p3-ghost-white tracking-wide`}
         >
           {game.title}
         </h3>
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-p3-ghost-white mb-2">
-          {game.genre}
-        </span>
-        <p className="text-p3-snow text-base mb-4 line-clamp-3">
-          {game.shortDescription}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {game.platforms.map((platform) => (
-            <span
-              key={platform}
-              className="bg-p3-slate text-p3-ghost-white text-xs font-semibold px-3 py-1 rounded-full"
-            >
-              {platform}
-            </span>
-          ))}
-        </div>
       </div>
-      {/* Overlay on hover: 90% black, title/genre in white, minimalist outline button */}
+
       <div
         className="
-        absolute inset-0 flex flex-col items-center justify-center
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300
-        bg-black/90 z-10
-      "
+          absolute bottom-15 left-1/2 w-[80%] h-px bg-pure-white transform -translate-x-1/2
+          opacity-0 transition-opacity duration-300
+          group-hover:opacity-60
+        "
+      />
+      <div
+        className="
+          absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
+          opacity-0 transition-opacity duration-300
+          group-hover:opacity-100
+        "
       >
-        <div className="text-center space-y-3">
-          <h3 className={`${orbitron.className} text-2xl font-bold text-white`}>
-            {game.title}
-          </h3>
-          <span className="block text-xs font-semibold uppercase tracking-widest text-white">
-            {game.genre}
-          </span>
-          <button
-            tabIndex={-1}
-            className="
-              mt-4 px-5 py-2 border-2 border-white rounded-full
-              text-white font-semibold text-sm bg-transparent
-              hover:bg-white hover:text-p3-charcoal transition
-              shadow-none outline-none
-            "
-          >
-            View →
-          </button>
-        </div>
+        →
       </div>
     </motion.div>
   );
 }
-
-// Featured Game Card
-function FeaturedGameCard({
-  game,
-  onClick,
-}: {
-  game: (typeof AllGames)[0];
-  onClick: () => void;
-}) {
+// Featured Game Card Component
+export function FeaturedGameCard({ game, onClick }: FeaturedGameCardProps) {
   return (
     <motion.div
-      key={game.title + game.image}
+      onClick={onClick}
+      role="button"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.3 }}
       variants={fadeInUp}
       className="
-        group bg-p3-charcoal border border-p3-mint-flash/30 rounded-2xl shadow-lg 
-        flex flex-col md:flex-row overflow-hidden transition hover:shadow-2xl hover:border-p3-mint-flash
-        cursor-pointer relative
-        min-h-[300px] md:min-h-[350px]
+        group relative cursor-pointer overflow-hidden rounded-2xl
+        shadow-xl transition-transform duration-300
+        hover:scale-[1.02] focus:scale-[1.02]
+        border border-p3-mint-flash/30
       "
-      onClick={onClick}
-      tabIndex={0}
-      role="button"
-      aria-label={`View details for ${game.title}`}
+      style={{ aspectRatio: "16 / 9" }}
     >
-      {/* Game Image - larger for featured section */}
-      <div className="relative w-full md:w-1/2 h-[250px] md:h-[350px] bg-p3-slate flex items-center justify-center overflow-hidden">
-        <Image
-          src={game.image}
-          alt={game.title}
-          fill
-          className="object-cover object-center w-full h-full"
-          sizes="(min-width: 1024px) 700px, 100vw"
-          priority
-        />
-      </div>
-      {/* Game Info */}
-      <div className="flex flex-col flex-1 p-8">
+      {/* Background Image */}
+      <Image
+        src={game.image}
+        alt={game.title}
+        fill
+        className="object-cover"
+        sizes="100vw"
+        priority
+      />
+
+      {/* Subtle Gradient Overlay */}
+      <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50" />
+
+      {/* Featured Badge */}
+      <span
+        className="
+          absolute top-4 left-4 px-3 py-1 bg-p3-mint-flash/90
+          text-p3-pure-white font-bold uppercase rounded-full
+          text-xs tracking-wider shadow-md
+          group-hover:bg-p3-mint-flash
+          transition-colors duration-300
+        "
+      >
+        Featured
+      </span>
+
+      {/* Text Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+        <span
+          className={`${orbitron.className} uppercase text-xs text-p3-snow opacity-75`}
+        >
+          {game.genre}
+        </span>
         <h3
-          className={`${orbitron.className} text-3xl md:text-4xl font-bold text-p3-snow mb-2 group-hover:text-p3-mint-flash transition`}
+          className={`${orbitron.className} uppercase text-2xl sm:text-3xl text-p3-ghost-white tracking-wide`}
         >
           {game.title}
         </h3>
-        <span className="inline-block text-sm font-semibold uppercase tracking-widest text-p3-ghost-white mb-2">
-          {game.genre}
-        </span>
-        <p className="text-p3-snow text-lg mb-4 line-clamp-4">
-          {game.shortDescription}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {game.platforms.map((platform) => (
-            <span
-              key={platform}
-              className="bg-p3-slate text-p3-ghost-white text-xs font-semibold px-3 py-1 rounded-full"
-            >
-              {platform}
-            </span>
-          ))}
-        </div>
       </div>
-      {/* Overlay on hover: 90% black, title/genre in white, minimalist outline button */}
+
+      {/* Hover Effects */}
       <div
         className="
-        absolute inset-0 flex flex-col items-center justify-center
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300
-        bg-black/90 z-10
-      "
+          absolute bottom-15 left-1/2 w-[80%] h-px bg-p3-pure-white
+          transform -translate-x-1/2
+          opacity-0 transition-opacity duration-300
+          group-hover:opacity-60
+        "
+      />
+      <div
+        className="
+          absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
+          opacity-0 transition-opacity duration-300
+          group-hover:opacity-100
+        "
       >
-        <div className="text-center space-y-3">
-          <h3
-            className={`${orbitron.className} text-3xl md:text-4xl font-bold text-white`}
-          >
-            {game.title}
-          </h3>
-          <span className="block text-sm font-semibold uppercase tracking-widest text-white">
-            {game.genre}
-          </span>
-          <button
-            tabIndex={-1}
-            className="
-              mt-4 px-5 py-2 border-2 border-white rounded-full
-              text-white font-semibold text-sm bg-transparent
-              hover:bg-white hover:text-p3-charcoal transition
-              shadow-none outline-none
-            "
-          >
-            View →
-          </button>
-        </div>
+        →
       </div>
     </motion.div>
   );
 }
 
+// Main Game Showcase Component
 export default function GameShowcase() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const featuredTitleRef = useRef<HTMLHeadingElement>(null);
   const [titleFontSize, setTitleFontSize] = useState<number>(48);
   const [featuredTitleFontSize, setFeaturedTitleFontSize] =
     useState<number>(48);
-  const [selectedGame, setSelectedGame] = useState<(typeof AllGames)[0] | null>(
-    null
-  );
+  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<string>("All");
 
+  // Update font sizes on mount
   useLayoutEffect(() => {
     if (titleRef.current) {
-      const computed = window.getComputedStyle(titleRef.current);
-      setTitleFontSize(parseFloat(computed.fontSize));
+      setTitleFontSize(
+        parseFloat(window.getComputedStyle(titleRef.current).fontSize)
+      );
     }
     if (featuredTitleRef.current) {
-      const computed = window.getComputedStyle(featuredTitleRef.current);
-      setFeaturedTitleFontSize(parseFloat(computed.fontSize));
+      setFeaturedTitleFontSize(
+        parseFloat(window.getComputedStyle(featuredTitleRef.current).fontSize)
+      );
     }
   }, []);
 
-  // Filtered games by platform
+  // Filter games by selected platform
   const Games = useMemo(() => {
     if (selectedPlatform === "All") return AllGames;
     return AllGames.filter((game) =>
@@ -389,7 +377,7 @@ export default function GameShowcase() {
     );
   }, [selectedPlatform]);
 
-  // Select the first game as the featured game (modify this logic as needed)
+  // Select first game as featured
   const featuredGame = AllGames[0];
 
   return (
@@ -398,10 +386,8 @@ export default function GameShowcase() {
         id="games"
         className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
       >
-        <VerticalLines />
         <GridBackground />
 
-        {/* Featured Games Section */}
         <SectionTitle
           titleRef={featuredTitleRef}
           titleFontSize={featuredTitleFontSize}
@@ -411,7 +397,6 @@ export default function GameShowcase() {
 
         <div className="h-8 sm:h-12 md:h-16" />
 
-        {/* Featured Game Card */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-16">
           {featuredGame && (
             <FeaturedGameCard
@@ -423,7 +408,6 @@ export default function GameShowcase() {
 
         <div className="h-8 sm:h-12 md:h-16" />
 
-        {/* Watermark and Title for All Games */}
         <SectionTitle
           titleRef={titleRef}
           titleFontSize={titleFontSize}
@@ -433,7 +417,6 @@ export default function GameShowcase() {
 
         <div className="h-12 sm:h-16 md:h-20" />
 
-        {/* Sort Bar */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-10">
           <PlatformFilterBar
             selectedPlatform={selectedPlatform}
@@ -441,17 +424,8 @@ export default function GameShowcase() {
           />
         </div>
 
-        {/* Game Grid */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div
-            className="
-              grid 
-              grid-cols-1 
-              md:grid-cols-2 
-              lg:grid-cols-3 
-              gap-10
-            "
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
             {Games.length === 0 && (
               <div className="col-span-full text-center text-p3-slate text-lg py-20">
                 No games found for this platform.
@@ -459,7 +433,7 @@ export default function GameShowcase() {
             )}
             {Games.map((game, i) => (
               <GameCard
-                key={game.title + game.image + i}
+                key={`${game.title}-${game.image}-${i}`}
                 game={game}
                 i={i}
                 onClick={() => setSelectedGame(game)}
@@ -468,13 +442,6 @@ export default function GameShowcase() {
           </div>
         </div>
       </section>
-
-      {/* <div className="relative z-20">
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <PlatformDivider />
-        </div>
-      </div> */}
-      {/* Game Modal */}
       {selectedGame && (
         <GameModal game={selectedGame} onClose={() => setSelectedGame(null)} />
       )}

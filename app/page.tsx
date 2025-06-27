@@ -13,8 +13,8 @@ export default function Home() {
       <Hero />
       <Introduction />
       <OurMission />
-      <Game />
       <TeamMembers />
+      <Game />
       <Contact />
     </>
   );

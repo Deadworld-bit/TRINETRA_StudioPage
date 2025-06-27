@@ -24,22 +24,21 @@ export default function CursorEffect() {
     };
   }, []);
 
-  // Immediate follow: no animation, just set style directly
   return (
     <div
       style={{
         position: "fixed",
-        left: pos.x - 16,
-        top: pos.y - 16,
-        width: clicked ? 20 : 32,
-        height: clicked ? 20 : 32,
+        left: pos.x,
+        top: pos.y,
+        transform: "translate(-50%, -50%)",
+        width: clicked ? 20 : 12,
+        height: clicked ? 20 : 12,
         borderRadius: "50%",
-        border: "2px solid var(--p3-snow, #60d394)",
-        background: "transparent",
+        background: "var(--p3-pure-white)",
+        boxShadow: "0 0 8px #40e0d0",
         pointerEvents: "none",
         zIndex: 9999,
-        transition: "width 0.12s, height 0.12s, border-color 0.2s",
-        mixBlendMode: "exclusion",
+        transition: "width 0.1s, height 0.1s",
       }}
     />
   );

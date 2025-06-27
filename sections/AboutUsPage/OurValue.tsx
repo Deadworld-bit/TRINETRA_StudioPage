@@ -10,17 +10,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 const containerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.5 } },
+  visible: { transition: { staggerChildren: 0.3 } },
 };
 
 const titleVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 function VerticalLines() {
@@ -48,7 +48,7 @@ function GridBackground() {
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0"
       style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.22,
@@ -75,14 +75,14 @@ function SectionTitle({
         initial="hidden"
         animate="visible"
         className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full"
-        style={{ opacity: 0.15 }}
+        style={{ opacity: 0.1 }}
       >
         <h1
           className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
           style={{
-            WebkitTextStroke: "1.5px rgba(255,255,255,0.15)",
+            WebkitTextStroke: "1.2px rgba(255,255,255,0.1)",
             WebkitTextFillColor: "var(--p3-charcoal)",
-            fontSize: `${titleFontSize * 1.75}px`,
+            fontSize: `${titleFontSize * 1.5}px`,
             lineHeight: 1,
           }}
         >
@@ -94,7 +94,7 @@ function SectionTitle({
         variants={titleVariants}
         initial="hidden"
         animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]`}
       >
         {title}
       </motion.h2>
@@ -105,46 +105,51 @@ function SectionTitle({
 function ValueContent() {
   return (
     <motion.div
-      className="flex flex-col justify-center text-left space-y-8 border-l-2 border-p3-mint-flash pl-5"
+      className="flex flex-col justify-center text-left space-y-6 border-l-2 border-p3-mint-flash pl-6"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
     >
       <motion.p
-        className={`${inter.className} text-lg md:text-xl`}
+        className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         <span className="text-p3-snow font-medium">TRINETRA</span> operates on
         principles of{" "}
-        <span className="text-p3-mint-flash font-semibold">
+        <span className="text-p3-mint-flash font-semibold hover:underline hover:text-p3-mint-flash/80 transition-all duration-300">
           open collaboration
         </span>{" "}
-        and <span className="text-p3-mint-flash font-semibold">shared growth</span>.
-        We encourage team cohesion through{" "}
+        and{" "}
+        <span className="text-p3-mint-flash font-semibold hover:underline hover:text-p3-mint-flash/80 transition-all duration-300">
+          shared growth
+        </span>
+        . We encourage team cohesion through{" "}
         <span className="italic">Game Jams</span> and small-scale development
         projects.
       </motion.p>
       <motion.ul
-        className={`${inter.className} list-disc list-inside space-y-2 text-lg md:text-xl`}
+        className={`${inter.className} list-disc list-inside space-y-2 text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         <li>
-          <span className="text-p3-mint-flash font-semibold">
+          <span className="text-p3-mint-flash font-semibold hover:text-p3-mint-flash/80 transition-all duration-300">
             Diversity of thought
           </span>
         </li>
         <li>
-          <span className="text-p3-mint-flash font-semibold">
+          <span className="text-p3-mint-flash font-semibold hover:text-p3-mint-flash/80 transition-all duration-300">
             Transparent communication
           </span>
         </li>
         <li>
-          <span className="text-p3-mint-flash font-semibold">Mutual respect</span>
+          <span className="text-p3-mint-flash font-semibold hover:text-p3-mint-flash/80 transition-all duration-300">
+            Mutual respect
+          </span>
         </li>
       </motion.ul>
       <motion.p
-        className={`${inter.className} text-lg md:text-xl`}
+        className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         We remain adaptable in structure, welcoming creative contributors
@@ -157,14 +162,14 @@ function ValueContent() {
 function ValueImage() {
   return (
     <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
+      initial={{ scale: 0.95, opacity: 0 }}
       whileInView={{ scale: 1, opacity: 1 }}
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ scale: 1.03, rotate: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
       className="flex justify-center items-center"
     >
-      <div className="w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-p3-slate/80">
+      <div className="w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden shadow-xl bg-p3-slate/50 border border-p3-snow/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-300">
         <Image
           src="/collab_01.jpg"
           alt="Team collaborating to reflect TRINETRA's values of diversity and growth"
@@ -203,8 +208,8 @@ export default function OurValue() {
         watermark="Our Values"
         title="Our Values"
       />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <ValueContent />
           <ValueImage />
         </div>

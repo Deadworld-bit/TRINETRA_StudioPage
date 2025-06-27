@@ -6,18 +6,16 @@ import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { FaPhoneAlt, FaPaperPlane, FaMapMarkerAlt } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
 import { Orbitron } from "next/font/google";
-import Link from "next/link";
-import { FaBriefcase } from "react-icons/fa";
 
 // --- Font ---
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 // --- Styles ---
 const styles = {
-  input: `w-full bg-transparent border border-p3-snow rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate
+  input: `w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate
            focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash
            transition duration-200 focus:scale-[1.02]`,
-  textarea: `w-full bg-transparent border border-p3-snow rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate
+  textarea: `w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate
               focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash
               transition duration-200 focus:scale-[1.02] resize-none`,
   button: `w-full mt-6 px-8 py-4 bg-pure-white hover:bg-p3-coral-burst hover:text-p3-snow
@@ -74,32 +72,13 @@ function useAutoClear(
   return [msg, setMsg];
 }
 
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${(i * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function GridBackground() {
   return (
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0"
       style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
+        backgroundImage: 'url("/ConvertedPic/parttern_06.webp")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.22,
@@ -112,8 +91,8 @@ function GridBackground() {
 const CONTACT_INFO = [
   {
     Icon: FaPhoneAlt,
-    title: "Call Me",
-    lines: ["201-354-4443", "201-354-4443"],
+    title: "Call Us",
+    lines: ["024-6293-5559", "097-7345-712"],
   },
   {
     Icon: FaPaperPlane,
@@ -123,7 +102,7 @@ const CONTACT_INFO = [
   {
     Icon: FaMapMarkerAlt,
     title: "Location",
-    lines: ["474 Central Road", "New York"],
+    lines: ["474 Central Road", "India"],
   },
 ];
 
@@ -372,7 +351,6 @@ export default function Contact() {
       variants={containerVariants}
       className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
     >
-      <VerticalLines />
       <GridBackground />
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row gap-8">
@@ -392,7 +370,7 @@ export default function Contact() {
           </div>
         </div>
         {/* Add margin below the form/info section to prevent overlap */}
-        <div className="h-5 md:h-5" />
+        <div className="h-4 md:h-4" />
       </div>
     </motion.section>
   );

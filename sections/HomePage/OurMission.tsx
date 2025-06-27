@@ -1,64 +1,95 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Orbitron } from "next/font/google";
-import { FaLightbulb, FaGraduationCap, FaGlobe } from "react-icons/fa";
-import { missionPillars } from "@/constants/constants";
+import { Lightbulb, GraduationCap, Globe, ArrowRight } from "lucide-react";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+const services = [
+  {
+    icon: Lightbulb,
+    title: "Original Content",
+    description:
+      "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Continuous Learning",
+    description:
+      "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
+  },
+  {
+    icon: Globe,
+    title: "Global Collaboration",
+    description:
+      "We welcome international collaboration to share knowledge and align with global industry standards.",
+  },
+];
 
-// Icon mapping for mission pillars
-const iconMap: Record<string, React.ElementType> = {
-  FaLightbulb,
-  FaGraduationCap,
-  FaGlobe,
-};
-
-// Animation variants
-const lineVariant: Variants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: (i: number) => ({
-    opacity: 0.7,
-    x: [0, 5, -5, 0],
-    transition: {
-      delay: i * 0.3,
-      repeat: Infinity,
-      duration: 8 + i * 2,
-      ease: "easeInOut",
-    },
-  }),
-};
-
-const titleVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30, rotateX: 10 },
-  visible: (i: number) => ({
+  hidden: { opacity: 0, y: 30 },
+  visible: {
     opacity: 1,
     y: 0,
-    rotateX: 0,
-    transition: {
-      delay: 0.4 + i * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
-// Vertical lines background
+const ServiceCard = ({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}) => (
+  <motion.div
+    variants={cardVariants}
+    whileHover={{ y: -10 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    className="flex flex-col items-start p-12 bg-p3-charcoal rounded-xl shadow-2xl group"
+  >
+    <Icon className="w-16 h-16 mb-8 text-pure-white" />
+    <h3 className="text-2xl font-bold text-white uppercase tracking-wide mb-6">
+      {title}
+    </h3>
+    <p className="text-lg text-gray-300 leading-relaxed mb-8">{description}</p>
+    <ArrowRight className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
+  </motion.div>
+);
+
+function GridBackground() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        opacity: 0.22,
+      }}
+    />
+  );
+}
+
 function VerticalLines() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
+      {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
           className="absolute top-0 bottom-0 w-0.75"
           style={{
-            left: `${(i * 100) / 6}%`,
+            left: `${((i + 1) * 100) / 6}%`,
             background: "rgba(255, 255, 255, 0.13)",
             opacity: 1,
             filter: "blur(0.5px)",
@@ -69,171 +100,32 @@ function VerticalLines() {
   );
 }
 
-function GridBackground() {
+export default function OurServices() {
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/parrtern_02.jpg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
-
-// Watermark and Title
-function SectionTitle({
-  titleRef,
-  titleFontSize,
-  watermark,
-  title,
-}: {
-  titleRef: React.RefObject<HTMLHeadingElement | null>;
-  titleFontSize: number;
-  watermark: string;
-  title: string;
-}) {
-  return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
-      {/* Watermark */}
-      <motion.div
-        variants={titleVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full"
-        style={{ opacity: 0.1 }}
-      >
-        <h1
-          className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
-          style={{
-            WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--p3-charcoal)",
-            fontSize: `${titleFontSize * 1.75}px`,
-            lineHeight: 1,
-          }}
-        >
-          {watermark}
-        </h1>
-      </motion.div>
-      {/* Title */}
-      <motion.h2
-        ref={titleRef}
-        variants={titleVariants}
-        initial="hidden"
-        animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-p3-snow drop-shadow-lg text-left`}
-      >
-        {title}
-      </motion.h2>
-    </div>
-  );
-}
-
-// Mission Card
-function MissionCard({
-  icon,
-  title,
-  desc,
-  i,
-}: {
-  icon: string;
-  title: string;
-  desc: string;
-  i: number;
-}) {
-  const Icon = iconMap[icon] || FaLightbulb;
-  // Assign color based on icon for demo
-  const iconColor =
-    icon === "FaLightbulb"
-      ? "text-p3-coral-burst"
-      : icon === "FaGraduationCap"
-      ? "text-p3-electric-indigo"
-      : "text-p3-mint-flash";
-  const borderColor =
-    icon === "FaLightbulb"
-      ? "border-p3-coral-burst"
-      : icon === "FaGraduationCap"
-      ? "border-p3-electric-indigo"
-      : "border-p3-mint-flash";
-
-  return (
-    <motion.div
-      custom={i}
-      variants={cardVariants}
+    <motion.section
+      id="ourservices"
+      className="relative bg-charcoal text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
+      variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      whileHover={{
-        scale: 1.04,
-        rotateX: 3,
-        rotateY: -3,
-        boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-        background: "rgba(30,30,40,0.55)",
-        backdropFilter: "blur(16px) saturate(160%)",
-        WebkitBackdropFilter: "blur(16px) saturate(160%)",
-      }}
-      transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      className={`
-        bg-p3-charcoal border ${borderColor} rounded-xl p-6 sm:p-8 md:p-10 space-y-6
-        transition-all flex flex-col items-start min-h-[300px] glass-card
-        `}
-      style={{
-        backdropFilter: "blur(0px) saturate(120%)",
-        WebkitBackdropFilter: "blur(0px) saturate(120%)",
-        transition: "backdrop-filter 0.3s, background 0.3s",
-      }}
-    >
-      <div className={`${iconColor} text-4xl sm:text-5xl mb-4`}>
-        <Icon />
-      </div>
-      <h3
-        className={`${orbitron.className} text-xl sm:text-2xl font-bold text-p3-white-smoke`}
-      >
-        {title}
-      </h3>
-      <p className="text-base sm:text-lg leading-relaxed text-p3-snow">
-        {desc}
-      </p>
-    </motion.div>
-  );
-}
-
-export default function OurMission() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [titleFontSize, setTitleFontSize] = useState<number>(48);
-
-  useLayoutEffect(() => {
-    if (titleRef.current) {
-      const computed = window.getComputedStyle(titleRef.current);
-      setTitleFontSize(parseFloat(computed.fontSize));
-    }
-  }, []);
-
-  return (
-    <section
-      className="relative bg-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
-      id="ourmission"
+      viewport={{ once: true, amount: 0.2 }}
     >
       <GridBackground />
       <VerticalLines />
 
-      {/* Section Title */}
-      <SectionTitle
-        titleRef={titleRef}
-        titleFontSize={titleFontSize}
-        watermark="OUR MISSION"
-        title="Our Mission"
-      />
-
-      {/* Mission Pillars */}
-      <div className="relative z-10 mt-12 sm:mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
-        {missionPillars.map((item, i) => (
-          <MissionCard key={i} {...item} i={i} />
-        ))}
+      {/* Content container matching other sections' width */}
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {services.map((service, i) => (
+            <ServiceCard
+              key={i}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

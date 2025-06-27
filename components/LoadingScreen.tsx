@@ -7,8 +7,8 @@ export default function LoadingScreen({ show }: { show: boolean }) {
   useEffect(() => {
     if (show) {
       setPhase("loading");
-      const timer1 = setTimeout(() => setPhase("expand"), 1200); // loading bar fills
-      const timer2 = setTimeout(() => setPhase("done"), 1800);   // expand to reveal
+      const timer1 = setTimeout(() => setPhase("expand"), 1200); 
+      const timer2 = setTimeout(() => setPhase("done"), 1800);   
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);

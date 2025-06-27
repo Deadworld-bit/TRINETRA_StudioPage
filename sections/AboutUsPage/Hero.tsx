@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Orbitron } from "next/font/google";
 import { motion, useScroll, useTransform } from "framer-motion";
-import backgroundImage from "@/public/wallpaper_bg14.png";
-import Link from "next/link";
+import backgroundImage from "@/public/ConvertedPic/darkthemestudio.jpg";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
@@ -17,32 +17,20 @@ function useHeroScrollTransforms() {
   };
 }
 
-function HeroOverlays() {
-  return (
-    <>
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, var(--p3-charcoal) 0%, transparent 60%, var(--p3-charcoal) 100%)",
-          opacity: 0.85,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)",
-          opacity: 0.08,
-        }}
-      />
-    </>
-  );
-}
+const overlays = [
+  {
+    bg: "linear-gradient(to bottom, var(--p3-charcoal) 0%, transparent 60%, var(--p3-charcoal) 100%)",
+    opacity: 0.85,
+  },
+  {
+    bg: "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)",
+    opacity: 0.08,
+  },
+];
 
 const HERO_TITLE = `About Us`;
 
-const Hero: React.FC = () => {
+const Hero = () => {
   const { bgY, headingY, headingOpacity } = useHeroScrollTransforms();
 
   return (
@@ -56,16 +44,22 @@ const Hero: React.FC = () => {
         backgroundPositionY: bgY,
       }}
     >
-      <HeroOverlays />
+      {overlays.map(({ bg, opacity }, i) => (
+        <div
+          key={i}
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: bg, opacity }}
+        />
+      ))}
 
-      <div className="relative px-4 lg:px-8 pt-20 max-w-3xl mx-auto flex flex-col items-start justify-center h-full">
+      <div className="relative flex flex-col items-start justify-center h-full px-4 pt-20 lg:px-8 max-w-3xl mx-auto">
         <motion.h1
-          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl text-center`}
+          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl`}
           style={{
             fontSize: "clamp(3rem, 6vw, 5rem)",
             y: headingY,
             opacity: headingOpacity,
-            background: "var(--p3-snow)",
+            background: "var(--p3-pure-white)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             whiteSpace: "pre-line",
@@ -75,15 +69,16 @@ const Hero: React.FC = () => {
         </motion.h1>
       </div>
 
-      <div className="absolute bottom-[3.25rem] left-1/2 transform -translate-x-1/2 w-[90%] h-px bg-white opacity-50" />
+      {/* Divider line */}
+      <div className="absolute bottom-[4rem] left-1/2 w-[80%] h-px bg-p3-pure-white opacity-70 transform -translate-x-1/2" />
 
-      {/* Breadcrumbs - slightly larger text, aligned to start of divider */}
-      <div className="absolute bottom-4 left-[5%] text-base text-white flex items-center space-x-2">
+      {/* Breadcrumbs */}
+      <div className="absolute bottom-6 left-[10%] flex items-center space-x-2 text-lg text-pure-white">
         <Link href="/" className="hover:underline">
           Home
         </Link>
         <span className="opacity-60">»</span>
-        <div>AboutUs</div>
+        <span>AboutUs</span>
       </div>
     </motion.section>
   );
