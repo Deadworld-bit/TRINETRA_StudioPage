@@ -164,7 +164,7 @@ export default function GameShowcase() {
           {AllGames.length > 3 && (
             <div className="mt-12 flex">
               <Link
-                href="/games"
+                href="/game"
                 className="inline-flex items-center px-10 py-4 bg-white text-black font-semibold rounded-lg shadow-xl hover:bg-gray-200 transition"
               >
                 View All Games &rarr;
