@@ -1,190 +1,144 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { teamMembers } from "@/constants/constants";
-import { Orbitron } from "next/font/google"; // Use Orbitron for consistency
+import { Orbitron, Inter } from "next/font/google"; // Import Inter font
+import { teamMembers, TeamMember } from "@/constants/constants"; // Assuming teamMembers is the full list
+
+interface SocialLink {
+  icon: React.ElementType;
+  url: string;
+  name?: string;
+}
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+const inter = Inter({ subsets: ["latin"] }); // Initialize Inter font
 
-// Animation variants
-const lineVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: (i: number) => ({
-    opacity: 0.7,
-    x: [0, 5, -5, 0],
-    transition: {
-      delay: i * 0.4,
-      repeat: Infinity,
-      duration: 10,
-      ease: "easeInOut",
-    },
-  }),
-};
-
-const titleVariants: Variants = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: {
-      delay: 0.3 + i * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
+    transition: { delay: 0.1 + i * 0.1, duration: 0.4, ease: "easeOut" },
   }),
 };
 
-// Watermark and Title
-function SectionTitle({
-  titleRef,
-  titleFontSize,
-  watermark,
-  title,
-}: {
-  titleRef: React.RefObject<HTMLHeadingElement | null>;
-  titleFontSize: number;
-  watermark: string;
-  title: string;
-}) {
-  return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
-      {/* Watermark */}
-      <motion.div
-        variants={titleVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full"
-        style={{ opacity: 0.1 }}
-      >
-        <h1
-          className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
-          style={{
-            WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--p3-charcoal)",
-            fontSize: `${titleFontSize * 1.75}px`,
-            lineHeight: 1,
-          }}
-        >
-          {watermark}
-        </h1>
-      </motion.div>
-      {/* Title */}
-      <motion.h2
-        ref={titleRef}
-        variants={titleVariants}
-        initial="hidden"
-        animate="visible"
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
-      >
-        {title}
-      </motion.h2>
-    </div>
-  );
+interface MemberCardProps {
+  member: TeamMember;
+  idx: number;
 }
 
-// Team member card
-function MemberCard({ member, idx }: { member: any; idx: number }) {
+function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleCardClick = () => {
+    if (isMobile) setIsClicked(!isClicked);
+  };
+
+  const isActive = isMobile ? isClicked : isHovered;
+
   return (
     <motion.div
       custom={idx}
-      variants={cardVariants}
+      variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      whileHover={{
-        scale: 1.02,
-        y: -4,
-        boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
-      }}
-      transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      className="bg-p3-slate/80 border border-p3-electric-indigo rounded-xl overflow-hidden shadow-xl flex flex-col relative"
+      className="relative rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow duration-300"
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onClick={handleCardClick}
     >
-      {/* Image with subtle zoom on hover */}
-      <div className="relative w-full aspect-square overflow-hidden">
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full h-full"
-        >
-          <Image
-            src={
-              typeof member.photo === "string" ? member.photo : member.photo.src
-            }
-            alt={member.name}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 400px, 100vw"
-            priority={idx === 0}
-          />
-        </motion.div>
+      <div className="relative w-full aspect-square">
+        <Image
+          src={
+            typeof member.photo === "string" ? member.photo : member.photo.src
+          }
+          alt={member.name}
+          fill
+          className="object-cover transition-transform duration-500 hover:scale-105"
+          sizes="(min-width: 1024px) 350px, 100vw"
+          priority={idx === 0}
+        />
       </div>
-      {/* Info */}
-      <div className="pl-8 sm:pl-10 pr-6 pb-6 pt-4 flex flex-col items-start bg-p3-charcoal rounded-b-xl">
-        <h3
-          className={`${orbitron.className} text-xl sm:text-2xl font-bold text-p3-snow mb-1`}
+
+      <div className="p-8 bg-p3-charcoal text-center relative overflow-hidden">
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center"
+          initial={false}
+          animate={{ y: isActive ? "-100%" : "0%" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          {member.name}
-        </h3>
-        <p className="text-base sm:text-lg text-p3-snow mb-4">
-          {member.title}
-        </p>
-        <div className="flex gap-5 mt-2">
-          {member.social.map((social: any, i: number) => (
-            <a
-              key={i}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-p3-snow hover:text-p3-ghost-white transition"
-              aria-label={social.url}
-            >
-              <social.icon size={22} />
-            </a>
-          ))}
-        </div>
+          <h3
+            className={`${orbitron.className} text-2xl font-bold text-white tracking-wide mb-2`}
+          >
+            {member.name.toUpperCase()}
+          </h3>
+          <p className={`${inter.className} text-base text-gray-300 font-light`}> 
+            {member.title}
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center space-y-4"
+          initial={false}
+          animate={{ y: isActive ? "0%" : "100%" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          <div className="flex space-x-6">
+            {member.social.map((social, i) => (
+              <a
+                key={i}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} on ${social.icon }`}
+                className="text-white text-2xl hover:text-teal-400 transition-colors duration-200"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <social.icon />
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );
 }
 
-export default function TeamMember() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const [titleFontSize, setTitleFontSize] = useState<number>(48);
-
-  useLayoutEffect(() => {
-    if (titleRef.current) {
-      const computed = window.getComputedStyle(titleRef.current);
-      setTitleFontSize(parseFloat(computed.fontSize));
-    }
-  }, []);
-
+export default function TeamMemberSection(): JSX.Element {
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-20 md:py-28"
       id="pioneers"
+      className="relative py-24 overflow-hidden" 
     >
-      <SectionTitle
-        titleRef={titleRef}
-        titleFontSize={titleFontSize}
-        watermark="Our Pioneers"
-        title="Our Pioneers"
-      />
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <h2
+          className={`${orbitron.className} text-center text-5xl md:text-6xl lg:text-7xl font-extrabold text-pure-white mb-12`} // Added text-center for consistency
+        >
+          Our Pioneers
+        </h2>
 
-      {/* Team Cards */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-12 sm:mt-16 lg:mt-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {teamMembers.map((member, idx) => (
             <MemberCard key={idx} member={member} idx={idx} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

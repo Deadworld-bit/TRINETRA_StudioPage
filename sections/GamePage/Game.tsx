@@ -40,9 +40,6 @@ interface Game {
 }
 
 interface TitleProps {
-  titleRef: React.RefObject<HTMLHeadingElement | null>;
-  titleFontSize: number;
-  watermark: string;
   title: string;
 }
 
@@ -60,69 +57,12 @@ interface FeaturedGameCardProps {
   onClick: () => void;
 }
 
-// Vertical Lines Background
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${((i + 1) * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Grid Background
-function GridBackground() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/ConvertedPic/parttern_06.webp")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
-
 // Section Title Component
-function SectionTitle({
-  titleRef,
-  titleFontSize,
-  watermark,
-  title,
-}: TitleProps) {
+function SectionTitle({ title }: TitleProps) {
   return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-start">
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none select-none w-full">
-        <h1
-          className={`${orbitron.className} font-extrabold uppercase leading-none tracking-tighter whitespace-nowrap`}
-          style={{
-            WebkitTextStroke: "2px rgba(255,255,255,0.10)",
-            WebkitTextFillColor: "var(--p3-charcoal)",
-            fontSize: `${titleFontSize * 1.75}px`,
-            lineHeight: 1,
-            transition: "font-size 0.2s",
-          }}
-        >
-          {watermark}
-        </h1>
-      </div>
+    <div className="relative max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-start"> {/* Changed items-center to items-start for left alignment */}
       <h2
-        ref={titleRef}
-        className={`${orbitron.className} relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-0 text-left text-p3-snow drop-shadow-lg`}
-        style={{ transition: "font-size 0.2s" }}
+        className={`${orbitron.className} text-left text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-0 text-p3-snow drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]`} // Changed text-center to text-left
       >
         {title}
       </h2>
@@ -139,7 +79,7 @@ function PlatformFilterBar({
   setSelectedPlatform: (platform: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-3 items-center">
+    <div className="flex flex-wrap gap-3 items-center justify-start"> {/* Changed justify-center to justify-start for left alignment */}
       {platformOptions.map((platform) => (
         <button
           key={platform}
@@ -186,7 +126,7 @@ export function GameCard({ game, i, onClick }: GameCardProps) {
       <div className="absolute inset-0 bg-black/40" />
       <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
         <span
-          className={`${orbitron.className} uppercase text-xs text-p3-snow opacity-75`}
+          className={`${orbitron.className} uppercase text-sm text-p3-snow opacity-75`}
         >
           {game.genre}
         </span>
@@ -263,12 +203,12 @@ export function FeaturedGameCard({ game, onClick }: FeaturedGameCardProps) {
       {/* Text Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
         <span
-          className={`${orbitron.className} uppercase text-xs text-p3-snow opacity-75`}
+          className={`${orbitron.className} uppercase text-sm text-p3-snow opacity-75`}
         >
           {game.genre}
         </span>
         <h3
-          className={`${orbitron.className} uppercase text-2xl sm:text-3xl text-p3-ghost-white tracking-wide`}
+          className={`${orbitron.className} uppercase text-3xl sm:text-4xl text-p3-ghost-white tracking-wide`}
         >
           {game.title}
         </h3>
@@ -298,27 +238,9 @@ export function FeaturedGameCard({ game, onClick }: FeaturedGameCardProps) {
 
 // Main Game Showcase Component
 export default function GameShowcase() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const featuredTitleRef = useRef<HTMLHeadingElement>(null);
-  const [titleFontSize, setTitleFontSize] = useState<number>(48);
-  const [featuredTitleFontSize, setFeaturedTitleFontSize] =
-    useState<number>(48);
+  // Removed unused refs and states for title font size calculation
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<string>("All");
-
-  // Update font sizes on mount
-  useLayoutEffect(() => {
-    if (titleRef.current) {
-      setTitleFontSize(
-        parseFloat(window.getComputedStyle(titleRef.current).fontSize)
-      );
-    }
-    if (featuredTitleRef.current) {
-      setFeaturedTitleFontSize(
-        parseFloat(window.getComputedStyle(featuredTitleRef.current).fontSize)
-      );
-    }
-  }, []);
 
   // Filter games by selected platform
   const Games = useMemo(() => {
@@ -337,20 +259,16 @@ export default function GameShowcase() {
     <>
       <section
         id="games"
-        className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
+        className="relative overflow-hidden py-12 sm:py-20 md:py-28" 
       >
-        <GridBackground />
-
+        {/* Featured Games Section Title */}
         <SectionTitle
-          titleRef={featuredTitleRef}
-          titleFontSize={featuredTitleFontSize}
-          watermark="Featured Games"
           title="Featured Games"
         />
 
         <div className="h-8 sm:h-12 md:h-16" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 mb-16">
           {featuredGame && (
             <FeaturedGameCard
               game={featuredGame}
@@ -361,23 +279,21 @@ export default function GameShowcase() {
 
         <div className="h-8 sm:h-12 md:h-16" />
 
+        {/* Latest Games Section Title */}
         <SectionTitle
-          titleRef={titleRef}
-          titleFontSize={titleFontSize}
-          watermark="Latest Games"
           title="Latest Games"
         />
 
         <div className="h-12 sm:h-16 md:h-20" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-10">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 mb-10">
           <PlatformFilterBar
             selectedPlatform={selectedPlatform}
             setSelectedPlatform={setSelectedPlatform}
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
             {Games.length === 0 && (
               <div className="col-span-full text-center text-p3-slate text-lg py-20">
