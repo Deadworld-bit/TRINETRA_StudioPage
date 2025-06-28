@@ -33,41 +33,6 @@ const staggerVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// --- Subcomponents ---
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${(i * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function GridBackground() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
-
 function HighlightBox({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
@@ -97,15 +62,13 @@ const Introduction: React.FC = () => {
 
   return (
     <motion.section
-      className="relative w-full bg-charcoal text-p3-white-smoke py-24 px-4 md:px-12 lg:px-24 overflow-hidden"
+      className="relative w-full text-p3-white-smoke py-24 px-4 md:px-12 lg:px-24 overflow-hidden"
       id="whoarewe"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      <GridBackground />
-      <VerticalLines />
 
       {/* Watermark and Title */}
 

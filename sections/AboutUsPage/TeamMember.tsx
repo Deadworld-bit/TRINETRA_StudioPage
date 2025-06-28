@@ -42,41 +42,6 @@ const cardVariants: Variants = {
   }),
 };
 
-// Vertical lines background
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${(i * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function GridBackground() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
-
 // Watermark and Title
 function SectionTitle({
   titleRef,
@@ -203,11 +168,9 @@ export default function TeamMember() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-20 md:py-28 bg-charcoal"
+      className="relative overflow-hidden py-12 sm:py-20 md:py-28"
       id="pioneers"
     >
-      <GridBackground />
-      <VerticalLines />
       <SectionTitle
         titleRef={titleRef}
         titleFontSize={titleFontSize}

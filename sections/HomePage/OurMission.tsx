@@ -51,32 +51,13 @@ const GridBackground: React.FC = () => (
     aria-hidden
     className="pointer-events-none absolute inset-0 z-0"
     style={{
-      backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
+      backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.22,
     }}
   />
 );
-
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${((i + 1) * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
 
 // --- Service Card Component ---
 interface ServiceCardProps extends Service {}
@@ -102,10 +83,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
 const OurServices: React.FC = () => (
   <section
     id="ourservices"
-    className="relative bg-charcoal text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
+    className="relative text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
   >
-    <GridBackground />
-    <VerticalLines/>
 
     <motion.div
       className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"

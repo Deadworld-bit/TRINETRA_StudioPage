@@ -21,39 +21,6 @@ const imageVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-// --- Decorative Components ---
-const GridBackground: React.FC = () => (
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-0 z-0"
-    style={{
-      backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      opacity: 0.22,
-    }}
-  />
-);
-
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${((i + 1) * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 // --- Intro Text ---
 const introText = {
   title: "Born from passion, built to play.",
@@ -68,12 +35,8 @@ const MotionLink = motion(Link);
 const Introduction: React.FC = () => (
   <section
     id="whoarewe"
-    className="relative w-full bg-charcoal text-white pt-32 pb-32 px-8 md:px-16 lg:px-32 overflow-hidden"
+    className="relative w-full text-white pt-32 pb-32 px-8 md:px-16 lg:px-32 overflow-hidden"
   >
-    {/* Decorations */}
-    <GridBackground />
-    <VerticalLines />
-
     {/* Animated Container for content children */}
     <motion.div
       className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20"
@@ -116,7 +79,7 @@ const Introduction: React.FC = () => (
       <div className="w-full lg:w-1/2 h-[500px] md:h-[600px] lg:h-[700px] relative">
         <motion.div className="w-full h-full" variants={imageVariants}>
           <Image
-            src="/ConvertedPic/office_01.webp"
+            src="/ConvertedPic/office_02.jpg"
             alt="Architectural Design"
             fill
             className="object-cover"

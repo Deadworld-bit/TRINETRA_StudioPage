@@ -1,13 +1,6 @@
 "use client";
 
 import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
-import {
-  FaSteam,
-  FaGooglePlay,
-  FaPlaystation,
-  FaXbox,
-  FaAppStore,
-} from "react-icons/fa";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { Orbitron } from "next/font/google";
@@ -133,46 +126,6 @@ function SectionTitle({
       >
         {title}
       </h2>
-    </div>
-  );
-}
-
-// Platform Divider Component
-function PlatformDivider() {
-  return (
-    <div className="relative z-10 w-full bg-p3-pure-black py-8 px-6 sm:px-10 md:px-16">
-      <div
-        className="
-          max-w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 p-6 bg-p3-pure-black"
-      >
-        {/* Text */}
-        <div className="text-center md:text-left">
-          <h3
-            className={`
-              ${orbitron.className}
-              text-2xl sm:text-3xl md:text-4xl font-bold text-p3-pure-white mb-2
-            `}
-          >
-            Get ready to play your heart out!
-          </h3>
-          <p className="text-p3-ghost-white text-sm sm:text-base opacity-80">
-            Download now and unlock a world of gaming wonders.
-          </p>
-        </div>
-
-        {/* Platform Icons */}
-        <div className="flex items-center gap-5 md:gap-8 justify-center">
-          {[FaSteam, FaGooglePlay, FaPlaystation, FaXbox, FaAppStore].map(
-            (Icon, idx) => (
-              <Icon
-                key={idx}
-                size={34}
-                className="text-p3-pure-white opacity-80 hover:opacity-100 transition duration-200"
-              />
-            )
-          )}
-        </div>
-      </div>
     </div>
   );
 }

@@ -21,39 +21,6 @@ const cardVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-// Decorative backgrounds
-const GridBackground: React.FC = () => (
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-0 z-0"
-    style={{
-      backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      opacity: 0.22,
-    }}
-  />
-);
-
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${((i + 1) * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function GameShowcase() {
   const [selectedGame, setSelectedGame] = useState<(typeof AllGames)[0] | null>(
     null
@@ -64,10 +31,8 @@ export default function GameShowcase() {
     <>
       <section
         id="games"
-        className="relative w-full bg-charcoal text-white py-24 overflow-hidden"
+        className="relative w-full text-white py-24 overflow-hidden"
       >
-        <GridBackground />
-        <VerticalLines />
 
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-0">
           {/* Title */}

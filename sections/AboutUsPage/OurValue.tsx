@@ -23,40 +23,6 @@ const fadeInUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-function VerticalLines() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className="absolute top-0 bottom-0 w-0.75"
-          style={{
-            left: `${(i * 100) / 6}%`,
-            background: "rgba(255, 255, 255, 0.13)",
-            opacity: 1,
-            filter: "blur(0.5px)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function GridBackground() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
-
 function SectionTitle({
   titleRef,
   titleFontSize,
@@ -197,11 +163,9 @@ export default function OurValue() {
 
   return (
     <section
-      className="relative bg-charcoal text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
+      className="relative text-p3-white-smoke py-16 sm:py-20 md:py-24 overflow-hidden w-full"
       id="ourvalue"
     >
-      <VerticalLines />
-      <GridBackground />
       <SectionTitle
         titleRef={titleRef}
         titleFontSize={titleFontSize}
