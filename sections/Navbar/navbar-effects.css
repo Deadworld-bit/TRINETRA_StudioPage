@@ -45,6 +45,13 @@
   transition: background 0.3s, border 0.3s;
 }
 
+.navbar-pattern-bg {
+  background-image: url('/parttern_06.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .nav-link {
   position: relative;
   overflow: hidden;

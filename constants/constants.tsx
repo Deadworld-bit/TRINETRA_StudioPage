@@ -89,6 +89,27 @@ export const teamMembers: TeamMember[] = [
     photo: profile,
     social: [{ icon: FaInstagram, url: "https://instagram.com/sanni" }],
   },
+  {
+    name: "Alakh Pandey",
+    title: "Creative Director",
+    photo: profile, 
+    social: [
+      { icon: FaTwitter, url: "https://twitter.com/alakh" },
+      { icon: FaLinkedin, url: "https://linkedin.com/in/alakh" },
+    ],
+  },
+  {
+    name: "Pushpa Raj",
+    title: "Lead Developer",
+    photo: profile,
+    social: [{ icon: FaTwitter, url: "https://twitter.com/pushpa" }],
+  },
+  {
+    name: "Sanni Dancer",
+    title: "Art & Design",
+    photo: profile,
+    social: [{ icon: FaInstagram, url: "https://instagram.com/sanni" }],
+  },
 ];
 
 export const Games: Game[] = [

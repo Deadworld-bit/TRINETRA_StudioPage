@@ -224,3 +224,7 @@ html {
   from { opacity: 0.2; }
   to   { opacity: 0.6; }
 }
+
+body {
+  cursor: none;
+}

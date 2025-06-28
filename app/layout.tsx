@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Geist} from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
-import CursorEffect from "@/components/CursorEffect";
+import ClientLayout from "@/components/ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,19 +17,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} font-sans antialiased text-black`}
-      >
-        <CursorEffect />
-        {children}
+      <body className={`${geistSans.variable} font-sans antialiased text-black`}>
+        <ClientLayout>{children}</ClientLayout>
+        <Analytics />
+        <SpeedInsights />
       </body>
-      <Analytics />
-      <SpeedInsights />
     </html>
   );
 }
