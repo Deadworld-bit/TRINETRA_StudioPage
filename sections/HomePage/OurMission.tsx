@@ -4,7 +4,27 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 import { Lightbulb, GraduationCap, Globe, ArrowRight } from "lucide-react";
 
-const services = [
+// --- Animation Variants ---
+const sectionVariants: Variants = {
+  hidden: {}, // keep section visible to avoid white flash
+  visible: { transition: { staggerChildren: 0.2 } },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const hoverTransition = { type: "spring", stiffness: 300 };
+
+// --- Data ---
+interface Service {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+const services: Service[] = [
   {
     icon: Lightbulb,
     title: "Original Content",
@@ -25,61 +45,19 @@ const services = [
   },
 ];
 
-const sectionVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const ServiceCard = ({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}) => (
-  <motion.div
-    variants={cardVariants}
-    whileHover={{ y: -10 }}
-    transition={{ type: "spring", stiffness: 300 }}
-    className="flex flex-col items-start p-12 bg-p3-charcoal rounded-xl shadow-2xl group"
-  >
-    <Icon className="w-16 h-16 mb-8 text-pure-white" />
-    <h3 className="text-2xl font-bold text-white uppercase tracking-wide mb-6">
-      {title}
-    </h3>
-    <p className="text-lg text-gray-300 leading-relaxed mb-8">{description}</p>
-    <ArrowRight className="w-8 h-8 text-gray-400 group-hover:text-white transition-colors duration-300" />
-  </motion.div>
+// --- Decorative Components ---
+const GridBackground: React.FC = () => (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 z-0"
+    style={{
+      backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      opacity: 0.22,
+    }}
+  />
 );
-
-function GridBackground() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-      style={{
-        backgroundImage: 'url("/ConvertedPic/parrtern_02.webp")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.22,
-      }}
-    />
-  );
-}
 
 function VerticalLines() {
   return (
@@ -100,32 +78,52 @@ function VerticalLines() {
   );
 }
 
-export default function OurServices() {
-  return (
-    <motion.section
-      id="ourservices"
-      className="relative bg-charcoal text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
-      variants={sectionVariants}
+// --- Service Card Component ---
+interface ServiceCardProps extends Service {}
+const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description }) => (
+  <motion.div
+    className="flex flex-col items-start p-8 bg-p3-charcoal rounded-xl shadow-2xl group"
+    variants={cardVariants}
+    whileHover={{ y: -8 }}
+    transition={hoverTransition}
+  >
+    <Icon className="w-12 h-12 mb-4 text-pure-white" />
+    <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-4">
+      {title}
+    </h3>
+    <p className="text-base text-gray-300 leading-relaxed mb-6">
+      {description}
+    </p>
+    <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
+  </motion.div>
+);
+
+// --- Our Services Section ---
+const OurServices: React.FC = () => (
+  <section
+    id="ourservices"
+    className="relative bg-charcoal text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
+  >
+    <GridBackground />
+    <VerticalLines/>
+
+    <motion.div
+      className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
     >
-      <GridBackground />
-      <VerticalLines />
+      {services.map((svc, idx) => (
+        <ServiceCard
+          key={idx}
+          icon={svc.icon}
+          title={svc.title}
+          description={svc.description}
+        />
+      ))}
+    </motion.div>
+  </section>
+);
 
-      {/* Content container matching other sections' width */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {services.map((service, i) => (
-            <ServiceCard
-              key={i}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-            />
-          ))}
-        </div>
-      </div>
-    </motion.section>
-  );
-}
+export default OurServices;

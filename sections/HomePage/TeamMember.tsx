@@ -121,34 +121,44 @@ export default function TeamMemberSection() {
   return (
     <section
       id="pioneers"
-      className="relative overflow-hidden bg-charcoal py-32 px-8 md:px-16 lg:px-32"
+      className="relative bg-charcoal text-white py-24 w-full overflow-hidden"
     >
       <GridBackground />
       <VerticalLines />
 
-      {/* Header */}
+      {/* center everything in a 7xl container, same as OurServices */}
+      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-0">
+        {/* Section title — no extra px */}
+        <h2
+          className={`${orbitron.className} text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-p3-snow drop-shadow-lg`}
+        >
+          Our Pioneers
+        </h2>
 
-      <SectionHeader title="Our Pioneers" />
-
-      {/* Cards Grid aligned under title, spans full section width */}
-      <div className="w-full px-8 md:px-16 lg:px-32 mx-auto mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        {/* Cards Grid */}
+        <motion.div
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {displayedTeamMembers.map((member, idx) => (
             <MemberCard key={idx} member={member} idx={idx} />
           ))}
-        </div>
-      </div>
+        </motion.div>
 
-      {teamMembers.length > 4 && (
-        <div className="mt-12 w-full px-8 md:px-16 lg:px-32 mx-auto flex justify-start">
-          <Link
-            href="/aboutus"
-            className="inline-flex items-center px-10 py-4 bg-white text-black font-semibold rounded-lg shadow-xl hover:bg-gray-200 transition"
-          >
-            View All Team Members &rarr;
-          </Link>
-        </div>
-      )}
+        {/* “View All” button */}
+        {teamMembers.length > 4 && (
+          <div className="mt-12 flex justify-start">
+            <Link
+              href="/aboutus"
+              className="inline-flex items-center px-10 py-4 bg-white text-black font-semibold rounded-lg shadow-xl hover:bg-gray-200 transition"
+            >
+              View All Team Members &rarr;
+            </Link>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
