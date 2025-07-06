@@ -69,12 +69,11 @@ export const missionPillars: MissionPillar[] = [
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Alakh Pandey",
-    title: "Creative Director",
-    photo: profile, 
+    name: "Ayush Raja",
+    title: "Founder",
+    photo: "/Ayush_profile_01.png", 
     social: [
-      { icon: FaTwitter, url: "https://twitter.com/alakh" },
-      { icon: FaLinkedin, url: "https://linkedin.com/in/alakh" },
+      { icon: FaInstagram, url: "https://www.instagram.com/gamedev.ayush/" },
     ],
   },
   {
