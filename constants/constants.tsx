@@ -1,5 +1,12 @@
-import profile from "@/public/Profile.jpg"; 
-import { FaTwitter, FaLinkedin, FaInstagram, FaLightbulb, FaGraduationCap, FaGlobe } from "react-icons/fa";
+import profile from "@/public/Profile.jpg";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaLightbulb,
+  FaGraduationCap,
+  FaGlobe,
+} from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { IconType } from "react-icons";
 
@@ -34,34 +41,34 @@ export interface Game {
   fullDescription: string;
   platforms: string[];
   image: string;
-  downloadLinks: { [platform: string]: string }; 
+  downloadLinks: { [platform: string]: string };
 }
 
 export const aboutus: AboutUs[] = [
   {
     title: "About Us",
     text_1: [
-    "At TRINETRA, our mission is to revive and reshape the Indian gaming industry by championing original, meaningful game development. We avoid reliance on derivative or cloned content, focusing instead on unique concepts that push creative boundaries.",
+      "At TRINETRA, our mission is to revive and reshape the Indian gaming industry by championing original, meaningful game development. We avoid reliance on derivative or cloned content, focusing instead on unique concepts that push creative boundaries.",
     ],
     text_2: [
-    "Through structured learning and collaborative experimentation, we develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
+      "Through structured learning and collaborative experimentation, we develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
     ],
   },
-]
+];
 
 export const missionPillars: MissionPillar[] = [
   {
-    icon: "FaLightbulb", 
+    icon: "FaLightbulb",
     title: "Original Content",
     desc: "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
   },
   {
-    icon: "FaGraduationCap", 
+    icon: "FaGraduationCap",
     title: "Continuous Learning",
     desc: "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
   },
   {
-    icon: "FaGlobe", 
+    icon: "FaGlobe",
     title: "Global Collaboration",
     desc: "We welcome international collaboration to share knowledge and align with global industry standards.",
   },
@@ -70,28 +77,31 @@ export const missionPillars: MissionPillar[] = [
 export const teamMembers: TeamMember[] = [
   {
     name: "Ayush Raja",
-    title: "Founder",
-    photo: "/Ayush_profile_01.png", 
+    title: "Developer",
+    photo: "/Ayush_profile_01.png",
     social: [
       { icon: FaInstagram, url: "https://www.instagram.com/gamedev.ayush/" },
     ],
   },
   {
-    name: "Pushpa Raj",
-    title: "Lead Developer",
-    photo: profile,
+    name: "Sanjay",
+    title: "Developer",
+    photo: "/ConvertedPic/NeutralFace.webp",
     social: [{ icon: FaTwitter, url: "https://twitter.com/pushpa" }],
   },
   {
-    name: "Sanni Dancer",
-    title: "Art & Design",
-    photo: profile,
-    social: [{ icon: FaInstagram, url: "https://instagram.com/sanni" }],
+    name: "Harsh Kumar",
+    title: "Developer",
+    photo: "/ConvertedPic/HarshKumar_profile_01.webp",
+    social: [
+      { icon: FaInstagram, url: "https://www.instagram.com/harshk_dev?utm_source=qr&igsh=MTVvYWF5b3dmbW83" },
+      { icon: FaLinkedin, url: "https://www.linkedin.com/in/harsh-kumar-249915326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+    ],
   },
   {
     name: "Alakh Pandey",
     title: "Creative Director",
-    photo: profile, 
+    photo: profile,
     social: [
       { icon: FaTwitter, url: "https://twitter.com/alakh" },
       { icon: FaLinkedin, url: "https://linkedin.com/in/alakh" },
@@ -115,7 +125,8 @@ export const Games: Game[] = [
   {
     title: "Echoes of the Void",
     genre: "Sci-Fi RPG",
-    shortDescription: "A sci-fi adventure where every choice alters space-time.",
+    shortDescription:
+      "A sci-fi adventure where every choice alters space-time.",
     fullDescription:
       "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
     platforms: ["PC", "Xbox", "PlayStation"],

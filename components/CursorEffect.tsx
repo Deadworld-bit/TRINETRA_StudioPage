@@ -1,26 +1,47 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 export default function CursorEffect() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [clicked, setClicked] = useState(false);
 
-  // Track mouse position
   useEffect(() => {
-    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
+    const handleMouseMove = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        setPos({ x: touch.clientX, y: touch.clientY });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, []);
 
-  // Handle click effect
   useEffect(() => {
-    const down = () => setClicked(true);
-    const up = () => setClicked(false);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
+    const handleMouseDown = () => setClicked(true);
+    const handleMouseUp = () => setClicked(false);
+    const handleTouchStart = () => setClicked(true);
+    const handleTouchEnd = () => setClicked(false);
+
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+
     return () => {
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
