@@ -97,12 +97,12 @@ const Hero: React.FC = () => {
     >
       <HeroOverlays />
 
-      <div className="relative px-4 lg:px-8 max-w-3xl">
+      <div className="relative px-4 lg:px-8 max-w-4xl"> {/* Increased max-width */}
         <motion.h1
-          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl`}
+          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wider text-6xl sm:text-7xl lg:text-8xl xl:text-9xl`} // Refined font sizes
           variants={titleVariants}
           style={{
-            fontSize: "clamp(3rem, 6vw, 5rem)",
+            fontSize: "clamp(3.5rem, 8vw, 6.5rem)", // Adjusted clamp values for title
             y: headingY,
             opacity: headingOpacity,
             background: "var(--p3-snow)",
@@ -114,8 +114,8 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${orbitron.className} mt-6 drop-shadow-md text-lg sm:text-xl md:text-2xl tracking-wide`}
-          style={{ opacity: subOpacity, color: "var(--p3-white-smoke)", letterSpacing: "0.04em" }}
+          className={`${orbitron.className} mt-6 sm:mt-8 drop-shadow-md text-lg sm:text-xl md:text-2xl lg:text-3xl`} // Adjusted margin and font sizes
+          style={{ opacity: subOpacity, color: "var(--p3-white-smoke)", letterSpacing: "0.05em" }} // Slightly adjusted letter spacing
         >
           {HERO_SUBTITLE}
         </motion.p>
