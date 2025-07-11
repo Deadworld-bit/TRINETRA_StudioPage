@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.trinetragames.in/
+
+# Sitemaps
+Sitemap: https://www.trinetragames.in/sitemap.xml
