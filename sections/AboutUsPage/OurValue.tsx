@@ -33,7 +33,6 @@ function ValueContent() {
       variants={containerVariants}
     >
       <motion.p
-        // Matched text size to Introduction's main body text
         className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
@@ -51,7 +50,6 @@ function ValueContent() {
         projects.
       </motion.p>
       <motion.ul
-        // Matched text size to Introduction's pillar/bullet text
         className={`${inter.className} list-disc list-inside space-y-3 text-base md:text-lg leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
@@ -72,7 +70,6 @@ function ValueContent() {
         </li>
       </motion.ul>
       <motion.p
-        // Matched text size to Introduction's main body text
         className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
@@ -109,9 +106,6 @@ function ValueImage() {
 }
 
 export default function OurValue() {
-  // Removed useRef, useLayoutEffect, and useState as they are no longer needed
-  // because the title font size is hardcoded by Tailwind classes.
-
   return (
     <section
       className="relative text-p3-white-smoke py-20 sm:py-24 md:py-32 overflow-hidden w-full"

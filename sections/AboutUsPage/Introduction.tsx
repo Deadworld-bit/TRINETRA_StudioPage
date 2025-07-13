@@ -8,7 +8,7 @@ import { aboutus } from "@/constants/constants";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
-// --- Animation Variants ---
+// Animation Variants
 const containerVariants: Variants = {
   hidden: {},
   visible: {
@@ -46,7 +46,7 @@ function HighlightBox({ children }: { children: React.ReactNode }) {
   );
 }
 
-// --- Main Component ---
+// Main Component
 
 const Introduction: React.FC = () => {
   const about = aboutus[0];
@@ -69,9 +69,6 @@ const Introduction: React.FC = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-
-      {/* Watermark and Title */}
-
       <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         {/* Right: Image & Pillars */}
         <div className="lg:w-1/2 w-full">

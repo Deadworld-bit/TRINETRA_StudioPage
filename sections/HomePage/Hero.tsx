@@ -8,7 +8,7 @@ import backgroundImage from "@/public/wallpaper_bg12.png";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
-// --- Animation Variants ---
+// Animation Variants
 const titleVariants: Variants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
   visible: {
@@ -19,7 +19,7 @@ const titleVariants: Variants = {
   },
 };
 
-// --- Scroll Transforms Hook ---
+// Scroll Transforms Hook
 function useHeroScrollTransforms() {
   const { scrollY } = useScroll();
   return {
@@ -30,7 +30,7 @@ function useHeroScrollTransforms() {
   };
 }
 
-// --- Decorative Overlays ---
+// Decorative Overlays
 const overlays: CSSProperties[] = [
   {
     background:
@@ -41,7 +41,7 @@ const overlays: CSSProperties[] = [
     background:
       "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)",
     opacity: 0.08,
-    pointerEvents: 'none' as const,
+    pointerEvents: "none" as const,
   },
 ];
 
@@ -55,7 +55,7 @@ function HeroOverlays() {
   );
 }
 
-// --- Scroll Indicator ---
+// Scroll Indicator
 function ScrollIndicator() {
   return (
     <motion.div
@@ -74,7 +74,7 @@ function ScrollIndicator() {
   );
 }
 
-// --- Hero Component ---
+// Hero Component
 const HERO_TITLE = "TRINETRA";
 const HERO_SUBTITLE = "Indie Games. Bold Ideas. Made by Passion.";
 
@@ -97,12 +97,12 @@ const Hero: React.FC = () => {
     >
       <HeroOverlays />
 
-      <div className="relative px-4 lg:px-8 max-w-4xl"> {/* Increased max-width */}
+      <div className="relative px-4 lg:px-8 max-w-4xl">
         <motion.h1
           className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wider text-6xl sm:text-7xl lg:text-8xl xl:text-9xl`} // Refined font sizes
           variants={titleVariants}
           style={{
-            fontSize: "clamp(3.5rem, 8vw, 6.5rem)", // Adjusted clamp values for title
+            fontSize: "clamp(3.5rem, 8vw, 6.5rem)",
             y: headingY,
             opacity: headingOpacity,
             background: "var(--p3-snow)",
@@ -114,8 +114,12 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${orbitron.className} mt-6 sm:mt-8 drop-shadow-md text-lg sm:text-xl md:text-2xl lg:text-3xl`} // Adjusted margin and font sizes
-          style={{ opacity: subOpacity, color: "var(--p3-white-smoke)", letterSpacing: "0.05em" }} // Slightly adjusted letter spacing
+          className={`${orbitron.className} mt-6 sm:mt-8 drop-shadow-md text-lg sm:text-xl md:text-2xl lg:text-3xl`}
+          style={{
+            opacity: subOpacity,
+            color: "var(--p3-white-smoke)",
+            letterSpacing: "0.05em",
+          }}
         >
           {HERO_SUBTITLE}
         </motion.p>

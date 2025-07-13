@@ -69,10 +69,7 @@ const Hero = () => {
         </motion.h1>
       </div>
 
-      {/* Divider line */}
       <div className="absolute bottom-[4rem] left-1/2 w-[80%] h-px bg-p3-pure-white opacity-70 transform -translate-x-1/2" />
-
-      {/* Breadcrumbs */}
       <div className="absolute bottom-6 left-[10%] flex items-center space-x-2 text-lg text-pure-white">
         <Link href="/" className="hover:underline">
           Home

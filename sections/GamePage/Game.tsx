@@ -238,11 +238,9 @@ export function FeaturedGameCard({ game, onClick }: FeaturedGameCardProps) {
 
 // Main Game Showcase Component
 export default function GameShowcase() {
-  // Removed unused refs and states for title font size calculation
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<string>("All");
 
-  // Filter games by selected platform
   const Games = useMemo(() => {
     if (selectedPlatform === "All") return AllGames;
     return AllGames.filter((game) =>
@@ -251,8 +249,6 @@ export default function GameShowcase() {
         .includes(selectedPlatform.toLowerCase())
     );
   }, [selectedPlatform]);
-
-  // Select first game as featured
   const featuredGame = AllGames[0];
 
   return (
@@ -261,7 +257,6 @@ export default function GameShowcase() {
         id="games"
         className="relative overflow-hidden py-12 sm:py-20 md:py-28" 
       >
-        {/* Featured Games Section Title */}
         <SectionTitle
           title="Featured Games"
         />
@@ -279,7 +274,6 @@ export default function GameShowcase() {
 
         <div className="h-8 sm:h-12 md:h-16" />
 
-        {/* Latest Games Section Title */}
         <SectionTitle
           title="Latest Games"
         />

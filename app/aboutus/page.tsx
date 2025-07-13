@@ -5,7 +5,7 @@ import Introduction from "@/sections/AboutUsPage/Introduction";
 import OurValue from "@/sections/AboutUsPage/OurValue";
 import TeamMember from "@/sections/AboutUsPage/TeamMember";
 
-// --- Decorative Components ---
+// Decorative Components
 const GridBackground: React.FC = () => (
   <div
     aria-hidden

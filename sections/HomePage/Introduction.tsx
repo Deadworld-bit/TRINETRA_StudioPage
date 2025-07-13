@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
-// --- Animation Variants ---
+// Animation Variants
 const containerVariants: Variants = {
-  hidden: {}, // no opacity change on container
+  hidden: {}, 
   visible: { transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
 };
 
@@ -21,7 +21,7 @@ const imageVariants: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-// --- Intro Text ---
+// Intro Text
 const introText = {
   title: "Born from passion, built to play.",
   subtitle: "Who We Are",
@@ -29,7 +29,7 @@ const introText = {
     "At TRINETRA, we fuse creativity and dedication to craft authentic, innovative gaming experiences—leveraging structured learning and collaborative experimentation to drive technical evolution while championing originality and pushing creative boundaries beyond the merely derivative.",
 };
 
-// --- Motion Link for animation ---
+// Motion Link for animation
 const MotionLink = motion(Link);
 
 const Introduction: React.FC = () => (
@@ -37,7 +37,6 @@ const Introduction: React.FC = () => (
     id="whoarewe"
     className="relative w-full text-white pt-32 pb-32 px-8 md:px-16 lg:px-32 overflow-hidden"
   >
-    {/* Animated Container for content children */}
     <motion.div
       className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20"
       initial="hidden"
@@ -45,7 +44,6 @@ const Introduction: React.FC = () => (
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
     >
-      {/* Left Content */}
       <div className="w-full lg:w-1/2 z-10 space-y-8">
         <motion.h1
           className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
@@ -75,7 +73,6 @@ const Introduction: React.FC = () => (
         </motion.div>
       </div>
 
-      {/* Right Image */}
       <div className="w-full lg:w-1/2 h-[500px] md:h-[600px] lg:h-[700px] relative">
         <motion.div className="w-full h-full" variants={imageVariants}>
           <Image

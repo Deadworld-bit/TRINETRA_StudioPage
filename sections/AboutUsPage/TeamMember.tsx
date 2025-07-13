@@ -3,8 +3,8 @@
 import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Orbitron, Inter } from "next/font/google"; // Import Inter font
-import { teamMembers, TeamMember } from "@/constants/constants"; // Assuming teamMembers is the full list
+import { Orbitron, Inter } from "next/font/google"; 
+import { teamMembers, TeamMember } from "@/constants/constants"; 
 
 interface SocialLink {
   icon: React.ElementType;

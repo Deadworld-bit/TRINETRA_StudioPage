@@ -4,9 +4,9 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 import { Lightbulb, GraduationCap, Globe, ArrowRight } from "lucide-react";
 
-// --- Animation Variants ---
+// Animation Variants
 const sectionVariants: Variants = {
-  hidden: {}, // keep section visible to avoid white flash
+  hidden: {},
   visible: { transition: { staggerChildren: 0.2 } },
 };
 
@@ -17,7 +17,7 @@ const cardVariants: Variants = {
 
 const hoverTransition = { type: "spring", stiffness: 300 };
 
-// --- Data ---
+// Data
 interface Service {
   icon: React.ElementType;
   title: string;
@@ -45,7 +45,7 @@ const services: Service[] = [
   },
 ];
 
-// --- Decorative Components ---
+// Decorative Components
 const GridBackground: React.FC = () => (
   <div
     aria-hidden
@@ -59,7 +59,7 @@ const GridBackground: React.FC = () => (
   />
 );
 
-// --- Service Card Component ---
+// Service Card Component
 interface ServiceCardProps extends Service {}
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description }) => (
   <motion.div
@@ -79,7 +79,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, descriptio
   </motion.div>
 );
 
-// --- Our Services Section ---
+// Our Services Section
 const OurServices: React.FC = () => (
   <section
     id="ourservices"

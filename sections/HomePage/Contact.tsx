@@ -4,7 +4,6 @@ import { FaBriefcase } from "react-icons/fa";
 import { Orbitron } from "next/font/google";
 import Link from "next/link";
 
-// Font for consistency
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 export default function Contact() {
