@@ -11,8 +11,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "TRINETRA_StudioPage",
-  description: "This is a TRINETRA Studio Page",
+  title: "TRINETRA Games",
+  description: "TRINETRA GAMES is an independent game development studio based in India, driven by creativity, passion, and bold ideas. We specialize in crafting unique, story-rich indie games that resonate with players around the world. At TRINETRA, we believe great games are made with heart—and we love to collaborate beyond borders to bring unforgettable gaming experiences to life.",
 };
 
 export default function RootLayout({
