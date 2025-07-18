@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display as Playfair } from "next/font/google";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import type { CSSProperties } from "react";
 import backgroundImage from "@/public/wallpaper_bg12.png";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+const playfair = Playfair({
+  subsets: ["latin"],
+  weight: ["400", "700"],   // choose the weights you need
+});
 
 // Animation Variants
 const titleVariants: Variants = {
@@ -65,7 +68,7 @@ function ScrollIndicator() {
     >
       <a
         href="#whoarewe"
-        className={`${orbitron.className} mt-2 px-7 py-3 rounded-full border-2 border-p3-snow text-p3-snow font-bold uppercase tracking-wide bg-transparent transition hover:bg-p3-snow hover:text-p3-charcoal focus:outline-none focus:ring-2 focus:ring-p3-snow`}
+        className={`${playfair.className} mt-2 px-7 py-3 rounded-full border-2 border-p3-snow text-p3-snow font-bold uppercase tracking-wide bg-transparent transition hover:bg-p3-snow hover:text-p3-charcoal focus:outline-none focus:ring-2 focus:ring-p3-snow`}
         style={{ fontSize: "1.05rem", letterSpacing: "0.08em" }}
       >
         More About Us
@@ -85,7 +88,7 @@ const Hero: React.FC = () => {
   return (
     <motion.section
       id="aboutus"
-      className="relative w-full pt-20 flex flex-col items-center justify-center min-h-screen overflow-hidden text-center"
+      className={`${playfair.className} relative w-full pt-20 flex flex-col items-center justify-center min-h-screen overflow-hidden text-center`}
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
         backgroundSize: "cover",
@@ -99,7 +102,7 @@ const Hero: React.FC = () => {
 
       <div className="relative px-4 lg:px-8 max-w-4xl">
         <motion.h1
-          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wider text-6xl sm:text-7xl lg:text-8xl xl:text-9xl`} // Refined font sizes
+          className="uppercase font-extrabold drop-shadow-lg tracking-wider text-6xl sm:text-7xl lg:text-8xl xl:text-9xl"
           variants={titleVariants}
           style={{
             fontSize: "clamp(3.5rem, 8vw, 6.5rem)",
@@ -114,7 +117,7 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         <motion.p
-          className={`${orbitron.className} mt-6 sm:mt-8 drop-shadow-md text-lg sm:text-xl md:text-2xl lg:text-3xl`}
+          className="mt-6 sm:mt-8 drop-shadow-md text-lg sm:text-xl md:text-2xl lg:text-3xl"
           style={{
             opacity: subOpacity,
             color: "var(--p3-white-smoke)",
