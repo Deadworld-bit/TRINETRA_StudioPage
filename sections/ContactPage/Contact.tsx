@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, JSX } from "react";
 import emailjs from "@emailjs/browser";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { FaPhoneAlt, FaPaperPlane, FaMapMarkerAlt } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
+
+// Load Google Fonts
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500"] });
 
 // Type Definitions
 
@@ -31,8 +35,6 @@ type ContactFormProps = {
 };
 
 // Constants & Configuration
-
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
 
 const COOLDOWN_SECONDS = 30;
 const EMAIL_VALIDATION_REGEX = /^\S+@\S+\.\S+$/;
@@ -134,9 +136,9 @@ function ContactInfoCards() {
             <div className="bg-p3-mint-flash rounded-full p-3">
               <Icon className="text-pure-white text-2xl" />
             </div>
-            <h4 className="font-bold text-p3-snow text-lg">{title}</h4>
+            <h4 className={`${playfair.className} font-bold text-p3-snow text-lg`}>{title}</h4>
           </div>
-          <div className="ml-12 font-mono space-y-1 text-p3-snow">
+          <div className={`${manrope.className} ml-12 space-y-1 text-p3-snow`}>  
             {lines.map((line, i) => (
               <div key={i}>{line}</div>
             ))}
@@ -157,11 +159,11 @@ function ContactForm({
 }: ContactFormProps) {
   const styles = {
     input:
-      "w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash transition duration-200 focus:scale-[1.02]",
+      `${manrope.className} w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash transition duration-200 focus:scale-[1.02]`,
     textarea:
-      "w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash transition duration-200 focus:scale-[1.02] resize-none",
+      `${manrope.className} w-full bg-transparent border border-p3-ghost-white rounded-xl px-5 py-4 text-lg text-p3-snow placeholder-p3-slate focus:outline-none focus:bg-p3-snow focus:text-p3-charcoal focus:border-p3-mint-flash transition duration-200 focus:scale-[1.02] resize-none`,
     button:
-      "w-full mt-6 px-8 py-4 bg-pure-white hover:bg-p3-coral-burst hover:text-p3-snow border-2 border-p3-mint-flash hover:border-p3-coral-burst rounded-xl text-p3-charcoal font-bold text-lg shadow-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed",
+      `${manrope.className} w-full mt-6 px-8 py-4 bg-pure-white hover:bg-p3-coral-burst hover:text-p3-snow border-2 border-p3-mint-flash hover:border-p3-coral-burst rounded-xl text-p3-charcoal font-bold text-lg shadow-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed`,
     honeypot: "hidden",
   };
 
@@ -184,7 +186,7 @@ function ContactForm({
       className="relative bg-p3-charcoal border border-p3-mint-flash rounded-2xl shadow-2xl p-10"
     >
       <h3
-        className={`${orbitron.className} text-3xl md:text-4xl font-extrabold mb-6 text-pure-white`}
+        className={`${playfair.className} text-3xl md:text-4xl font-extrabold mb-6 text-pure-white`}
       >
         Get In Touch
       </h3>
@@ -211,7 +213,7 @@ function ContactForm({
               required
             />
             {isEmailInvalid && (
-              <span className="mt-1 text-sm text-pure-white pl-2">
+              <span className={`${manrope.className} mt-1 text-sm text-pure-white pl-2`}>
                 Please enter a valid email.
               </span>
             )}
@@ -265,7 +267,7 @@ function ContactForm({
             ) : (
               <XCircleIcon className="w-6 h-6 text-p3-coral-burst" />
             )}
-            <span className="text-base">{message}</span>
+            <span className={`${manrope.className} text-base`}>{message}</span>
           </div>
         )}
       </form>
