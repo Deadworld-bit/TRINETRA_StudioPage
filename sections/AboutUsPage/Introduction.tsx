@@ -2,11 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
 import { motion, Variants } from "framer-motion";
 import { aboutus } from "@/constants/constants";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+// Font configuration
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["500"] });
 
 // Animation Variants
 const containerVariants: Variants = {
@@ -36,18 +38,17 @@ const staggerVariants: Variants = {
 function HighlightBox({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      className="my-8 p-6 rounded-lg bg-gradient-to-r from-p3-mint-flash/10 to-transparent border-l-4 border-p3-mint-flash text-p3-mint-flash text-xl md:text-2xl font-semibold shadow-lg"
+      className="my-8 p-6 rounded-lg bg-gradient-to-r from-p3-mint-flash/10 to-transparent border-l-4 border-p3-mint-flash text-p3-mint-flash text-2xl md:text-3xl font-semibold shadow-lg"
       variants={fadeInUp}
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <p className="text-center">{children}</p>
+      <p className={`${manrope.className} text-center`}>{children}</p>
     </motion.div>
   );
 }
 
 // Main Component
-
 const Introduction: React.FC = () => {
   const about = aboutus[0];
 
@@ -62,7 +63,7 @@ const Introduction: React.FC = () => {
 
   return (
     <motion.section
-      className="relative w-full text-p3-white-smoke py-24 px-4 md:px-12 lg:px-24 overflow-hidden"
+      className="relative w-full text-p3-white-smoke py-16 px-4 md:px-12 lg:px24 overflow-hidden"
       id="whoarewe"
       initial="hidden"
       whileInView="visible"
@@ -94,7 +95,7 @@ const Introduction: React.FC = () => {
             {pillars.map((pillar, idx) => (
               <motion.li
                 key={idx}
-                className="relative flex items-center gap-4 text-base md:text-lg text-p3-white-smoke group"
+                className="relative flex items-center gap-4 text-xl md:text-2xl text-p3-white-smoke group"
                 variants={staggerVariants}
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -102,7 +103,9 @@ const Introduction: React.FC = () => {
                 <span className="flex-shrink-0 w-6 h-6 bg-p3-mint-flash/20 text-p3-mint-flash rounded-full flex items-center justify-center font-bold group-hover:bg-p3-mint-flash group-hover:text-p3-charcoal transition-colors duration-300">
                   ✓
                 </span>
-                <span style={{ lineHeight: 1.6 }}>{pillar}</span>
+                <span className={`${manrope.className}`} style={{ lineHeight: 1.6 }}>
+                  {pillar}
+                </span>
               </motion.li>
             ))}
           </motion.ul>
@@ -111,20 +114,20 @@ const Introduction: React.FC = () => {
         {/* Left: Content */}
         <div className="lg:w-1/2 flex flex-col justify-center">
           <motion.span
-            className={`${orbitron.className} text-p3-coral-burst text-lg font-bold mb-3 tracking-wider uppercase`}
+            className={`${manrope.className} text-p3-coral-burst text-xl font-bold mb-3 tracking-wider uppercase`}
             variants={fadeInUp}
           >
             Who We Are
           </motion.span>
           <motion.h2
-            className={`${orbitron.className} text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
+            className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-p3-snow drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]`}
             variants={fadeInUp}
           >
             TRINETRA: A Fusion of Creativity and Dedication.
           </motion.h2>
 
           <motion.div
-            className="text-lg md:text-xl text-p3-white-smoke/90 mb-8"
+            className={`${manrope.className} text-xl md:text-2xl text-p3-white-smoke/90 mb-8`}
             style={{ lineHeight: 1.7, maxWidth: "60ch" }}
             variants={fadeInUp}
           >

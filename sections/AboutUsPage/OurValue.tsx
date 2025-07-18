@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react"; // useRef, useLayoutEffect, useState are no longer needed
+import React from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Orbitron, Inter } from "next/font/google"; // Ensure Inter is imported
+import { Playfair_Display, Manrope } from "next/font/google";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
-const inter = Inter({ subsets: ["latin"] }); // Inter font for body text
+// Font configuration
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 const containerVariants: Variants = {
   hidden: {},
@@ -33,7 +34,7 @@ function ValueContent() {
       variants={containerVariants}
     >
       <motion.p
-        className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
+        className={`${manrope.className} text-xl md:text-2xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         <span className="text-p3-snow font-medium">TRINETRA</span> operates on
@@ -50,7 +51,7 @@ function ValueContent() {
         projects.
       </motion.p>
       <motion.ul
-        className={`${inter.className} list-disc list-inside space-y-3 text-base md:text-lg leading-relaxed text-p3-white-smoke`}
+        className={`${manrope.className} list-disc list-inside space-y-3 text-xl md:text-2xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         <li>
@@ -70,7 +71,7 @@ function ValueContent() {
         </li>
       </motion.ul>
       <motion.p
-        className={`${inter.className} text-lg md:text-xl leading-relaxed text-p3-white-smoke`}
+        className={`${manrope.className} text-xl md:text-2xl leading-relaxed text-p3-white-smoke`}
         variants={fadeInUp}
       >
         We remain adaptable in structure, welcoming creative contributors
@@ -108,12 +109,12 @@ function ValueImage() {
 export default function OurValue() {
   return (
     <section
-      className="relative text-p3-white-smoke py-20 sm:py-24 md:py-32 overflow-hidden w-full"
+      className="relative text-p3-white-smoke py-16 overflow-hidden w-full"
       id="ourvalue"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <motion.h2
-          className={`${orbitron.className} text-center text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-16 text-p3-snow drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]`}
+          className={`${playfair.className} text-center text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-16 text-p3-snow drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}

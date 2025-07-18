@@ -3,7 +3,7 @@
 import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Orbitron, Inter } from "next/font/google"; 
+import { Playfair_Display, Manrope } from "next/font/google"; 
 import { teamMembers, TeamMember } from "@/constants/constants"; 
 
 interface SocialLink {
@@ -12,8 +12,8 @@ interface SocialLink {
   name?: string;
 }
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
-const inter = Inter({ subsets: ["latin"] }); // Initialize Inter font
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -72,7 +72,7 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
         />
       </div>
 
-      <div className="p-8 bg-p3-charcoal text-center relative overflow-hidden">
+      <div className="p-10 bg-p3-charcoal text-center relative overflow-hidden">
         <motion.div
           className="absolute inset-0 flex flex-col items-center justify-center"
           initial={false}
@@ -80,11 +80,11 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <h3
-            className={`${orbitron.className} text-2xl font-bold text-white tracking-wide mb-2`}
+            className={`${playfair.className} text-3xl font-bold text-white tracking-wide mb-2`}
           >
             {member.name.toUpperCase()}
           </h3>
-          <p className={`${inter.className} text-base text-gray-300 font-light`}> 
+          <p className={`${manrope.className} text-lg md:text-xl text-gray-300 font-light`}> 
             {member.title}
           </p>
         </motion.div>
@@ -102,7 +102,7 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${member.name} on ${social.icon }`}
+                aria-label={`${member.name} on ${social.icon}`}
                 className="text-white text-2xl hover:text-teal-400 transition-colors duration-200"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -120,11 +120,11 @@ export default function TeamMemberSection(): JSX.Element {
   return (
     <section
       id="pioneers"
-      className="relative py-24 overflow-hidden" 
+      className="relative py-16 overflow-hidden" 
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <h2
-          className={`${orbitron.className} text-center text-5xl md:text-6xl lg:text-7xl font-extrabold text-pure-white mb-12`} // Added text-center for consistency
+          className={`${playfair.className} text-center text-6xl md:text-7xl lg:text-8xl font-extrabold text-pure-white mb-12`}
         >
           Our Pioneers
         </h2>
