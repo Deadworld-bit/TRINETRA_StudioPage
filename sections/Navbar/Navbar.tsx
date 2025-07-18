@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import logoLight from "@/public/StudioLogo_4_white.png";
 import "./navbar-effects.css";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -15,7 +15,11 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 
-const orbitron = Orbitron({ subsets: ["latin"] });
+// Using Playfair Display from Google Fonts
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -56,13 +60,19 @@ export default function Navbar() {
   const headerClasses = `
     fixed top-0 left-0 w-full z-50
     transition-colors duration-500 ease-in-out
-    ${scrolled ? "bg-p3-pure-black bg-opacity-80 shadow-md nav-glass" : "bg-transparent"}
+    ${
+      scrolled
+        ? "bg-p3-pure-black bg-opacity-80 shadow-md nav-glass"
+        : "bg-transparent"
+    }
   `;
 
   const Logo = ({ size }: { size: "desktop" | "mobile" }) => {
-    const dimension = size === "desktop" ? 60 : 40;
+    const dimension = size === "desktop" ? 80 : 50;
     return (
-      <div style={{ width: dimension, height: dimension, position: "relative" }}>
+      <div
+        style={{ width: dimension, height: dimension, position: "relative" }}
+      >
         <Image
           src={logoLight}
           alt="Trinetra Logo White"
@@ -77,7 +87,11 @@ export default function Navbar() {
     <div className="hidden md:flex justify-between items-center px-8 h-20">
       <div className="flex items-center">
         <Logo size="desktop" />
-        <span className={`${orbitron.className} text-3xl font-bold ml-4 studio-name text-p3-white-smoke`}>TRINETRA</span>
+        <span
+          className={`${playfair.className} text-4xl font-bold ml-4 studio-name text-p3-white-smoke`}
+        >
+          TRINETRA
+        </span>
       </div>
       <nav>
         <ul className="flex gap-8">
@@ -85,7 +99,7 @@ export default function Navbar() {
             <li key={label}>
               <Link
                 href={href}
-                className={`${orbitron.className} text-base font-bold tracking-widest uppercase nav-link ${TRANSITION_COLOR} text-p3-white-smoke hover:text-p3-snow`}
+                className={`${playfair.className} text-lg font-bold tracking-widest uppercase nav-link ${TRANSITION_COLOR} text-p3-white-smoke hover:text-p3-snow`}
               >
                 {label}
               </Link>
@@ -98,21 +112,30 @@ export default function Navbar() {
 
   const MobileHeader = () => (
     <div className="md:hidden fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 z-50 bg-p3-pure-black shadow-md">
-      <span className={`${orbitron.className} text-xl font-bold studio-name text-p3-white-smoke`}>TRINETRA</span>
+      <span
+        className={`${playfair.className} text-2xl font-bold studio-name text-p3-white-smoke`}
+      >
+        TRINETRA
+      </span>
       <button
-        onClick={() => setExpanded(prev => !prev)}
+        onClick={() => setExpanded((prev) => !prev)}
         className={`${TRANSITION_COLOR} text-p3-white-smoke menu-button`}
         aria-label="Toggle navigation"
       >
-        {expanded ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
+        {expanded ? (
+          <HiX className="text-3xl" />
+        ) : (
+          <HiMenu className="text-3xl" />
+        )}
       </button>
     </div>
   );
 
-  // Move drawer out of header and bump z-index so it stays above
   const MobileDrawer = () => (
     <nav
-      className={`md:hidden fixed top-16 left-0 h-[calc(100%-4rem)] w-full bg-p3-charcoal flex flex-col items-center justify-center z-60 transition-transform duration-300 ${expanded ? "translate-x-0" : "translate-x-full"}`}
+      className={`md:hidden fixed top-16 left-0 h-[calc(100%-4rem)] w-full bg-p3-charcoal flex flex-col items-center justify-center z-60 transition-transform duration-300 ${
+        expanded ? "translate-x-0" : "translate-x-full"
+      }`}
       style={{ boxShadow: expanded ? "-2px 0 16px rgba(0,0,0,0.2)" : "none" }}
     >
       <ul className="flex flex-col items-center space-y-8 mt-8">
@@ -120,7 +143,7 @@ export default function Navbar() {
           <li key={label}>
             <Link
               href={href}
-              className={`${orbitron.className} text-base font-bold tracking-widest uppercase nav-link ${TRANSITION_COLOR} text-p3-white-smoke hover:text-p3-snow`}
+              className={`${playfair.className} text-lg font-bold tracking-widest uppercase nav-link ${TRANSITION_COLOR} text-p3-white-smoke hover:text-p3-snow`}
               onClick={() => setExpanded(false)}
             >
               {label}
@@ -131,11 +154,10 @@ export default function Navbar() {
     </nav>
   );
 
-  // Social Vertical Bar (Desktop Only)
   const SocialBar = () => (
     <div className="hidden md:flex flex-col items-center fixed left-6 top-1/2 -translate-y-1/2 z-40">
       <div className="h-12" />
-      <div className="flex flex-col items-center gap-4 bg-p3-slate/70 rounded-2xl px-2 py-4 shadow-lg border border-p3-white-smoke/20">
+      <div className="flex flex-col items-center gap-4 bg-black/70 rounded-2xl px-2 py-4 shadow-lg border border-white/20">
         {socialLinks.map(({ icon: Icon, href, label }) => (
           <a
             key={label}

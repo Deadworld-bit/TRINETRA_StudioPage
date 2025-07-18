@@ -8,7 +8,7 @@ import backgroundImage from "@/public/wallpaper_bg12.png";
 
 const playfair = Playfair({
   subsets: ["latin"],
-  weight: ["400", "700"],   // choose the weights you need
+  weight: ["400", "700"], 
 });
 
 // Animation Variants
@@ -79,7 +79,7 @@ function ScrollIndicator() {
 
 // Hero Component
 const HERO_TITLE = "TRINETRA";
-const HERO_SUBTITLE = "Indie Games. Bold Ideas. Made by Passion.";
+const HERO_SUBTITLE = "INDIE GAMES. BOLD IDEAS. MADE BY PASSION.";
 
 const Hero: React.FC = () => {
   const { backgroundY, headingY, headingOpacity, subOpacity } =
