@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { IconType } from "react-icons";
+import { Lightbulb, GraduationCap, Globe } from "lucide-react";
 
 export interface SocialLink {
   icon: IconType;
@@ -28,12 +29,6 @@ export interface AboutUs {
   text_2: string[];
 }
 
-export interface MissionPillar {
-  icon: string;
-  title: string;
-  desc: string;
-}
-
 export interface Game {
   title: string;
   genre: string;
@@ -42,6 +37,12 @@ export interface Game {
   platforms: string[];
   image: string;
   downloadLinks: { [platform: string]: string };
+}
+
+export interface Service {
+  icon: React.ElementType;
+  title: string;
+  description: string;
 }
 
 export const aboutus: AboutUs[] = [
@@ -53,24 +54,6 @@ export const aboutus: AboutUs[] = [
     text_2: [
       "Through structured learning and collaborative experimentation, we develop interactive experiences that reflect creativity, authenticity, and technical evolution.",
     ],
-  },
-];
-
-export const missionPillars: MissionPillar[] = [
-  {
-    icon: "FaLightbulb",
-    title: "Original Content",
-    desc: "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
-  },
-  {
-    icon: "FaGraduationCap",
-    title: "Continuous Learning",
-    desc: "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
-  },
-  {
-    icon: "FaGlobe",
-    title: "Global Collaboration",
-    desc: "We welcome international collaboration to share knowledge and align with global industry standards.",
   },
 ];
 
@@ -94,8 +77,14 @@ export const teamMembers: TeamMember[] = [
     title: "Developer",
     photo: "/ConvertedPic/HarshKumar_profile_01.webp",
     social: [
-      { icon: FaInstagram, url: "https://www.instagram.com/harshk_dev?utm_source=qr&igsh=MTVvYWF5b3dmbW83" },
-      { icon: FaLinkedin, url: "https://www.linkedin.com/in/harsh-kumar-249915326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+      {
+        icon: FaInstagram,
+        url: "https://www.instagram.com/harshk_dev?utm_source=qr&igsh=MTVvYWF5b3dmbW83",
+      },
+      {
+        icon: FaLinkedin,
+        url: "https://www.linkedin.com/in/harsh-kumar-249915326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      },
     ],
   },
   {
@@ -180,5 +169,26 @@ export const Games: Game[] = [
       iOS: "https://example.com/skyline-ios",
       Android: "https://example.com/skyline-android",
     },
+  },
+];
+
+export const services: Service[] = [
+  {
+    icon: Lightbulb,
+    title: "Original Content",
+    description:
+      "We prioritize original ideas in a market dominated by copycat titles, fostering new-concept development and early-stage experimentation.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Continuous Learning",
+    description:
+      "Our studio operates on principles of continuous learning, encouraging participation from individuals at all skill levels.",
+  },
+  {
+    icon: Globe,
+    title: "Global Collaboration",
+    description:
+      "We welcome international collaboration to share knowledge and align with global industry standards.",
   },
 ];

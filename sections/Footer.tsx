@@ -1,6 +1,6 @@
 "use client";
 
-import { Orbitron } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import {
   FaDiscord,
   FaInstagram,
@@ -9,7 +9,8 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+// Primary font for footer
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
 
 const socialLinks: { href: string; icon: React.ElementType; title: string }[] =
   [
@@ -33,15 +34,13 @@ export default function Footer() {
 
   return (
     <footer
-      className={`${orbitron.className} text-p3-pure-white`}
-      style={{
-        background: "var(--p3-pure-black)",
-      }}
+      className={`${playfair.className} text-p3-pure-white`}
+      style={{ background: "var(--p3-pure-black)" }}
     >
       <div className="max-w-screen-xl mx-auto px-8 py-16">
         <div className="border-t border-p2-slate pt-8 flex flex-col sm:flex-row justify-between items-center gap-5">
           <p className="text-sm sm:text-lg leading-relaxed text-p3-pure-white">
-            &copy; {year} TRINETRA Game Studio. All Rights Reserved.
+            © {year} TRINETRA Game Studio. All Rights Reserved.
           </p>
           <div className="flex items-center gap-5">
             {socialLinks.map(({ href, icon: Icon, title }) => (

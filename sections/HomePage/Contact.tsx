@@ -1,10 +1,10 @@
 "use client";
 
 import { FaBriefcase } from "react-icons/fa";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
 
 export default function Contact() {
   return (
@@ -20,18 +20,16 @@ export default function Contact() {
         <div className="flex items-center gap-4 mb-6">
           <span className="h-px w-16 bg-white/40" />
           <span
-            className={`${orbitron.className} uppercase tracking-widest text-white font-semibold text-sm`}
+            className={`${playfair.className} uppercase tracking-widest text-white font-semibold text-sm`}
           >
             Share your project
           </span>
           <span className="h-px w-16 bg-white/40" />
         </div>
         <h2
-          className={`
-            ${orbitron.className}
+          className={`${playfair.className}
             text-white text-3xl md:text-5xl lg:text-6xl
-            font-extrabold text-center mb-8
-          `}
+            font-extrabold text-center mb-8`}
         >
           READY TO WORK TOGETHER?
         </h2>

@@ -3,18 +3,19 @@
 import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Orbitron } from "next/font/google";
+import { Playfair_Display, Manrope } from "next/font/google";
 import Link from "next/link";
 import { teamMembers, TeamMember } from "@/constants/constants";
+import { ArrowRight } from "lucide-react";
 
-interface SocialLink {
-  icon: React.ElementType;
-  url: string;
-  name?: string;
-}
+// Fonts
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
-
+// Animation Variants
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
@@ -44,7 +45,6 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
   const handleCardClick = () => {
     if (isMobile) setIsClicked(!isClicked);
   };
-
   const isActive = isMobile ? isClicked : isHovered;
 
   return (
@@ -72,7 +72,7 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
         />
       </div>
 
-      <div className="p-8 bg-p3-charcoal text-center relative overflow-hidden">
+      <div className="p-10 bg-p3-charcoal text-center relative overflow-hidden">
         <motion.div
           className="absolute inset-0 flex flex-col items-center justify-center"
           initial={false}
@@ -80,11 +80,15 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
           <h3
-            className={`${orbitron.className} text-2xl font-bold text-white tracking-wide mb-2`}
+            className={`${playfair.className} text-3xl md:text-4xl font-bold text-white uppercase tracking-wide mb-2`}
           >
-            {member.name.toUpperCase()}
+            {member.name}
           </h3>
-          <p className="text-sm text-gray-300 font-light">{member.title}</p>
+          <p
+            className={`${manrope.className} text-lg md:text-xl text-gray-300 font-light`}
+          >
+            {member.title}
+          </p>
         </motion.div>
 
         <motion.div
@@ -100,7 +104,7 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${member.name} on ${social.icon}`}
+                aria-label={`${member.name} on social`}
                 className="text-white text-2xl hover:text-teal-400 transition-colors duration-200"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -120,17 +124,17 @@ export default function TeamMemberSection(): JSX.Element {
   return (
     <section
       id="pioneers"
-      className="relative py-24 overflow-hidden"
+      className={`relative py-16 px-8 md:px-16 lg:px-32 overflow-hidden ${playfair.className}`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-0">
+      <div className="max-w-7xl mx-auto">
         <h2
-          className={`${orbitron.className} text-5xl md:text-6xl lg:text-7xl font-extrabold text-pure-white mb-12`}
+          className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-pure-white mb-8`}
         >
           Our Pioneers
         </h2>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -141,12 +145,12 @@ export default function TeamMemberSection(): JSX.Element {
         </motion.div>
 
         {teamMembers.length > 3 && (
-          <div className="mt-12 flex justify-start">
+          <div className="mt-8 flex justify-start">
             <Link
               href="/aboutus"
-              className="inline-flex items-center px-10 py-4 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition"
+              className={`${manrope.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition`}
             >
-              View All Team Members →
+              View All Team Members <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </div>
         )}
