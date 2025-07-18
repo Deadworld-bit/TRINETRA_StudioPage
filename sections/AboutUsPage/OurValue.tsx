@@ -114,7 +114,7 @@ export default function OurValue() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <motion.h2
-          className={`${playfair.className} text-center text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-16 text-p3-snow drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]`}
+          className={`${playfair.className} text-center text-6xl md:text-7xl lg:text-8xl font-extrabold text-pure-white mb-12`}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
