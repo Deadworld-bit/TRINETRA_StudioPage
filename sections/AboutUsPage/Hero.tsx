@@ -2,11 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { Orbitron } from "next/font/google";
 import { motion, useScroll, useTransform } from "framer-motion";
 import backgroundImage from "@/public/ConvertedPic/darkthemestudio.jpg";
+import { Playfair_Display, Manrope } from "next/font/google";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["700"] });
+// Primary and secondary fonts
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500"] });
 
 function useHeroScrollTransforms() {
   const { scrollY } = useScroll();
@@ -35,7 +37,7 @@ const Hero = () => {
 
   return (
     <motion.section
-      id="contact"
+      id="about"
       className="relative w-full h-[66vh] overflow-hidden text-left"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,
@@ -54,7 +56,7 @@ const Hero = () => {
 
       <div className="relative flex flex-col items-start justify-center h-full px-4 pt-20 lg:px-8 max-w-3xl mx-auto">
         <motion.h1
-          className={`${orbitron.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl`}
+          className={`${playfair.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl`}
           style={{
             fontSize: "clamp(3rem, 6vw, 5rem)",
             y: headingY,
@@ -70,12 +72,12 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-[4rem] left-1/2 w-[80%] h-px bg-p3-pure-white opacity-70 transform -translate-x-1/2" />
-      <div className="absolute bottom-6 left-[10%] flex items-center space-x-2 text-lg text-pure-white">
+      <div className={`${manrope.className} absolute bottom-6 left-[10%] flex items-center space-x-2 text-lg text-pure-white`}>
         <Link href="/" className="hover:underline">
           Home
         </Link>
         <span className="opacity-60">»</span>
-        <span>AboutUs</span>
+        <span>About Us</span>
       </div>
     </motion.section>
   );
