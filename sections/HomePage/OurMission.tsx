@@ -3,6 +3,11 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import { Lightbulb, GraduationCap, Globe, ArrowRight } from "lucide-react";
+import { Playfair_Display, Manrope } from "next/font/google";
+
+// Load Google Fonts
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "700"] });
+const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 // Animation Variants
 const sectionVariants: Variants = {
@@ -45,64 +50,43 @@ const services: Service[] = [
   },
 ];
 
-// Decorative Components
-const GridBackground: React.FC = () => (
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-0 z-0"
-    style={{
-      backgroundImage: 'url("/ConvertedPic/parttern_07.webp")',
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      opacity: 0.22,
-    }}
-  />
-);
-
-// Service Card Component
-interface ServiceCardProps extends Service {}
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description }) => (
-  <motion.div
-    className="flex flex-col items-start p-8 bg-p3-charcoal rounded-xl shadow-2xl group"
-    variants={cardVariants}
-    whileHover={{ y: -8 }}
-    transition={hoverTransition}
-  >
-    <Icon className="w-12 h-12 mb-4 text-pure-white" />
-    <h3 className="text-xl font-bold text-white uppercase tracking-wide mb-4">
-      {title}
-    </h3>
-    <p className="text-base text-gray-300 leading-relaxed mb-6">
-      {description}
-    </p>
-    <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
-  </motion.div>
-);
-
 // Our Services Section
-const OurServices: React.FC = () => (
+const OurMissions: React.FC = () => (
   <section
     id="ourservices"
-    className="relative text-white py-24 px-8 md:px-16 lg:px-32 w-full overflow-hidden"
+    className={`relative text-white py-16 px-8 md:px-16 lg:px-32 w-full overflow-hidden ${playfair.className}`}
   >
-
     <motion.div
-      className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
+      className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
     >
       {services.map((svc, idx) => (
-        <ServiceCard
+        <motion.div
           key={idx}
-          icon={svc.icon}
-          title={svc.title}
-          description={svc.description}
-        />
+          className="flex flex-col items-start p-6 md:p-8 bg-p3-charcoal rounded-xl shadow-2xl group"
+          variants={cardVariants}
+          whileHover={{ y: -8 }}
+          transition={hoverTransition}
+        >
+          <svc.icon className="w-14 h-14 mb-4 text-pure-white" />
+          <h3
+            className={`${playfair.className} text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-3`}
+          >
+            {svc.title}
+          </h3>
+          <p
+            className={`${manrope.className} text-lg md:text-xl text-gray-300 leading-relaxed mb-6`}
+          >
+            {svc.description}
+          </p>
+          <ArrowRight className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors duration-300" />
+        </motion.div>
       ))}
     </motion.div>
   </section>
 );
 
-export default OurServices;
+export default OurMissions;
