@@ -13,6 +13,9 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "TRINETRA Games",
   description: "TRINETRA GAMES is an independent game development studio based in India, driven by creativity, passion, and bold ideas. We specialize in crafting unique, story-rich indie games that resonate with players around the world. At TRINETRA, we believe great games are made with heart—and we love to collaborate beyond borders to bring unforgettable gaming experiences to life.",
+  icons: {
+    icon: '/favicon.ico', 
+  },
 };
 
 export default function RootLayout({
@@ -20,6 +23,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/LogoStudio_4_white.png" type="image/png" />
+      </head>
       <body className={`${geistSans.variable} font-sans antialiased text-black`}>
         <ClientLayout>{children}</ClientLayout>
         <Analytics />
