@@ -4,11 +4,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Rubik, Merriweather } from "next/font/google";
 
 // Fonts
-const playfair = Playfair_Display({subsets: ["latin"], weight: ["400", "700"],});
-const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "700"] });
+const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Animation Variants
 const containerVariants: Variants = {

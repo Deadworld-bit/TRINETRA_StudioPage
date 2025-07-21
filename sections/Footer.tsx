@@ -1,6 +1,6 @@
 "use client";
 
-import { Playfair_Display } from "next/font/google";
+import { Rubik } from "next/font/google";
 import {
   FaDiscord,
   FaInstagram,
@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 
 // Primary font for footer
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const playfair = Rubik({ subsets: ["latin"], weight: ["700"] });
 
 const socialLinks: { href: string; icon: React.ElementType; title: string }[] =
   [

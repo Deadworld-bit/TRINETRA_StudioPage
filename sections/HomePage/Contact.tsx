@@ -1,10 +1,10 @@
 "use client";
 
 import { FaBriefcase } from "react-icons/fa";
-import { Playfair_Display } from "next/font/google";
+import { Rubik } from "next/font/google";
 import Link from "next/link";
 
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
+const playfair = Rubik({ subsets: ["latin"], weight: ["700"] });
 
 export default function Contact() {
   return (

@@ -3,17 +3,14 @@
 import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Rubik, Merriweather } from "next/font/google";
 import Link from "next/link";
 import { teamMembers, TeamMember } from "@/constants/constants";
 import { ArrowRight } from "lucide-react";
 
 // Fonts
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "700"] });
+const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Animation Variants
 const fadeInUp: Variants = {
@@ -150,7 +147,7 @@ export default function TeamMemberSection(): JSX.Element {
               href="/aboutus"
               className={`${manrope.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition`}
             >
-              View All Team Members <ArrowRight className="ml-2 w-5 h-5" />
+              View All Team Members →
             </Link>
           </div>
         )}
