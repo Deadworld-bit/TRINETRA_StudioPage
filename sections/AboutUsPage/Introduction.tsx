@@ -70,7 +70,7 @@ const Introduction: React.FC = () => {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
+      <div className="relative max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-stretch gap-12 lg:gap-20">
         {/* Image & Pillars */}
         <div className="lg:w-1/2 w-full flex flex-col">
           <motion.div
