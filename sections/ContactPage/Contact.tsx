@@ -5,11 +5,11 @@ import emailjs from "@emailjs/browser";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { FaPhoneAlt, FaPaperPlane, FaMapMarkerAlt } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Rubik, Merriweather } from "next/font/google";
 
 // Load Google Fonts
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
-const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500"] });
+const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Type Definitions
 

@@ -3,14 +3,13 @@
 import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Rubik, Merriweather } from "next/font/google";
 import { Games as AllGames } from "@/constants/constants";
 import GameModal from "@/components/gamemodal";
 
 // Font configuration
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
-const manrope = Manrope({ subsets: ["latin"], weight: ["500"] });
-
+const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 // Constants
 const platformOptions = ["All", "PC", "Xbox", "PlayStation", "iOS", "Android"];
 const cardBaseStyles =

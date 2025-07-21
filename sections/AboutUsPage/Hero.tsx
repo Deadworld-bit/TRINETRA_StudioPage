@@ -4,11 +4,11 @@ import React from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import backgroundImage from "@/public/ConvertedPic/darkthemestudio.jpg";
-import { Playfair_Display, Manrope } from "next/font/google";
+import { Rubik, Merriweather } from "next/font/google";
 
 // Primary and secondary fonts
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"] });
-const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500"] });
+const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 function useHeroScrollTransforms() {
   const { scrollY } = useScroll();
