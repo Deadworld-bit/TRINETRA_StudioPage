@@ -89,7 +89,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: "Alakh Pandey",
-    title: "Creative Director",
+    title: "Artist",
     photo: profile,
     social: [
       { icon: FaTwitter, url: "https://twitter.com/alakh" },

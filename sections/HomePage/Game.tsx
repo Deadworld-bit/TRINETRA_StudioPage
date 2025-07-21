@@ -7,6 +7,7 @@ import { motion, Variants } from "framer-motion";
 import GameModal from "@/components/gamemodal";
 import { Rubik, Merriweather } from "next/font/google";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 // Load Google Fonts
 const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
@@ -110,14 +111,14 @@ export default function GameShowcase() {
           </motion.div>
 
           {AllGames.length > 3 && (
-            <div className="mt-12 flex justify-start">
-              <Link
-                href="/game"
-                className={`${manrope.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-charcoal font-semibold rounded-lg shadow-xl hover:bg-p3-mint-flash/80 transition-colors duration-300`}
-              >
-                View All Games →
-              </Link>
-            </div>
+            <div className="mt-8 flex justify-start">
+            <Link
+              href="/game"
+              className={`${playfair.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition`}
+            >
+              View All Games <ArrowRight className="ml-2" />
+            </Link>
+          </div>
           )}
         </div>
         {selectedGame && <GameModal game={selectedGame} onClose={() => setSelectedGame(null)} />}

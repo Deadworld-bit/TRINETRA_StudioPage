@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, JSX } from "react";
+import React, { JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { Rubik } from "next/font/google";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import { teamMembers, TeamMember } from "@/constants/constants";
 import { ArrowRight } from "lucide-react";
 
-// Fonts
+// Font
 const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Animation Variants
@@ -27,22 +27,6 @@ interface MemberCardProps {
 }
 
 function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const handleCardClick = () => {
-    if (isMobile) setIsClicked(!isClicked);
-  };
-  const isActive = isMobile ? isClicked : isHovered;
-
   return (
     <motion.div
       custom={idx}
@@ -50,57 +34,37 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="relative rounded-2xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow duration-300"
-      onMouseEnter={() => !isMobile && setIsHovered(true)}
-      onMouseLeave={() => !isMobile && setIsHovered(false)}
-      onClick={handleCardClick}
+      className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
     >
       <div className="relative w-full aspect-square">
         <Image
-          src={
-            typeof member.photo === "string" ? member.photo : member.photo.src
-          }
+          src={typeof member.photo === "string" ? member.photo : member.photo.src}
           alt={member.name}
           fill
           className="object-cover transition-transform duration-500 hover:scale-105"
           sizes="(min-width: 1024px) 350px, 100vw"
           priority={idx === 0}
         />
-        <motion.div
-          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isActive ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="flex space-x-6">
-            {member.social.map((social, i) => (
-              <a
-                key={i}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${member.name} on social`}
-                className="text-white text-3xl hover:text-teal-400 transition-colors duration-200"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <social.icon />
-              </a>
-            ))}
-          </div>
-        </motion.div>
       </div>
 
-      <div className="p-10 bg-p3-charcoal text-center">
-        <h3
-          className={`${playfair.className} text-4xl font-bold text-white uppercase tracking-wide mb-2`}
-        >
-          {member.name}
+      <div className="absolute bottom-0 w-full bg-[#262626]/80 bg-opacity-60 p-4 flex flex-col items-center">
+        <h3 className={`${playfair.className} text-xl font-semibold text-white uppercase tracking-wide text-center`}>  
+          {member.name} - {member.title}
         </h3>
-        <p
-          className={`${playfair.className} text-xl text-gray-300 font-normal`}
-        >
-          {member.title}
-        </p>
+        <div className="mt-2 flex space-x-4">
+          {member.social.map((social, i) => (
+            <a
+              key={i}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} on social`}
+              className="text-white text-2xl hover:text-teal-400 transition-colors duration-200"
+            >
+              <social.icon />
+            </a>
+          ))}
+        </div>
       </div>
     </motion.div>
   );

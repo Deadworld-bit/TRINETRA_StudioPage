@@ -37,7 +37,7 @@ const OurMissions: React.FC = () => (
       {services.map((svc, idx) => (
         <motion.div
           key={idx}
-          className="flex flex-col items-start p-6 md:p-8 bg-p3-charcoal rounded-xl shadow-2xl group"
+          className="flex flex-col items-start p-6 md:p-8 bg-[#262626]/80 rounded-xl shadow-2xl group"
           variants={cardVariants}
           whileHover={{ y: -8 }}
           transition={hoverTransition}
