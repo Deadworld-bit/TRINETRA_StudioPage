@@ -91,7 +91,7 @@ function ValueImage() {
       viewport={{ once: true, amount: 0.3 }}
       className="flex justify-center items-center p-4 md:p-0"
     >
-      <div className="w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-p3-snow/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-300">
+      <div className="w-full h-full max-w-md overflow-hidden shadow-xl border border-p3-snow/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-300">
         <Image
           src="/collab_01.jpg"
           alt="Team collaborating to reflect TRINETRA's values of diversity and growth"

@@ -7,7 +7,7 @@ import { motion, Variants } from "framer-motion";
 import { aboutus } from "@/constants/constants";
 
 // Font configuration
-const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Animation Variants
@@ -63,25 +63,25 @@ const Introduction: React.FC = () => {
 
   return (
     <motion.section
-      className="relative w-full text-p3-white-smoke py-16 px-4 md:px-12 lg:px24 overflow-hidden"
+      className="relative w-full text-p3-white-smoke py-16 px-4 md:px-12 lg:px-24 overflow-hidden"
       id="whoarewe"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-        {/* Right: Image & Pillars */}
-        <div className="lg:w-1/2 w-full">
+      <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
+        {/* Image & Pillars */}
+        <div className="lg:w-1/2 w-full flex flex-col">
           <motion.div
-            className="relative w-full h-[350px] md:h-[450px] rounded-xl overflow-hidden shadow-2xl group"
+            className="relative w-full h-full min-h-[350px] md:min-h-[450px] overflow-hidden shadow-2xl group"
             variants={fadeInUp}
           >
             <Image
-              src="/office_01.jpg"
+              src="/office_04.jpg"
               alt="Studio Interior"
               fill
-              className="object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              className="object-cover h-full w-full transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -111,7 +111,7 @@ const Introduction: React.FC = () => {
           </motion.ul>
         </div>
 
-        {/* Left: Content */}
+        {/* Content */}
         <div className="lg:w-1/2 flex flex-col justify-center">
           <motion.span
             className={`${manrope.className} text-p3-coral-burst text-xl font-bold mb-3 tracking-wider uppercase`}
@@ -127,7 +127,7 @@ const Introduction: React.FC = () => {
           </motion.h2>
 
           <motion.div
-            className={`${manrope.className} text-xl md:text-2xl text-p3-white-smoke/90 mb-8`}
+            className={`${manrope.className} text-xl md:text-2xl text-p3-white-smoke/90 mb-8`} 
             style={{ lineHeight: 1.7, maxWidth: "60ch" }}
             variants={fadeInUp}
           >
@@ -141,7 +141,6 @@ const Introduction: React.FC = () => {
           <HighlightBox>{highlight}</HighlightBox>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto"></div>
     </motion.section>
   );
 };

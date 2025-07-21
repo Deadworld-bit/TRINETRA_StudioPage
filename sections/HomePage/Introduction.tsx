@@ -80,7 +80,7 @@ const Introduction: React.FC = () => (
       <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] lg:h-[600px] relative">
         <motion.div className="w-full h-full" variants={imageVariants}>
           <Image
-            src="/ConvertedPic/office_02.jpg"
+            src="/office_05.jpg"
             alt="Architectural Design"
             fill
             className="object-cover"
