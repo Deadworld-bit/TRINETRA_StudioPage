@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import backgroundImage from "@/public/ConvertedPic/wallpaper_bg13.webp";
+import backgroundImage from "@/public/wallpaper_bg16.jpg";
 import { Rubik, Merriweather } from "next/font/google";
 
 const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
