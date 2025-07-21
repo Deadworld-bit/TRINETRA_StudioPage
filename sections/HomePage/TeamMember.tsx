@@ -3,14 +3,13 @@
 import React, { useState, useEffect, JSX } from "react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Rubik, Merriweather } from "next/font/google";
+import { Rubik } from "next/font/google";
 import Link from "next/link";
 import { teamMembers, TeamMember } from "@/constants/constants";
 import { ArrowRight } from "lucide-react";
 
 // Fonts
-const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
-const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
+const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 
 // Animation Variants
 const fadeInUp: Variants = {
@@ -67,32 +66,11 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
           sizes="(min-width: 1024px) 350px, 100vw"
           priority={idx === 0}
         />
-      </div>
-
-      <div className="p-10 bg-p3-charcoal text-center relative overflow-hidden">
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center"
-          initial={false}
-          animate={{ y: isActive ? "-100%" : "0%" }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          <h3
-            className={`${playfair.className} text-3xl md:text-4xl font-bold text-white uppercase tracking-wide mb-2`}
-          >
-            {member.name}
-          </h3>
-          <p
-            className={`${manrope.className} text-lg md:text-xl text-gray-300 font-light`}
-          >
-            {member.title}
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center space-y-4"
-          initial={false}
-          animate={{ y: isActive ? "0%" : "100%" }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isActive ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
         >
           <div className="flex space-x-6">
             {member.social.map((social, i) => (
@@ -102,7 +80,7 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} on social`}
-                className="text-white text-2xl hover:text-teal-400 transition-colors duration-200"
+                className="text-white text-3xl hover:text-teal-400 transition-colors duration-200"
                 onClick={(e) => e.stopPropagation()}
               >
                 <social.icon />
@@ -110,6 +88,19 @@ function MemberCard({ member, idx }: MemberCardProps): JSX.Element {
             ))}
           </div>
         </motion.div>
+      </div>
+
+      <div className="p-10 bg-p3-charcoal text-center">
+        <h3
+          className={`${playfair.className} text-4xl font-bold text-white uppercase tracking-wide mb-2`}
+        >
+          {member.name}
+        </h3>
+        <p
+          className={`${playfair.className} text-xl text-gray-300 font-normal`}
+        >
+          {member.title}
+        </p>
       </div>
     </motion.div>
   );
@@ -145,9 +136,9 @@ export default function TeamMemberSection(): JSX.Element {
           <div className="mt-8 flex justify-start">
             <Link
               href="/aboutus"
-              className={`${manrope.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition`}
+              className={`${playfair.className} inline-flex items-center px-8 py-3 bg-p3-pure-white text-p3-pure-black font-semibold rounded-lg hover:bg-gray-200 transition`}
             >
-              View All Team Members →
+              View All Team Members <ArrowRight className="ml-2" />
             </Link>
           </div>
         )}
