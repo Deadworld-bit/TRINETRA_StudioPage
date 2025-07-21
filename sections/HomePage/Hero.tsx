@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { Playfair_Display as Playfair } from "next/font/google";
+import { Rubik as Rubik } from "next/font/google";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import type { CSSProperties } from "react";
 import backgroundImage from "@/public/wallpaper_bg12.png";
 
-const playfair = Playfair({
+const playfair = Rubik({
   subsets: ["latin"],
   weight: ["400", "700"], 
 });
@@ -79,7 +79,7 @@ function ScrollIndicator() {
 
 // Hero Component
 const HERO_TITLE = "TRINETRA";
-const HERO_SUBTITLE = "INDIE GAMES. BOLD IDEAS. MADE BY PASSION.";
+const HERO_SUBTITLE = "INDIE GAMES • BOLD IDEAS • MADE BY PASSION";
 
 const Hero: React.FC = () => {
   const { backgroundY, headingY, headingOpacity, subOpacity } =

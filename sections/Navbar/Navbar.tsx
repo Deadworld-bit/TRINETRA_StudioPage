@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
+import { Rubik } from "next/font/google";
 import logoLight from "@/public/StudioLogo_4_white.png";
 import "./navbar-effects.css";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -15,8 +15,7 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 
-// Using Playfair Display from Google Fonts
-const playfair = Playfair_Display({
+const playfair = Rubik({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
 });
@@ -86,7 +85,7 @@ export default function Navbar() {
   const DesktopNav = () => (
     <div className="hidden md:flex justify-between items-center px-8 h-20">
       <div className="flex items-center">
-        <Logo size="desktop" />
+        {/* <Logo size="desktop" /> */}
         <span
           className={`${playfair.className} text-4xl font-bold ml-4 studio-name text-p3-white-smoke`}
         >
