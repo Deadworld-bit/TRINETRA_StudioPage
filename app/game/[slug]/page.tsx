@@ -1,3 +1,5 @@
+// app/game/[slug]/page.tsx
+
 import { Games as AllGames } from "@/constants/constants";
 import Hero from "@/sections/DetailPage/Hero";
 import GameDetail from "@/sections/DetailPage/GameDetail";
@@ -12,15 +14,25 @@ function VerticalLines() {
     <div className="absolute inset-0 pointer-events-none -z-10">
       <div className="container mx-auto h-full relative">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="absolute h-full w-px bg-p3-white-smoke/10" style={{ left: `${(i + 1) * 20}%` }} />
+          <div
+            key={i}
+            className="absolute h-full w-px bg-p3-white-smoke/10"
+            style={{ left: `${(i + 1) * 20}%` }}
+          />
         ))}
       </div>
     </div>
   );
 }
 
-export default function GameDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+// Note: params is now a Promise<{ slug: string }>
+export default async function GameDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  // await the params to get your slug out
+  const { slug } = await params;
   const game = AllGames.find((g) => g.slug === slug);
 
   if (!game) {
