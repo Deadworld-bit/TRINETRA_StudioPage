@@ -85,12 +85,13 @@ export default function Navbar() {
   const DesktopNav = () => (
     <div className="hidden md:flex justify-between items-center px-8 h-20">
       <div className="flex items-center">
-        {/* <Logo size="desktop" /> */}
-        <span
-          className={`${playfair.className} text-4xl font-bold ml-4 studio-name text-p3-white-smoke`}
-        >
-          TRINETRA
-        </span>
+        <Link href="/">
+          <span
+            className={`${playfair.className} text-4xl font-bold ml-4 studio-name text-p3-white-smoke cursor-pointer hover:opacity-80`}
+          >
+            TRINETRA
+          </span>
+        </Link>
       </div>
       <nav>
         <ul className="flex gap-8">
@@ -111,11 +112,13 @@ export default function Navbar() {
 
   const MobileHeader = () => (
     <div className="md:hidden fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 z-50 bg-p3-pure-black shadow-md">
-      <span
-        className={`${playfair.className} text-2xl font-bold studio-name text-p3-white-smoke`}
-      >
-        TRINETRA
-      </span>
+      <Link href="/">
+        <span
+          className={`${playfair.className} text-2xl font-bold studio-name text-p3-white-smoke cursor-pointer hover:opacity-80`}
+        >
+          TRINETRA
+        </span>
+      </Link>
       <button
         onClick={() => setExpanded((prev) => !prev)}
         className={`${TRANSITION_COLOR} text-p3-white-smoke menu-button`}
