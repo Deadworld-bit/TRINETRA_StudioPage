@@ -30,6 +30,7 @@ export interface AboutUs {
 }
 
 export interface Game {
+  slug: string;
   title: string;
   genre: string;
   shortDescription: string;
@@ -112,6 +113,7 @@ export const teamMembers: TeamMember[] = [
 
 export const Games: Game[] = [
   {
+    slug: "echoes-of-the-void",
     title: "Echoes of the Void",
     genre: "Sci-Fi RPG",
     shortDescription:
@@ -127,6 +129,7 @@ export const Games: Game[] = [
     },
   },
   {
+    slug: "pixel-quest-chronicles",
     title: "Pixel Quest: Chronicles",
     genre: "Retro RPG",
     shortDescription: "Retro-inspired RPG with modern twists.",
@@ -141,6 +144,7 @@ export const Games: Game[] = [
     },
   },
   {
+    slug: "mystic-arena",
     title: "Mystic Arena",
     genre: "MOBA",
     shortDescription: "Fast-paced multiplayer battles in a mystical world.",
@@ -155,6 +159,7 @@ export const Games: Game[] = [
     },
   },
   {
+    slug: "skyline-racer",
     title: "Skyline Racer",
     genre: "Racing",
     shortDescription: "High-speed racing above the clouds.",

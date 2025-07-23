@@ -77,7 +77,7 @@ export default function TeamMemberSection(): JSX.Element {
     >
       <div className="max-w-7xl mx-auto">
         <h2
-          className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-pure-white mb-8`}
+          className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl font-extrabold text-pure-white mb-8 text-center mx-auto`}
         >
           Our Pioneers
         </h2>

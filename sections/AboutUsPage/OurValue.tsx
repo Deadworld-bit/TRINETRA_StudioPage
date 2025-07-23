@@ -96,16 +96,17 @@ function ValueImage() {
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
-      className="relative w-full h-full mx-auto rounded-2xl overflow-hidden shadow-2xl flex items-center"
+      className="relative w-full h-full mx-auto overflow-hidden shadow-2xl flex items-center"
+      style={{ minHeight: "100%", height: "100%" }} 
     >
       <div className="absolute inset-0 bg-gradient-to-tr from-p3-mint-flash/20 to-transparent pointer-events-none" />
       <Image
-        src="/collab_01.jpg"
+        src="/collabaration_02.jpg"
         alt="Team collaborating to reflect TRINETRA's values"
-        width={700}
-        height={525}
+        fill
         className="object-cover w-full h-full"
         priority
+        sizes="100vw"
       />
     </motion.div>
   );
