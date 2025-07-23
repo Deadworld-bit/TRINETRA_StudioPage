@@ -19,10 +19,8 @@ function VerticalLines() {
   );
 }
 
-export default async function GameDetailPage({ params }: { params: { slug: string } }) {
-  // Await params before using
-  const awaitedParams = await Promise.resolve(params);
-  const { slug } = awaitedParams;
+export default function GameDetailPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const game = AllGames.find((g) => g.slug === slug);
 
   if (!game) {
