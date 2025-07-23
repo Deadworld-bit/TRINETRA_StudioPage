@@ -1,26 +1,36 @@
-// app/game/[slug]/page.tsx
-
 import { Games as AllGames } from "@/constants/constants";
 import Hero from "@/sections/DetailPage/Hero";
 import GameDetail from "@/sections/DetailPage/GameDetail";
 import { notFound } from "next/navigation";
 
 const GridBackground: React.FC = () => (
-  <div className="absolute inset-0 h-full w-full bg-p3-charcoal bg-grid-p3-white-smoke/[0.2] -z-10" />
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0 z-0"
+    style={{
+      backgroundImage: 'url("/wallpaper_bg15.jpg")',
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      opacity: 0.22,
+    }}
+  />
 );
 
 function VerticalLines() {
   return (
-    <div className="absolute inset-0 pointer-events-none -z-10">
-      <div className="container mx-auto h-full relative">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute h-full w-px bg-p3-white-smoke/10"
-            style={{ left: `${(i + 1) * 20}%` }}
-          />
-        ))}
-      </div>
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          key={i}
+          className="absolute top-0 bottom-0 w-0.75"
+          style={{
+            left: `${((i + 1) * 100) / 6}%`,
+            background: "rgba(255, 255, 255, 0.13)",
+            opacity: 1,
+            filter: "blur(0.5px)",
+          }}
+        />
+      ))}
     </div>
   );
 }

@@ -36,7 +36,6 @@ const Hero = () => {
 
   return (
     <motion.section
-      id="contact"
       className="relative w-full h-[66vh] overflow-hidden text-left"
       style={{
         backgroundImage: `url(${backgroundImage.src})`,

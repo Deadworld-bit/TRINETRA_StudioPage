@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Rubik, Merriweather } from "next/font/google";
 
-const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
 
 function useHeroScrollTransforms() {
@@ -17,8 +17,14 @@ function useHeroScrollTransforms() {
 }
 
 const overlays = [
-  { bg: "linear-gradient(to bottom, var(--p3-charcoal) 0%, transparent 60%, var(--p3-charcoal) 100%)", opacity: 0.85 },
-  { bg: "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)", opacity: 0.08 },
+  {
+    bg: "linear-gradient(to bottom, var(--p3-charcoal) 0%, transparent 60%, var(--p3-charcoal) 100%)",
+    opacity: 0.85,
+  },
+  {
+    bg: "radial-gradient(circle at center, var(--p3-white-smoke) 0%, transparent 80%)",
+    opacity: 0.08,
+  },
 ];
 
 interface HeroProps {
@@ -30,34 +36,56 @@ const Hero: React.FC<HeroProps> = ({ title, imageUrl }) => {
   const { bgY, headingY, headingOpacity } = useHeroScrollTransforms();
 
   return (
-    <div className="relative h-[60vh] md:h-[70vh] flex flex-col justify-center items-center text-center overflow-hidden">
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${imageUrl})`, 
-          y: bgY,
-        }}
-      />
-      
+    <motion.section
+      id="hero"
+      className="relative w-full h-[66vh] overflow-hidden text-center" // Changed to center text
+      style={{
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundPositionY: bgY,
+      }}
+    >
       {overlays.map(({ bg, opacity }, i) => (
-        <div key={i} className="absolute inset-0" style={{ background: bg, opacity }} />
+        <div
+          key={i}
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: bg, opacity }}
+        />
       ))}
 
-      {/* Dynamic Title */}
-      <motion.div style={{ y: headingY, opacity: headingOpacity }} className="relative z-10 px-4">
-        <h1 className={`${playfair.className} text-5xl md:text-7xl font-bold text-p3-white-smoke`}>
-          {title} 
-        </h1>
-      </motion.div>
-
-      <div className={`${manrope.className} absolute bottom-8 text-sm text-p3-gilded-gold z-10`}>
-        <Link href="/" className="hover:underline">Home</Link>
-        <span className="mx-2">»</span>
-        <Link href="/games" className="hover:underline">Games</Link>
-        <span className="mx-2">»</span>
-        <span className="text-p3-white-smoke">{title}</span> 
+      <div className="relative flex flex-col items-center justify-center h-full px-4 pt-20 lg:px-8 max-w-3xl mx-auto">
+        <motion.h1
+          className={`${playfair.className} uppercase font-extrabold drop-shadow-lg tracking-wide text-6xl sm:text-7xl lg:text-8xl mx-auto`}
+          style={{
+            fontSize: "clamp(3rem, 6vw, 5rem)",
+            y: headingY,
+            opacity: headingOpacity,
+            background: "var(--p3-pure-white)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            whiteSpace: "pre-line",
+          }}
+        >
+          {title}
+        </motion.h1>
       </div>
-    </div>
+
+      <div className="absolute bottom-[4rem] left-1/2 w-[80%] h-px bg-p3-pure-white opacity-70 transform -translate-x-1/2" />
+      <div
+        className={`absolute bottom-6 left-[10%] flex items-center space-x-2 text-lg text-pure-white ${manrope.className}`}
+      >
+        <Link href="/" className="hover:underline">
+          Home
+        </Link>
+        <span className="opacity-60">»</span>
+        <Link href="/game" className="hover:underline">
+          Games
+        </Link>
+        <span className="opacity-60">»</span>
+        <span className="text-p3-white-smoke">{title}</span>
+      </div>
+    </motion.section>
   );
 };
 

@@ -3,9 +3,6 @@ import {
   FaTwitter,
   FaLinkedin,
   FaInstagram,
-  FaLightbulb,
-  FaGraduationCap,
-  FaGlobe,
 } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { IconType } from "react-icons";
@@ -29,14 +26,22 @@ export interface AboutUs {
   text_2: string[];
 }
 
+export interface GameRequirements {
+  min: string;
+  recommended: string;
+}
+
 export interface Game {
   slug: string;
   title: string;
   genre: string;
   shortDescription: string;
   fullDescription: string;
+  gameplayDescription: string;            
   platforms: string[];
+  requirements: { [platform: string]: GameRequirements }; 
   image: string;
+  screenshots: string[];                  
   downloadLinks: { [platform: string]: string };
 }
 
@@ -45,6 +50,7 @@ export interface Service {
   title: string;
   description: string;
 }
+
 
 export const aboutus: AboutUs[] = [
   {
@@ -112,16 +118,27 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const Games: Game[] = [
-  {
+   {
     slug: "echoes-of-the-void",
     title: "Echoes of the Void",
     genre: "Sci-Fi RPG",
-    shortDescription:
-      "A sci-fi adventure where every choice alters space-time.",
+    shortDescription: "A sci-fi adventure where every choice alters space-time.",
     fullDescription:
-      "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore. Pilot customizable starships, forge alliances with alien races, unravel cosmic mysteries, and master time-bending abilities to save your crew from the void.",
+      "Echoes of the Void is an immersive sci-fi RPG featuring dynamic narrative branching, hand-painted celestial art, and a procedurally generated galaxy to explore.",
+    gameplayDescription:
+      "Pilot starships across diverse sectors, engage in real-time space combat, solve puzzles using time-bending mechanics, and customize your crew’s abilities.",
     platforms: ["PC", "Xbox", "PlayStation"],
+    requirements: {
+      PC: { min: "Intel i5, 8GB RAM, GTX 970", recommended: "Intel i7, 16GB RAM, RTX 2070" },
+      Xbox: { min: "Xbox One", recommended: "Xbox Series X" },
+      PlayStation: { min: "PS4", recommended: "PS5" },
+    },
     image: "/wallpaper_bg1.jpg",
+    screenshots: [
+      "/wallpaper_bg1.jpg",
+      "/wallpaper_bg1.jpg",
+      "/wallpaper_bg1.jpg",
+    ],
     downloadLinks: {
       PC: "https://example.com/echoes-pc",
       Xbox: "https://example.com/echoes-xbox",
@@ -134,9 +151,21 @@ export const Games: Game[] = [
     genre: "Retro RPG",
     shortDescription: "Retro-inspired RPG with modern twists.",
     fullDescription:
-      "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat enhanced by modern quality-of-life improvements. Explore vibrant pixel kingdoms, recruit quirky companions, and craft legendary gear to conquer dungeons and unravel a pixel-perfect prophecy.",
+      "Pixel Quest: Chronicles brings back the golden age of RPGs with deep character customization, open-world pixel art exploration, and engaging turn-based combat.",
+    gameplayDescription:
+      "Roam vibrant pixel-art kingdoms, recruit quirky companions, craft legendary gear, and engage in tactical turn-based battles enriched with modern QoL features.",
     platforms: ["PC", "iOS", "Android"],
+    requirements: {
+      PC: { min: "Intel i3, 4GB RAM, Integrated GPU", recommended: "Intel i5, 8GB RAM, GTX 750" },
+      iOS: { min: "iOS 11+", recommended: "iOS 14+" },
+      Android: { min: "Android 8.0+", recommended: "Android 11+" },
+    },
     image: "/wallpaper_bg2.jpg",
+    screenshots: [
+      "/wallpaper_bg2.jpg",
+      "/wallpaper_bg2.jpg",
+      "/wallpaper_bg2.jpg",
+    ],
     downloadLinks: {
       PC: "https://example.com/pixelquest-pc",
       iOS: "https://example.com/pixelquest-ios",
@@ -149,9 +178,21 @@ export const Games: Game[] = [
     genre: "MOBA",
     shortDescription: "Fast-paced multiplayer battles in a mystical world.",
     fullDescription:
-      "Mystic Arena is a competitive MOBA where players control unique heroes with magical abilities. Team up, strategize, and battle in vibrant arenas. Unlock skins, climb the leaderboards, and prove your skills in cross-platform play.",
+      "Mystic Arena is a competitive MOBA where players control unique heroes with magical abilities and battle across enchanted battlegrounds.",
+    gameplayDescription:
+      "Choose from a roster of mystical champions, master spell combos, work with teammates, and dominate dynamic objectives in intense 5v5 matches.",
     platforms: ["PC", "iOS", "Android"],
+    requirements: {
+      PC: { min: "Intel i5, 8GB RAM, GTX 960", recommended: "Intel i7, 16GB RAM, RTX 2060" },
+      iOS: { min: "iOS 12+", recommended: "iOS 15+" },
+      Android: { min: "Android 9.0+", recommended: "Android 12+" },
+    },
     image: "/wallpaper_bg3.jpg",
+    screenshots: [
+      "/wallpaper_bg3.jpg",
+      "/wallpaper_bg3.jpg",
+      "/wallpaper_bg3.jpg",
+    ],
     downloadLinks: {
       PC: "https://example.com/mystic-pc",
       iOS: "https://example.com/mystic-ios",
@@ -164,9 +205,23 @@ export const Games: Game[] = [
     genre: "Racing",
     shortDescription: "High-speed racing above the clouds.",
     fullDescription:
-      "Skyline Racer lets you race anti-gravity vehicles on tracks suspended in the sky. Customize your ride, master tricky courses, and challenge friends in online multiplayer. Available on console and mobile.",
+      "Skyline Racer lets you race anti-gravity vehicles on tracks suspended in the sky with breathtaking vistas.",
+    gameplayDescription:
+      "Customize your hovercraft, master gravity-defying tracks, drift around cloud-capped corners and compete in online tournaments.",
     platforms: ["PC", "Xbox", "PlayStation", "iOS", "Android"],
+    requirements: {
+      PC: { min: "Intel i5, 8GB RAM, GTX 1050", recommended: "Intel i9, 16GB RAM, RTX 3070" },
+      Xbox: { min: "Xbox One S", recommended: "Xbox Series X" },
+      PlayStation: { min: "PS4 Pro", recommended: "PS5" },
+      iOS: { min: "iOS 13+", recommended: "iOS 16+" },
+      Android: { min: "Android 9.0+", recommended: "Android 14+" },
+    },
     image: "/wallpaper_bg4.jpg",
+    screenshots: [
+      "/wallpaper_bg4.jpg",
+      "/wallpaper_bg4.jpg",
+      "/wallpaper_bg4.jpg",
+    ],
     downloadLinks: {
       PC: "https://example.com/skyline-pc",
       Xbox: "https://example.com/skyline-xbox",

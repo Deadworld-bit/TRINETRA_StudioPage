@@ -7,10 +7,11 @@ import { Rubik, Merriweather } from "next/font/google";
 import { Games as AllGames } from "@/constants/constants";
 import Link from "next/link"; 
 
-// Font configuration
 const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
+
 const platformOptions = ["All", "PC", "Xbox", "PlayStation", "iOS", "Android"];
+
 const cardBaseStyles =
   "bg-p3-charcoal border border-p3-mint-flash/30 rounded-2xl shadow-lg overflow-hidden transition hover:shadow-2xl hover:border-p3-mint-flash cursor-pointer relative";
 const overlayStyles =

@@ -3,7 +3,6 @@
 import Hero from "@/sections/GamePage/Hero";
 import Game from "@/sections/GamePage/Game";
 
-// Decorative Components
 const GridBackground: React.FC = () => (
   <div
     aria-hidden
