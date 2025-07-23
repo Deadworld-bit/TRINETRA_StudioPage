@@ -5,12 +5,11 @@ import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import { Rubik, Merriweather } from "next/font/google";
 import { Games as AllGames } from "@/constants/constants";
-import GameModal from "@/components/gamemodal";
+import Link from "next/link"; 
 
 // Font configuration
-const playfair = Rubik({subsets: ["latin"], weight: ["400", "700"],});
+const playfair = Rubik({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Merriweather({ subsets: ["latin"], weight: ["400", "700"] });
-// Constants
 const platformOptions = ["All", "PC", "Xbox", "PlayStation", "iOS", "Android"];
 const cardBaseStyles =
   "bg-p3-charcoal border border-p3-mint-flash/30 rounded-2xl shadow-lg overflow-hidden transition hover:shadow-2xl hover:border-p3-mint-flash cursor-pointer relative";
@@ -37,6 +36,7 @@ interface Game {
   platforms: string[];
   fullDescription: string;
   downloadLinks: { [platform: string]: string };
+  slug: string; 
 }
 
 interface TitleProps {
@@ -45,7 +45,6 @@ interface TitleProps {
 
 interface CardProps {
   game: Game;
-  onClick: () => void;
 }
 
 interface GameCardProps extends CardProps {
@@ -54,7 +53,6 @@ interface GameCardProps extends CardProps {
 
 interface FeaturedGameCardProps {
   game: Game;
-  onClick: () => void;
 }
 
 // Section Title Component
@@ -98,142 +96,137 @@ function PlatformFilterBar({
 }
 
 // Game Card Component
-export function GameCard({ game, i, onClick }: GameCardProps) {
+export function GameCard({ game, i }: GameCardProps) {
   return (
-    <motion.div
-      custom={i}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={fadeInUp}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      className="
-        group relative cursor-pointer overflow-hidden rounded-2xl
-        shadow-xl transition-transform duration-300
-        hover:scale-[1.02] focus:scale-[1.02]
-      "
-      style={{ aspectRatio: "16 / 9" }}
-    >
-      <Image
-        src={game.image}
-        alt={game.title}
-        fill
-        className="object-cover"
-        priority={i === 0}
-      />
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
-        <span
-          className={`${manrope.className} uppercase text-sm text-p3-snow opacity-75`}
-        >
-          {game.genre}
-        </span>
-        <h3
-          className={`${playfair.className} uppercase text-2xl sm:text-3xl text-p3-ghost-white tracking-wide`}
-        >
-          {game.title}
-        </h3>
-      </div>
-
-      <div
+    <Link href={`/game/${game.slug}`} className="group block">
+      <motion.div
+        custom={i}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeInUp}
+        role="button"
+        tabIndex={0}
         className="
-          absolute bottom-15 left-1/2 w-[80%] h-px bg-pure-white transform -translate-x-1/2
-          opacity-0 transition-opacity duration-300
-          group-hover:opacity-60
+          group relative cursor-pointer overflow-hidden rounded-2xl
+          shadow-xl transition-transform duration-300
+          hover:scale-[1.02] focus:scale-[1.02]
         "
-      />
-      <div
-        className="
-          absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
-          opacity-0 transition-opacity duration-300
-          group-hover:opacity-100
-        "
+        style={{ aspectRatio: "16 / 9" }}
       >
-        →
-      </div>
-    </motion.div>
+        <Image
+          src={game.image}
+          alt={game.title}
+          fill
+          className="object-cover"
+          priority={i === 0}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+          <span
+            className={`${manrope.className} uppercase text-sm text-p3-snow opacity-75`}
+          >
+            {game.genre}
+          </span>
+          <h3
+            className={`${playfair.className} uppercase text-2xl sm:text-3xl text-p3-ghost-white tracking-wide`}
+          >
+            {game.title}
+          </h3>
+        </div>
+
+        <div
+          className="
+            absolute bottom-15 left-1/2 w-[80%] h-px bg-pure-white transform -translate-x-1/2
+            opacity-0 transition-opacity duration-300
+            group-hover:opacity-60
+          "
+        />
+        <div
+          className="
+            absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
+            opacity-0 transition-opacity duration-300
+            group-hover:opacity-100
+          "
+        >
+          →
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
 // Featured Game Card Component
-export function FeaturedGameCard({ game, onClick }: FeaturedGameCardProps) {
+export function FeaturedGameCard({ game }: FeaturedGameCardProps) {
   return (
-    <motion.div
-      onClick={onClick}
-      role="button"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={fadeInUp}
-      className="
-        group relative cursor-pointer overflow-hidden rounded-2xl
-        shadow-xl transition-transform duration-300
-        hover:scale-[1.02] focus:scale-[1.02]
-        border border-p3-mint-flash/30
-      "
-      style={{ aspectRatio: "16 / 9" }}
-    >
-      {/* Background Image */}
-      <Image
-        src={game.image}
-        alt={game.title}
-        fill
-        className="object-cover"
-        sizes="100vw"
-        priority
-      />
-
-      {/* Subtle Gradient Overlay */}
-      <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50" />
-
-      {/* Featured Badge */}
-      <span
-        className={`${manrope.className} absolute top-4 left-4 px-3 py-1 bg-p3-mint-flash/90 text-p3-pure-white font-bold uppercase rounded-full text-xs tracking-wider shadow-md group-hover:bg-p3-mint-flash transition-colors duration-300`}
+    <Link href={`/game/${game.slug}`} className="group block">
+      <motion.div
+        role="button"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeInUp}
+        className="
+          group relative cursor-pointer overflow-hidden rounded-2xl
+          shadow-xl transition-transform duration-300
+          hover:scale-[1.02] focus:scale-[1.02]
+          border border-p3-mint-flash/30
+        "
+        style={{ aspectRatio: "16 / 9" }}
       >
-        Featured
-      </span>
+        <Image
+          src={game.image}
+          alt={game.title}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
 
-      {/* Text Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+        <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50" />
         <span
-          className={`${manrope.className} uppercase text-sm text-p3-snow opacity-75`}
+          className={`${manrope.className} absolute top-4 left-4 px-3 py-1 bg-p3-mint-flash/90 text-p3-pure-white font-bold uppercase rounded-full text-xs tracking-wider shadow-md group-hover:bg-p3-mint-flash transition-colors duration-300`}
         >
-          {game.genre}
+          Featured
         </span>
-        <h3
-          className={`${playfair.className} uppercase text-3xl sm:text-4xl text-p3-ghost-white tracking-wide`}
-        >
-          {game.title}
-        </h3>
-      </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+          <span
+            className={`${manrope.className} uppercase text-sm text-p3-snow opacity-75`}
+          >
+            {game.genre}
+          </span>
+          <h3
+            className={`${playfair.className} uppercase text-3xl sm:text-4xl text-p3-ghost-white tracking-wide`}
+          >
+            {game.title}
+          </h3>
+        </div>
 
-      {/* Hover Effects */}
-      <div
-        className="
-          absolute bottom-15 left-1/2 w-[80%] h-px bg-p3-pure-white
-          transform -translate-x-1/2
-          opacity-0 transition-opacity duration-300
-          group-hover:opacity-60
-        "
-      />
-      <div
-        className="
-          absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
-          opacity-0 transition-opacity duration-300
-          group-hover:opacity-100
-        "
-      >
-        →
-      </div>
-    </motion.div>
+        {/* Hover Effects */}
+        <div
+          className="
+            absolute bottom-15 left-1/2 w-[80%] h-px bg-p3-pure-white
+            transform -translate-x-1/2
+            opacity-0 transition-opacity duration-300
+            group-hover:opacity-60
+          "
+        />
+        <div
+          className="
+            absolute bottom-6 left-1/2 -translate-x-1/2 text-2xl text-p3-pure-white
+            opacity-0 transition-opacity duration-300
+            group-hover:opacity-100
+          "
+        >
+          →
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
 // Main Game Showcase Component
 export default function GameShowcase() {
-  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [selectedPlatform, setSelectedPlatform] = useState<string>("All");
 
   const Games = useMemo(() => {
@@ -244,7 +237,7 @@ export default function GameShowcase() {
         .includes(selectedPlatform.toLowerCase())
     );
   }, [selectedPlatform]);
-  const featuredGame = AllGames[0];
+  const featuredGame = AllGames[0]; 
 
   return (
     <>
@@ -260,7 +253,6 @@ export default function GameShowcase() {
           {featuredGame && (
             <FeaturedGameCard
               game={featuredGame}
-              onClick={() => setSelectedGame(featuredGame)}
             />
           )}
         </div>
@@ -281,7 +273,9 @@ export default function GameShowcase() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
             {Games.length === 0 && (
-              <div className={`${manrope.className} col-span-full text-center text-p3-slate text-lg py-20`}>
+              <div
+                className={`${manrope.className} col-span-full text-center text-p3-slate text-lg py-20`}
+              >
                 No games found for this platform.
               </div>
             )}
@@ -290,15 +284,11 @@ export default function GameShowcase() {
                 key={`${game.title}-${game.image}-${i}`}
                 game={game}
                 i={i}
-                onClick={() => setSelectedGame(game)}
               />
             ))}
           </div>
         </div>
       </section>
-      {selectedGame && (
-        <GameModal game={selectedGame} onClose={() => setSelectedGame(null)} />
-      )}
     </>
   );
 }

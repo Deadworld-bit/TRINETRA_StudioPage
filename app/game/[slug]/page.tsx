@@ -25,13 +25,11 @@ function VerticalLines() {
   );
 }
 
-// Note: params is now a Promise<{ slug: string }>
 export default async function GameDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // await the params to get your slug out
   const { slug } = await params;
   const game = AllGames.find((g) => g.slug === slug);
 
