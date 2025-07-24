@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Rubik } from "next/font/google";
-import logoLight from "@/public/StudioLogo_4_white.png";
+import logoLight from "@/public/StudioLogo_7_white.png";
 import "./navbar-effects.css";
 import { HiMenu, HiX } from "react-icons/hi";
 import Link from "next/link";
@@ -84,15 +84,9 @@ export default function Navbar() {
 
   const DesktopNav = () => (
     <div className="hidden md:flex justify-between items-center px-8 h-20">
-      <div className="flex items-center">
-        <Link href="/">
-          <span
-            className={`${playfair.className} text-4xl font-bold ml-4 studio-name text-p3-white-smoke cursor-pointer hover:opacity-80`}
-          >
-            TRINETRA
-          </span>
-        </Link>
-      </div>
+      <Link href="/">
+        <Logo size="desktop" />
+      </Link>
       <nav>
         <ul className="flex gap-8">
           {navLinks.map(({ label, href }) => (
@@ -113,22 +107,14 @@ export default function Navbar() {
   const MobileHeader = () => (
     <div className="md:hidden fixed top-0 left-0 w-full h-16 flex items-center justify-between px-4 z-50 bg-p3-pure-black shadow-md">
       <Link href="/">
-        <span
-          className={`${playfair.className} text-2xl font-bold studio-name text-p3-white-smoke cursor-pointer hover:opacity-80`}
-        >
-          TRINETRA
-        </span>
+        <Logo size="mobile" />
       </Link>
       <button
         onClick={() => setExpanded((prev) => !prev)}
         className={`${TRANSITION_COLOR} text-p3-white-smoke menu-button`}
         aria-label="Toggle navigation"
       >
-        {expanded ? (
-          <HiX className="text-3xl" />
-        ) : (
-          <HiMenu className="text-3xl" />
-        )}
+        {expanded ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
       </button>
     </div>
   );

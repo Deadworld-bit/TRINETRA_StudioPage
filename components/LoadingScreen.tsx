@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import StudioLogo from "@/public/StudioLogo_4_white.png";
+import StudioLogo from "@/public/StudioLogo_7_white.png";
 
 const SHIMMER_DURATION = 2.5;
 const SHIMMER_DELAY = 1.0;
@@ -17,7 +17,7 @@ export default function LoadingScreen({ show }: { show: boolean }) {
           }}
         >
           <motion.div
-            className="relative w-64 h-64"
+            className="relative w-96 h-96"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: 1,
