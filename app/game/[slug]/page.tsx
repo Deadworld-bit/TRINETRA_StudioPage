@@ -3,12 +3,12 @@ import Hero from "@/sections/DetailPage/Hero";
 import GameDetail from "@/sections/DetailPage/GameDetail";
 import { notFound } from "next/navigation";
 
-const GridBackground: React.FC = () => (
+const GridBackground: React.FC<{ imageUrl: string }> = ({ imageUrl }) => (
   <div
     aria-hidden
     className="pointer-events-none absolute inset-0 z-0"
     style={{
-      backgroundImage: 'url("/wallpaper_bg15.jpg")',
+      backgroundImage: `url('${imageUrl}')`,
       backgroundSize: "cover",
       backgroundPosition: "center",
       opacity: 0.22,
@@ -49,7 +49,7 @@ export default async function GameDetailPage({
 
   return (
     <main className="relative bg-p3-charcoal text-p3-white-smoke overflow-x-hidden">
-      <GridBackground />
+      <GridBackground imageUrl={game.backgroundPic} />
       <VerticalLines />
       <div className="relative z-10">
         <Hero title={game.title} imageUrl={game.image} />

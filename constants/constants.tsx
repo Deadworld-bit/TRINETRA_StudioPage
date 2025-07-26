@@ -41,7 +41,9 @@ export interface Game {
   platforms: string[];
   requirements: { [platform: string]: GameRequirements }; 
   image: string;
-  screenshots: string[];                  
+  screenshots: string[];   
+  backgroundPic: string; 
+  gameplayVideoUrl: string;                
   downloadLinks: { [platform: string]: string };
 }
 
@@ -134,10 +136,12 @@ export const Games: Game[] = [
       PlayStation: { min: "PS4", recommended: "PS5" },
     },
     image: "/wallpaper_bg1.jpg",
+    backgroundPic: "/ConvertedPic/parttern_06.webp", 
+    gameplayVideoUrl: "https://www.youtube.com/embed/FmlGo1KY2jE?list=RDFmlGo1KY2jE&start_radio=1", 
     screenshots: [
-      "/wallpaper_bg1.jpg",
-      "/wallpaper_bg1.jpg",
-      "/wallpaper_bg1.jpg",
+      "/wallpaper_bg2.jpg",
+      "/wallpaper_bg3.jpg",
+      "/wallpaper_bg4.jpg",
     ],
     downloadLinks: {
       PC: "https://example.com/echoes-pc",
@@ -161,6 +165,8 @@ export const Games: Game[] = [
       Android: { min: "Android 8.0+", recommended: "Android 11+" },
     },
     image: "/wallpaper_bg2.jpg",
+    backgroundPic: "/ConvertedPic/parttern_07.webp", 
+    gameplayVideoUrl: "https://www.youtube.com/embed/FmlGo1KY2jE?list=RDFmlGo1KY2jE&start_radio=1",
     screenshots: [
       "/wallpaper_bg2.jpg",
       "/wallpaper_bg2.jpg",
@@ -188,6 +194,8 @@ export const Games: Game[] = [
       Android: { min: "Android 9.0+", recommended: "Android 12+" },
     },
     image: "/wallpaper_bg3.jpg",
+    backgroundPic: "/ConvertedPic/parttern_06.webp", 
+    gameplayVideoUrl: "https://www.youtube.com/embed/FmlGo1KY2jE?list=RDFmlGo1KY2jE&start_radio=1",
     screenshots: [
       "/wallpaper_bg3.jpg",
       "/wallpaper_bg3.jpg",
@@ -217,6 +225,8 @@ export const Games: Game[] = [
       Android: { min: "Android 9.0+", recommended: "Android 14+" },
     },
     image: "/wallpaper_bg4.jpg",
+    backgroundPic: "/ConvertedPic/parttern_07.webp", 
+    gameplayVideoUrl: "https://www.youtube.com/embed/FmlGo1KY2jE?list=RDFmlGo1KY2jE&start_radio=1",
     screenshots: [
       "/wallpaper_bg4.jpg",
       "/wallpaper_bg4.jpg",
