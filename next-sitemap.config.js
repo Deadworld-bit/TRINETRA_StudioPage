@@ -5,4 +5,5 @@ module.exports = {
   exclude: ['/secret/*'],                   
   changefreq: 'daily',
   priority: 0.7,
+  sitemapSize: 5000,
 }
