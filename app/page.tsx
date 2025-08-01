@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Hero from "@/sections/HomePage/Hero";
 import Introduction from "@/sections/HomePage/Introduction";
 import Game from "@/sections/HomePage/Game";
@@ -41,6 +42,36 @@ function VerticalLines() {
 }
 
 export default function Home() {
+  const [showDevOverlay, setShowDevOverlay] = useState(true);
+  const handleReturn = () => {
+    window.history.back();
+  };
+
+  if (showDevOverlay) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+        <div className="bg-white rounded-2xl p-6 max-w-sm text-center shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4">Studio Page Under Development</h2>
+          <p className="mb-6">Most content is currently for testing purposes.</p>
+          <div className="flex justify-center space-x-4">
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+              onClick={() => setShowDevOverlay(false)}
+            >
+              Continue to View Page
+            </button>
+            <button
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+              onClick={handleReturn}
+            >
+              Return
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Hero />
